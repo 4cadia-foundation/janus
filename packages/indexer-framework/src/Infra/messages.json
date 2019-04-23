@@ -1,0 +1,7 @@
+{
+  "update": {
+    "success": "Success on update",
+    "error": "Error on update",
+    "nochange": "No changes"
+  }
+}
