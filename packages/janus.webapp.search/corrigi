@@ -1,4 +1,0 @@
-
-> layoutsearch@1.0.0 lint C:\repositorios\layoutsearch
-> eslint --ext .js,.vue src test/unit test/e2e/specs "--fix" "=" "o" "CSS"
-
