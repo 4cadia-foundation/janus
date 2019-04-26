@@ -1,18 +1,20 @@
 <template>
   <div>
-    <b-button variant="light" class="button-search">&#128269;</b-button>
+    <button type="submit" class="btn btn-primary">
+      <i class="fa fa-search"></i>
+    </button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'button-icon'
+  name: 'button'
 }
 </script>
 <style scoped>
-.button-search {
+.btn {
   border-radius: 16px;
-  background-color: transparent;
-  border-color: transparent;
+  /* background-color: transparent; */
+  /* border-color: transparent; */
 }
 </style>
