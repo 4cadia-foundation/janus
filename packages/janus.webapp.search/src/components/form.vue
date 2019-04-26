@@ -1,11 +1,9 @@
 <template>
   <form class="form">
     <div class="form-content row">
-      <div class="col-10">
-        <v-input />
-      </div>
-      <div class="col-2">
-        <v-button />
+      <div class="col">
+        <v-input/>
+        <v-button/>
       </div>
     </div>
   </form>
@@ -20,15 +18,18 @@ export default {
     'v-input': Input,
     'v-button': Button
   },
-  computed: {
-  },
-  methods: {
-  },
+  computed: {},
+  methods: {},
   data () {
-    return {
-    }
+    return {}
   },
-  mounted () {
-  }
+  mounted () {}
 }
 </script>
+<style scoped>
+.col {
+  max-width: 50%;
+  position: relative;
+  margin: auto;
+}
+</style>

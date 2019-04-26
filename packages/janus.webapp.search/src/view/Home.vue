@@ -14,7 +14,7 @@ export default {
   name: 'Home',
   data () {
     return {
-      msg: 'Janus Project'
+      msg: 'Janus Platform'
     }
   },
   components: {
