@@ -3,19 +3,23 @@
     type="text"
     class="form-control input-search"
     placeholder="Enter key word  ..."
-    v-on:keyup="onKeyUp"
+    v-bind:value="input"
   >
 </template>
 
 <script>
 export default {
-  name: 'input',
+  name: 'InputSearch',
+  data () {
+    return {
+      input: 'input'
+    }
+  },
   components: {},
   methods: {
-    onKeyUp: function () {
-      return 0
-    }
-  }
+  },
+  props: [
+  ]
 }
 </script>
 

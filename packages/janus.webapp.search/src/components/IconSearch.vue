@@ -17,17 +17,16 @@
 
 <script>
 export default {
-  name: 'search',
+  name: 'IconSearch',
   components: {},
   methods: {
-
   }
-
 }
 </script>
+
 <style scoped>
 .icon-search{
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 </style>

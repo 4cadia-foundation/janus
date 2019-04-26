@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import Search from '@/components/search'
+import IconSearch from '@/components/IconSearch'
 export default {
-  name: 'button',
+  name: 'ButtonSearch',
   components: {
-    'icon-search': Search
+    'icon-search': IconSearch
   }
 }
 </script>
