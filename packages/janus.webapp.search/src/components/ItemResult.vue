@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'ItemList',
+  name: 'ItemResult',
   data () {
     return {
     }

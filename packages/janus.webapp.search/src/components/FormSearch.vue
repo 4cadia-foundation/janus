@@ -13,47 +13,25 @@
         </div>
       </div>
     </form>
-    <div class="result">
-      <ul class="list list-results">
-        <v-item v-for="(item, index) in filteredData" :key="index" :item="item"></v-item>
-      </ul>
-    </div>
   </div>
 </template>
 
 <script>
 import ButtonSearch from '@/components/ButtonSearch'
-import ItemList from '@/components/ItemList'
-import data from '@/utils/data'
 export default {
   name: 'FormSearch',
   data () {
     return {
-      search: '',
-      filteredData: []
+      search: this.search
     }
   },
   components: {
-    'v-button': ButtonSearch,
-    'v-item': ItemList
+    'v-button': ButtonSearch
   },
   computed: {},
   methods: {
     handleSubmit () {
-      this.getfilteredData()
-    },
-    getfilteredData: function () {
-      console.log(this.search)
-      this.filteredData = data
-      console.log(this.filteredData)
-      let filteredDataBySearch = []
-      if (this.search !== '') {
-        filteredDataBySearch = this.filteredData.filter(obj => {
-          return obj.title.indexOf(this.search)>= 0 ||  obj.desc.indexOf(this.search)>= 0
-        })
-        this.filteredData = filteredDataBySearch
-      }
-      console.log(this.filteredData)
+      this.$router.push({ path: 'search', query: { q: this.search } })
     }
   },
   props: {

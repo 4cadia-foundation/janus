@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/view/Home'
-import Result from '@/view/Result'
+import Search from '@/view/Search'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -13,9 +14,10 @@ export default new Router({
       component: Home
     },
     {
-      path: '/results',
-      name: 'Result',
-      component: Result
+      path: '/search',
+      name: 'Search',
+      props: true,
+      component: Search
     }
   ]
 })
