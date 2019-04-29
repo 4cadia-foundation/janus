@@ -23,8 +23,7 @@
 export default {
   name: 'ItemResult',
   data () {
-    return {
-    }
+    return {}
   },
   filters: {
     // this filter will can be used to capitalise words
@@ -46,8 +45,11 @@ export default {
   text-align: left;
   list-style: none;
   margin: 30px 0;
-  background: #eaeaea;
+  background: #f9f9f9;
   padding: 10px;
+  max-width: 50%;
+  margin: auto;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
 }
 .item-text {
   margin: 5px 0;

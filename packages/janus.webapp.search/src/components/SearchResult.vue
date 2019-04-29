@@ -61,9 +61,14 @@ export default {
   },
   mounted () {
     this.$parent.$on('search', (search) => {
-      this.search = search
+      this.search = search || ''
       this.getfilteredData()
     })
   }
 }
 </script>
+<style scoped>
+  .list-results{
+    padding: 0%;
+  }
+</style>
