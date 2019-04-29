@@ -48,7 +48,9 @@ export default {
       console.log(this.filteredData)
       let filteredDataBySearch = []
       if (this.search !== '') {
-        filteredDataBySearch = this.filteredData.filter(obj => obj.title.indexOf(this.search) >= 0)
+        filteredDataBySearch = this.filteredData.filter(obj => {
+          return obj.title.indexOf(this.search)>= 0 ||  obj.desc.indexOf(this.search)>= 0
+        })
         this.filteredData = filteredDataBySearch
       }
       console.log(this.filteredData)
