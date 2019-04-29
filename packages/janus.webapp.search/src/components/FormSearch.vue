@@ -24,7 +24,10 @@ export default {
   name: 'FormSearch',
   data () {
     return {
-      search: this.search
+      search: this.search,
+      errors: [],
+      isSubmitted: false,
+      isError: false
     }
   },
   components: {
@@ -36,10 +39,7 @@ export default {
     handleSubmit () {
       this.$emit('search', this.search)
     }
-  },
-  props: {
-  },
-  mounted () {}
+  }
 }
 </script>
 

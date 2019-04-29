@@ -1,17 +1,20 @@
 <template>
   <li class="list-item item">
     <div class="item-title">
-      <a class="link" :href="item.link">
-        <h2 class="title">{{ item.title || capitalize }} </h2>
+      <a class="link" :href="item.IpfsHash">
+        <h2 class="item-text link-text">{{ item.Title || capitalize }} </h2>
       </a>
     </div>
     <div class="item-link">
-      <a class="link" :href="item.link">
-        <h5 class="link-text">{{ item.link }}</h5>
+      <a class="link" :href="item.IpfsHash">
+        <h5 class="item-text link-text">{{ item.IpfsHash }}</h5>
       </a>
     </div>
     <div class="item-description">
-      <p class="description">{{ item.desc }}</p>
+      <p class="item-text description">{{ item.Description }}</p>
+    </div>
+    <div class="item-tags">
+      <p class="item-text tags">{{ item.Tags }}</p>
     </div>
   </li>
 </template>
@@ -46,9 +49,7 @@ export default {
   background: #eaeaea;
   padding: 10px;
 }
-.title,
-.link-text,
-.description {
+.item-text {
   margin: 5px 0;
 }
 </style>

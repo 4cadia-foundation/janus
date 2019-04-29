@@ -1,9 +1,13 @@
 <template>
   <div class="container">
     <div class="wrapper">
-      <h2>RESULTADO</h2>
+      <div class="message">
+        <v-not-found v-if="error" :message="msg"/>
+        <div v-else>
+          <h3>{{msg}}</h3>
+        </div>
+      </div>
       <div class="result">
-        <p>{{msg}}</p>
         <ul class="list list-results">
           <v-item-result v-for="(item, index) in filteredData" :key="index" :item="item"></v-item-result>
         </ul>
@@ -14,11 +18,13 @@
 
 <script>
 import ItemResult from '@/components/ItemResult'
-import data from '@/utils/data'
+import EtherData from '@/utils/ether_data'
+import NotFound from '@/components/NotFound'
 export default {
   name: 'SearchResult',
   components: {
-    'v-item-result': ItemResult
+    'v-item-result': ItemResult,
+    'v-not-found': NotFound
   },
   computed: {
   },
@@ -27,22 +33,29 @@ export default {
       search: '',
       filteredData: [],
       filteredDataBySearch: [],
-      msg: ''
+      msg: '',
+      error: false
     }
   },
   methods: {
     getfilteredData: function () {
+      let data = EtherData['Search']
       if (this.search !== '') {
         this.filteredDataBySearch = data.filter(obj => {
-          return obj.title.indexOf(this.search) >= 0 || obj.desc.indexOf(this.search) >= 0
+          return obj.Title.indexOf(this.search) >= 0 || obj.Description.indexOf(this.search) >= 0
         })
         if (this.filteredDataBySearch.length > 0) {
           this.filteredData = this.filteredDataBySearch
+          this.msg = ''
+          this.error = false
         } else {
           this.msg = 'Nenhum resultado encontrado'
+          this.error = true
+          this.filteredData = []
         }
       } else {
         this.msg = 'Digite algo para ser pesquisado'
+        this.filteredData = []
       }
     }
   },
