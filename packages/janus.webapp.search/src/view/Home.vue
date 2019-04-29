@@ -9,7 +9,6 @@
 
 <script>
 import FormSearch from '@/components/FormSearch'
-
 export default {
   name: 'Home',
   data () {

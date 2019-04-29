@@ -13,11 +13,13 @@
         </div>
       </div>
     </form>
+    <v-search-result />
   </div>
 </template>
 
 <script>
 import ButtonSearch from '@/components/ButtonSearch'
+import Search from '@/components/SearchResult'
 export default {
   name: 'FormSearch',
   data () {
@@ -26,12 +28,13 @@ export default {
     }
   },
   components: {
-    'v-button': ButtonSearch
+    'v-button': ButtonSearch,
+    'v-search-result': Search
   },
   computed: {},
   methods: {
     handleSubmit () {
-      this.$router.push({ path: 'search', query: { q: this.search } })
+      this.$emit('search', this.search)
     }
   },
   props: {

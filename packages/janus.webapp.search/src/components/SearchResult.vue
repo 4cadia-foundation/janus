@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="wrapper">
-      <h2>PAGINA DE RESULTADO</h2>
+      <h2>RESULTADO</h2>
       <div class="result">
         <p>{{msg}}</p>
         <ul class="list list-results">
@@ -16,7 +16,7 @@
 import ItemResult from '@/components/ItemResult'
 import data from '@/utils/data'
 export default {
-  name: 'Search',
+  name: 'SearchResult',
   components: {
     'v-item-result': ItemResult
   },
@@ -24,7 +24,6 @@ export default {
   },
   data () {
     return {
-      // search: this.$route.query.q ? this.$route.query.q : '',
       search: '',
       filteredData: [],
       filteredDataBySearch: [],
@@ -48,7 +47,10 @@ export default {
     }
   },
   mounted () {
-    this.getfilteredData()
+    this.$parent.$on('search', (search) => {
+      this.search = search
+      this.getfilteredData()
+    })
   }
 }
 </script>
