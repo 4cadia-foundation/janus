@@ -26,19 +26,18 @@ export default {
     return {
       search: this.$route.query.q ? this.$route.query.q : '',
       filteredData: [],
+      filteredDataBySearch: [],
       msg: ''
     }
   },
   methods: {
     getfilteredData: function () {
-      let filteredDataBySearch = []
-      console.log(this.search)
       if (this.search !== '') {
-        filteredDataBySearch = data.filter(obj => {
+        this.filteredDataBySearch = data.filter(obj => {
           return obj.title.indexOf(this.search) >= 0 || obj.desc.indexOf(this.search) >= 0
         })
-        if (this.filteredDataBySearch) {
-          this.filteredData = filteredDataBySearch
+        if (this.filteredDataBySearch.length > 0) {
+          this.filteredData = this.filteredDataBySearch
         } else {
           this.msg = 'Nenhum resultado encontrado'
         }
