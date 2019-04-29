@@ -2,7 +2,7 @@
   <div class="container">
     <h1>{{msg}}</h1>
     <div class="wrapper">
-      <v-form />
+      <v-form-search />
     </div>
   </div>
 </template>

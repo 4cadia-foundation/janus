@@ -21,17 +21,6 @@ export default {
   name: 'ItemList',
   data () {
     return {
-      // list of tags to giving each stack a different color
-      tags: {
-        language: 'light',
-        framework: 'dark',
-        frontend: 'success',
-        backend: 'danger',
-        mobile: 'warning',
-        web: 'secondary',
-        hybrid: 'info',
-        database: 'danger'
-      }
     }
   },
   filters: {
@@ -49,3 +38,17 @@ export default {
   }
 }
 </script>
+<style scoped>
+.list-item {
+  text-align: left;
+  list-style: none;
+  margin: 30px 0;
+  background: #eaeaea;
+  padding: 10px;
+}
+.title,
+.link-text,
+.description {
+  margin: 5px 0;
+}
+</style>
