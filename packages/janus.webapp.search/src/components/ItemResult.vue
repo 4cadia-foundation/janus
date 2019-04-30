@@ -13,9 +13,6 @@
     <div class="item-description">
       <p class="item-text description">{{ item.Description }}</p>
     </div>
-    <div class="item-tags">
-      <p class="item-text tags">{{ item.Tags }}</p>
-    </div>
   </li>
 </template>
 
@@ -26,13 +23,11 @@ export default {
     return {}
   },
   filters: {
-    // this filter will can be used to capitalise words
     capitalize: item => {
       return item.toUpperCase()
     }
   },
   props: {
-    // this component expects a prop of type object
     item: {
       type: Object,
       required: true

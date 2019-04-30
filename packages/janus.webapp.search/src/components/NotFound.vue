@@ -15,7 +15,6 @@ export default {
   components: {
   },
   props: {
-    // this component expects a prop of type object
     message: {
       type: String,
       required: false
@@ -35,9 +34,7 @@ export default {
   display: flex;
 }
 .error-message {
-  /* text-transform: uppercase; */
   font-size: 20px;
   font-weight: 100;
 }
-
 </style>

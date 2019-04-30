@@ -6,7 +6,7 @@
             <input
               type="text"
               class="form-control input-search"
-              placeholder="Enter key word  ..."
+              placeholder="Search for..."
               v-model="search"
             >
             <v-button/>
