@@ -1,8 +1,7 @@
 {
-  "name": "layoutsearch",
-  "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "Vinicius Politta <vinicius@janusproj.com>",
+  "name": "janus-search",
+  "version": "1.0.1",
+  "description": "A Web3 search engine",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

@@ -2,14 +2,14 @@
   <div class="container">
     <div class="wrapper">
       <div class="message">
-        <v-not-found v-if="error" :message="msg"/>
+        <v-not-found v-if="error" :message="error.message"/>
         <div v-else>
-          <h3>{{msg}}</h3>
+          <h3>{{error.message}}</h3>
         </div>
       </div>
       <div class="result">
         <ul class="list list-results">
-          <v-item-result v-for="(item, index) in filteredData" :key="index" :item="item"></v-item-result>
+          <v-item-result v-for="(item, index) in filteredDataBySearch" :key="index" :item="item"></v-item-result>
         </ul>
       </div>
     </div>
@@ -18,8 +18,8 @@
 
 <script>
 import ItemResult from '@/components/ItemResult'
-import EtherData from '@/utils/ether_data'
 import NotFound from '@/components/NotFound'
+import EtherData from '@/utils/ether_data'
 export default {
   name: 'SearchResult',
   components: {
@@ -31,38 +31,36 @@ export default {
   data () {
     return {
       search: '',
-      filteredData: [],
       filteredDataBySearch: [],
-      msg: '',
-      error: false
+      error: []
     }
   },
   methods: {
-    getfilteredData: function () {
+    getSearchResult: function () {
       let data = EtherData['Search']
       if (this.search !== '') {
         this.filteredDataBySearch = data.filter(obj => {
           return obj.Title.indexOf(this.search) >= 0 || obj.Description.indexOf(this.search) >= 0
         })
-        if (this.filteredDataBySearch.length > 0) {
-          this.filteredData = this.filteredDataBySearch
-          this.msg = ''
-          this.error = false
-        } else {
-          this.msg = 'Nenhum resultado encontrado'
-          this.error = true
-          this.filteredData = []
+        if (this.filteredDataBySearch.length < 0) {
+          this.error.push(
+            { 'message': 'Message' }
+          )
         }
       } else {
-        this.msg = 'Digite algo para ser pesquisado'
-        this.filteredData = []
+        this.filteredDataBySearch = []
       }
+    },
+    validate: function (e) {
+      e.preventDefault()
+      this.errors = []
     }
   },
   mounted () {
     this.$parent.$on('search', (search) => {
       this.search = search || ''
-      this.getfilteredData()
+      // this.getSearchResult()
+      // console.log(Message)
     })
   }
 }

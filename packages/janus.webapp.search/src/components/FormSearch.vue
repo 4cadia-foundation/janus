@@ -6,8 +6,8 @@
             <input
               type="text"
               class="form-control input-search"
-              placeholder="Search for..."
-              v-model="search"
+              :placeholder="placeholder"
+              v-model="input"
             >
             <v-button/>
         </div>
@@ -20,25 +20,31 @@
 <script>
 import ButtonSearch from '@/components/ButtonSearch'
 import Search from '@/components/SearchResult'
+import { mapState } from 'vuex'
+
 export default {
   name: 'FormSearch',
-  data () {
-    return {
-      search: this.search,
-      errors: [],
-      isSubmitted: false,
-      isError: false
-    }
-  },
   components: {
     'v-button': ButtonSearch,
     'v-search-result': Search
   },
-  computed: {},
+  data () {
+    return {
+      input: '',
+      placeholder: 'type'
+    }
+  },
+  computed: {
+    ...mapState({
+      search: state => state.form.search
+    })
+  },
   methods: {
     handleSubmit () {
-      this.$emit('search', this.search)
+      this.$store.commit('form/updateForm', this.input)
     }
+  },
+  mounted () {
   }
 }
 </script>
