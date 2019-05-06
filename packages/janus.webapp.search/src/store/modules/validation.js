@@ -1,33 +1,24 @@
-import messageData from '../../utils/information'
+import messageData from '../../utils/messages'
 
 // initial state
 const state = {
-  messages: []
+  messages: messageData.messages
 }
 
 // getters
 const getters = {
   messages: state => state.messages,
-  returnMessagesData (state) {
-    return state.messages === messageData.getData()
+  getErrors: state => state.messages.errors,
+  errorMatchesHttp: (state, getters) => (httpCode) => {
+    return state.messages.errors.find(errors => errors.httpCode === httpCode)
   }
 }
 
 // actions
-const actions = {
-  getMessages ({ commit }) {
-    messageData.getData(messages => {
-      commit('setMessages', messages)
-    })
-  }
-}
+const actions = {}
 
 // mutations
-const mutations = {
-  setMessages (state, messages) {
-    state.messages = messages
-  }
-}
+const mutations = {}
 
 export default {
   namespaced: true,

@@ -1,50 +1,67 @@
 <template>
   <div class="wrapper">
-    <form class="form" @submit.prevent="handleSubmit">
-      <div class="form-content row">
-        <div class="col">
+    <form
+      @submit="handleSubmit"
+      class="form">
+      <div class="form-content col">
+        <div class="form-field row">
             <input
               type="text"
               class="form-control input-search"
+              v-model="searchValue"
               :placeholder="placeholder"
-              v-model="input"
             >
             <v-button/>
+        </div>
+        <div class="form-errors row">
+          <p v-if="getErrors">
+            <b>Por favor, corrija o(s) seguinte(s) erro(s):</b>
+            <ul>
+              <li v-for="(error, index) in getErrors" :key="index">{{ error }}</li>
+            </ul>
+          </p>
         </div>
       </div>
     </form>
     <v-search-result />
   </div>
 </template>
-
 <script>
+
 import ButtonSearch from '@/components/ButtonSearch'
-import Search from '@/components/SearchResult'
-import { mapState } from 'vuex'
+import SearchResult from '@/components/SearchResult'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'FormSearch',
   components: {
     'v-button': ButtonSearch,
-    'v-search-result': Search
+    'v-search-result': SearchResult
   },
   data () {
     return {
-      input: '',
-      placeholder: 'type'
+      placeholder: 'Search something on Janus...',
+      searchValue: ''
     }
   },
   computed: {
     ...mapState({
-      search: state => state.form.search
-    })
+      searchState: state => state.form.search,
+      messages: state => state.validation.messages
+    }),
+    // Mounts the "getSearch" getter to the scope of your component.
+    ...mapGetters('validation', [
+      'getErrors',
+      'errorMatchesHttp'
+    ])
   },
   methods: {
-    handleSubmit () {
-      this.$store.commit('form/updateForm', this.input)
+    handleSubmit: function (e) {
+      this.$store.commit('form/updateForm', this.searchValue)
     }
   },
   mounted () {
+    console.log(this.errorMatchesHttp('general'))
   }
 }
 </script>

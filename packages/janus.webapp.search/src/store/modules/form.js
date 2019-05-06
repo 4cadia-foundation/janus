@@ -1,23 +1,21 @@
 // initial state
-// shape: [{ hash, title }]
 const state = {
   search: '',
-  status: null
+  submitting: 'Janus is searching for { keyword }'
 }
 
 // getters
-const getters = {}
+const getters = {
+  getSearch: state => state.search
+}
 
 // actions
 const actions = {}
 
 // mutations
 const mutations = {
-  updateForm (state, search) {
-    state.search = search
-  },
-  updateFormStatus (state, status) {
-    state.status = status
+  updateForm (state, searchValue) {
+    state.search = searchValue
   }
 }
 
