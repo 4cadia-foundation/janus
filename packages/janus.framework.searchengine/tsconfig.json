@@ -1,9 +1,21 @@
 {
     "compilerOptions": {
-        "target": "es5",
+        "lib": [
+            "es2015.promise",
+            "dom"
+        ],
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "*": [
+                "types/*"
+            ]
+        },
+        "target": "es6",
         "module": "commonjs",
         "declaration": true,
         "outDir": "./dist",
-        "strict": false
+        "strict": false,
+        "sourceMap": true
     }
 }

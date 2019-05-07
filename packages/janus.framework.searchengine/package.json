@@ -1,29 +1,55 @@
 {
-  "name": "pacotespider",
-  "version": "1.0.30",
+  "name": "janus-searchengine",
+  "version": "1.0.31",
   "description": "teste",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/startup.js",
+  "types": "dist/startup.d.ts",
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
     "lint": "tslint --project \"./tsconfig.json\"",
-    "test": "mocha --reporter spec"
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^11.13.7",
+    "@types/web3": "^1.0.18",
+    "fluent-ts-validator": "^3.0.2",
+    "ipfs-http-client": "^30.1.3",
+    "reflect-metadata": "^0.1.13",
+    "scrypt": "^6.0.3",
     "tslint": "^5.16.0",
-    "typescript": "^3.4.5"
+    "tsyringe": "^3.2.0",
+    "typescript": "^3.4.5",
+    "web3": "^1.0.0-beta.54",
+    "xmldom": "^0.1.27"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
+    "@types/jest": "^24.0.12",
     "@types/mocha": "^5.2.6",
     "chai": "^4.2.0",
-    "mocha": "^6.1.4"
+    "jest": "^24.8.0",
+    "mocha": "^6.1.4",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.5"
   },
   "files": [
     "dist"
-  ]
+  ],
+  "jest": {
+      "transform": {
+        ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      },
+      "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+      "moduleFileExtensions": [
+        "ts",
+        "tsx",
+        "js",
+        "jsx",
+        "json",
+        "node"
+      ]
+    }
 }
