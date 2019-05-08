@@ -1,15 +1,22 @@
 <template>
   <div id="app">
+    <icon-account/>
     <img src="./assets/eth1.jpg">
     <div class="main">
       <router-view/>
-    </div>
+      </div>
   </div>
 </template>
 
 <script>
+import IconAccount from '@/components/IconAccount'
 export default {
-  name: 'App'
+  name: 'App',
+
+  components: {
+    'icon-account': IconAccount
+
+  }
 }
 </script>
 
