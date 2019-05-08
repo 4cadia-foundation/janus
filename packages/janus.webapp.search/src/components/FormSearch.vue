@@ -104,7 +104,6 @@ export default {
   border-color: #dc3545;
 }
 .errors-list {
-  list-style: none;
   text-align: left;
   padding: 0 0 0 5px;
   margin-top: 10px;
