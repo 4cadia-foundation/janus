@@ -1,77 +1,83 @@
 <template>
-  <div class="wrapper">
+  <div class="content">
     <form
-      @submit="handleSubmit"
+      v-on:submit="validateForm"
       class="form">
       <div class="form-content col">
         <div class="form-field row">
             <input
               type="text"
               class="form-control input-search"
-              v-model="searchValue"
+              v-model="searchInput"
               :placeholder="placeholder"
+              v-bind:class="{ 'is-invalid': attemptSubmit && searchIsEmpty }"
             >
             <v-button/>
         </div>
-        <div class="form-errors row">
-          <p v-if="getErrors">
-            <b>Por favor, corrija o(s) seguinte(s) erro(s):</b>
-            <ul>
-              <li v-for="(error, index) in getErrors" :key="index">{{ error }}</li>
-            </ul>
-          </p>
-        </div>
       </div>
     </form>
-    <v-search-result />
+    <div v-if="hasExceptions" class="errors">
+      <ul class="errors-list">
+        <li v-for="(exception, index) in this.exceptions" :key="index">{{ exception }}</li>
+      </ul>
+    </div>
   </div>
 </template>
-<script>
 
+<script>
 import ButtonSearch from '@/components/ButtonSearch'
-import SearchResult from '@/components/SearchResult'
 import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'FormSearch',
   components: {
-    'v-button': ButtonSearch,
-    'v-search-result': SearchResult
+    'v-button': ButtonSearch
   },
   data () {
     return {
       placeholder: 'Search something on Janus...',
-      searchValue: ''
+      searchInput: '',
+      attemptSubmit: false,
+      exceptions: []
     }
   },
   computed: {
     ...mapState({
-      searchState: state => state.form.search,
-      messages: state => state.validation.messages
+      searchState: state => state.form.search
     }),
     // Mounts the "getSearch" getter to the scope of your component.
     ...mapGetters('validation', [
-      'getErrors',
-      'errorMatchesHttp'
-    ])
+      'getExceptionByType'
+    ]),
+    searchIsEmpty: function () {
+      return this.searchInput === ''
+    },
+    hasExceptions: function () {
+      return this.exceptions.length > 0
+    },
+    fieldIsEmpty: function () {
+      return this.getExceptionByType('Empty Field')
+    }
   },
   methods: {
     handleSubmit: function (e) {
       this.$store.commit('form/updateForm', this.searchValue)
+    },
+    validateForm: function (e) {
+      this.attemptSubmit = true
+      if (this.searchIsEmpty) {
+        this.exceptions.push(this.fieldIsEmpty)
+      } else {
+        this.handleSubmit()
+      }
     }
   },
   mounted () {
-    console.log(this.errorMatchesHttp('general'))
   }
 }
 </script>
 
 <style scoped>
-.col {
-  max-width: 50%;
-  position: relative;
-  margin: auto;
-}
 .input-search {
   border: none;
   border-radius: 16px;
@@ -93,5 +99,16 @@ export default {
   width: 100%;
   box-sizing: border-box;
   outline: none;
+}
+.form-control.is-invalid {
+  border-color: #dc3545;
+}
+.errors-list {
+  list-style: none;
+  text-align: left;
+  padding: 0 0 0 5px;
+  margin-top: 10px;
+  font-size: .875rem;
+  color: #dc3545;
 }
 </style>

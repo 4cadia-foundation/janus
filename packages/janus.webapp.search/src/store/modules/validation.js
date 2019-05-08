@@ -1,16 +1,23 @@
-import messageData from '../../utils/messages'
+import messageData from '../../utils/messages.json'
 
 // initial state
 const state = {
-  messages: messageData.messages
+  success: messageData.success,
+  errors: messageData.errors,
+  exceptions: messageData.exceptions
 }
 
 // getters
 const getters = {
-  messages: state => state.messages,
-  getErrors: state => state.messages.errors,
-  errorMatchesHttp: (state, getters) => (httpCode) => {
-    return state.messages.errors.find(errors => errors.httpCode === httpCode)
+  getErrors: state => state.errors,
+  getErrorByType: (state, getters) => (type) => {
+    return state.errors.find(error => error.type === type).text
+  },
+  errorMatchHttp: (state, getters) => (httpCode) => {
+    return state.errors.find(error => error.httpCode === httpCode).text
+  },
+  getExceptionByType: (state, getters) => (type) => {
+    return state.exceptions.find(exception => exception.type === type).text
   }
 }
 
