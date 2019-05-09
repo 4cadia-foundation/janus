@@ -8,7 +8,7 @@
 
 <script>
 import ItemResult from '@/components/ItemResult'
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'SearchResult',
@@ -22,7 +22,8 @@ export default {
     }),
     // Mounts the "getSearch" getter to the scope of your component.
     ...mapGetters('validation', ['getExceptionByType']),
-    ...mapGetters('search', ['getSearchValue']),
+    ...mapGetters('search', ['getSearchValue', 'getResults']),
+    // ...mapActions('search', ['getResults']),
     resultIsEmpty: function (value) {
       return this.searchResult === []
     },
@@ -40,7 +41,8 @@ export default {
   },
   methods: {
     getSearchResult: function () {
-      console.log(this.searchValue)
+      let data = this.getResults
+      console.log(data)
     },
     validate: function (e) {
       if (this.isEmpty(this.searchResult)) {
@@ -50,20 +52,20 @@ export default {
   },
   mounted () {
     this.getSearchResult()
-    this.$store.watch(
-      (state, getters) => getters.getSearchValue,
-      (newValue, oldValue) => {
-        console.log(this.searchValue)
-        console.log(`Updating from ${oldValue} to ${newValue}`)
+    // this.$store.watch(
+    //   (state, getters) => getters.getSearchValue,
+    //   (newValue, oldValue) => {
+    //     console.log(this.searchValue)
+    //     console.log(`Updating from ${oldValue} to ${newValue}`)
 
-        // Do whatever makes sense now
-        if (newValue === 'success') {
-          this.complex = {
-            deep: 'some deep object'
-          }
-        }
-      }
-    )
+    //     // Do whatever makes sense now
+    //     if (newValue === 'success') {
+    //       this.complex = {
+    //         deep: 'some deep object'
+    //       }
+    //     }
+    //   }
+    // )
   }
 }
 </script>
