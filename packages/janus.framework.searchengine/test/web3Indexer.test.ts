@@ -1,23 +1,63 @@
-import "reflect-metadata";
-import {container} from "../src/startup";
-import web3IndexerService from "../src/application/service/web3IndexerService";
+import Web3IndexerService from '../service/Web3IndexerService';
+import IndexerResult from '../entity/IndexerResult';
+import Website from '../entity/Website';
 
-let pack = container.resolve(web3IndexerService);
+let indexerService;
 
-jest.mock("../src/application/service/web3IndexerService.ts");
-
-test("Return 15 index empty", async () => {
-    // const addMock = jest.spyOn( );
-    let result = pack.ListByTags('0x5a019a8572a7431001703ac69558f686ba817766', ['tag1']);
-    console.log(result);
-    expect(1).toEqual(1);
+beforeEach(() => {
+    indexerService = new Web3IndexerService();
 });
 
-test("Return less than 15 index", () => {
+describe('ListByTags tests', function () {
+    it('Return error invalid owner address', async () => {
+        let expectedResultErrorsLength = 1;
+        let expectedResult = new IndexerResult();
+        expectedResult.errors.push('invalid owner address');
 
-    expect(1).toEqual(1);
-});
-test("Return 15 index full", () => {
+        indexerService.ListByTags = jest.fn().mockReturnValue(expectedResult);
 
-    expect(1).toEqual(1);
+        var result = await indexerService.ListByTags('aaa', 0, ['tag1']);
+
+        expect(result.errors.length).toBe(expectedResultErrorsLength);
+        expect(result.errors[0]).toBe('invalid owner address');
+    });
+
+    it('Return empty websites', async () => {
+        let expectedResultSucces = true;
+        let expectedResultWebsitesLength = 0;
+        let expectedResultErrorsLength = 0;
+        let expectedResult = new IndexerResult();
+        expectedResult.success = true;
+
+        indexerService.ListByTags = jest.fn().mockReturnValue(expectedResult);
+
+        var result = await indexerService.ListByTags('0x954df17d3c8a79ebb4ae62d89f9360a970815bc2', 0, ['tag1']);
+
+        expect(result.websites.length).toBe(expectedResultWebsitesLength);
+        expect(result.errors.length).toBe(expectedResultErrorsLength);
+        expect(result.success).toBe(expectedResultSucces);
+    });
+
+    it('Return one website', async () => {
+        let expectedResultSucces = true;
+        let expectedResultWebsitesLength = 1;
+        let expectedResultErrorsLength = 0;
+        let website = new Website('QmUdiv8F7eFSxZbUTJU8UfvJGc7UewTN9XF5AqkpTMHCxa', 'title', 'desc');
+
+        let expectedResult = new IndexerResult();
+        expectedResult.success = true;
+        expectedResult.websites.push(website);
+
+        indexerService.ListByTags = jest.fn().mockReturnValue(expectedResult);
+
+        var result = await indexerService.ListByTags('0x954df17d3c8a79ebb4ae62d89f9360a970815bc2', 0, ['tag1']);
+
+        expect(result.websites[0].storageHash).toBe(website.storageHash);
+        expect(result.websites[0].title).toBe(website.title);
+        expect(result.websites[0].description).toBe(website.description);
+        expect(result.websites.length).toBe(expectedResultWebsitesLength);
+        expect(result.errors.length).toBe(expectedResultErrorsLength);
+        expect(result.success).toBe(expectedResultSucces);
+    });
 });
+

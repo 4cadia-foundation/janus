@@ -1,9 +1,9 @@
 {
   "name": "janus-searchengine",
-  "version": "1.0.31",
+  "version": "1.0.35",
   "description": "teste",
-  "main": "dist/startup.js",
-  "types": "dist/startup.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
@@ -20,18 +20,13 @@
     "reflect-metadata": "^0.1.13",
     "scrypt": "^6.0.3",
     "tslint": "^5.16.0",
-    "tsyringe": "^3.2.0",
     "typescript": "^3.4.5",
     "web3": "^1.0.0-beta.54",
     "xmldom": "^0.1.27"
   },
   "devDependencies": {
-    "@types/chai": "^4.1.7",
     "@types/jest": "^24.0.12",
-    "@types/mocha": "^5.2.6",
-    "chai": "^4.2.0",
     "jest": "^24.8.0",
-    "mocha": "^6.1.4",
     "ts-jest": "^24.0.2",
     "typescript": "^3.4.5"
   },
@@ -39,17 +34,17 @@
     "dist"
   ],
   "jest": {
-      "transform": {
-        ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-      },
-      "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-      "moduleFileExtensions": [
-        "ts",
-        "tsx",
-        "js",
-        "jsx",
-        "json",
-        "node"
-      ]
-    }
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
 }

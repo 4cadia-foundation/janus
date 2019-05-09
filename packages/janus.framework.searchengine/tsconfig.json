@@ -16,6 +16,8 @@
         "declaration": true,
         "outDir": "./dist",
         "strict": false,
-        "sourceMap": true
+        "sourceMap": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true  
     }
 }
