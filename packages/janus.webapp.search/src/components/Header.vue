@@ -8,6 +8,9 @@
         <router-link to="/about">About Us</router-link>
       </li>
       <li class="menu-item">
+        <a href="https://janusproj.atlassian.net/wiki/spaces/PAP/pages/126320921/What+s+Identity">What's identity?</a>
+      </li>
+      <li class="menu-item">
         <menu-account />
       </li>
     </ul>

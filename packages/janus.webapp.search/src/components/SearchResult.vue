@@ -22,6 +22,7 @@ export default {
     }),
     // Mounts the "getSearch" getter to the scope of your component.
     ...mapGetters('validation', ['getExceptionByType']),
+    ...mapGetters('search', ['getSearchValue']),
     resultIsEmpty: function (value) {
       return this.searchResult === []
     },
