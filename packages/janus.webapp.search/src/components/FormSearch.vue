@@ -21,17 +21,22 @@
         <li v-for="(exception, index) in this.exceptions" :key="index">{{ exception }}</li>
       </ul>
     </div>
+    <div>
+      <v-search/>
+    </div>
   </div>
 </template>
 
 <script>
 import ButtonSearch from '@/components/ButtonSearch'
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
+import SearchResult from '@/components/SearchResult'
 
 export default {
   name: 'FormSearch',
   components: {
-    'v-button': ButtonSearch
+    'v-button': ButtonSearch,
+    'v-search': SearchResult
   },
   data () {
     return {
@@ -42,9 +47,6 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      searchState: state => state.form.search
-    }),
     // Mounts the "getSearch" getter to the scope of your component.
     ...mapGetters('validation', [
       'getExceptionByType'
@@ -55,18 +57,18 @@ export default {
     hasExceptions: function () {
       return this.exceptions.length > 0
     },
-    fieldIsEmpty: function () {
+    hasEmptyField: function () {
       return this.getExceptionByType('Empty Field')
     }
   },
   methods: {
     handleSubmit: function (e) {
-      this.$store.commit('form/updateForm', this.searchValue)
+      this.$store.commit('search/updateSearch', this.searchInput)
     },
     validateForm: function (e) {
       this.attemptSubmit = true
       if (this.searchIsEmpty) {
-        this.exceptions.push(this.fieldIsEmpty)
+        this.exceptions.push(this.hasEmptyField)
       } else {
         this.handleSubmit()
       }

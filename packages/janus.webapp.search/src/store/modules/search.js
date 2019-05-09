@@ -1,24 +1,13 @@
-import searchService from '../../api/searchService'
-
 // initial state
 // shape: [{ hash, title }]
 const state = {
-  results: [],
-  successs: null
+  result: [],
+  value: ''
 }
 
 // getters
 const getters = {
-  filteredResults: (state, getters, rootState) => {
-    return state.results.map(({ Search }) => {
-      console.log(Search)
-      // const site = rootState.sites.all.find(site => site.hash === hash)
-      // return {
-      //   title: site.title,
-      //   description: site.description
-      // }
-    })
-  }
+  getSearchValue: state => state.value
 }
 
 // actions
@@ -39,26 +28,18 @@ const actions = {
   //   )
   // }
   getResults ({ commit }) {
-    searchService.getContractData(results => {
-      commit('setResults', results)
-    })
   }
 }
 
 // mutations
 const mutations = {
 
-  setResults (state, results) {
-    state.results = results
+  setResults (state, result) {
+    state.result = result
+  },
+  updateSearch (state, searchValue) {
+    state.value = searchValue
   }
-
-  // setSearchResults (state, { results }) {
-  //   state.results = results
-  // },
-
-  // setSearchStatus (state, status) {
-  //   state.successs = status
-  // }
 }
 
 export default {

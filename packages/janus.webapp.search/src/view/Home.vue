@@ -3,14 +3,12 @@
     <h1>{{title}}</h1>
     <div class="wrapper">
       <v-form-search />
-      <v-search-result />
-    </div>
+      </div>
   </div>
 </template>
 
 <script>
 import FormSearch from '@/components/FormSearch'
-import SearchResult from '@/components/SearchResult'
 
 export default {
   name: 'Home',
@@ -20,8 +18,7 @@ export default {
     }
   },
   components: {
-    'v-form-search': FormSearch,
-    'v-search-result': SearchResult
+    'v-form-search': FormSearch
   }
 }
 </script>
