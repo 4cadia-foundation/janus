@@ -47,7 +47,6 @@ export default {
     }
   },
   computed: {
-    // Mounts the "getSearch" getter to the scope of your component.
     ...mapGetters('validation', [
       'getExceptionByType'
     ]),

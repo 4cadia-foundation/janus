@@ -1,12 +1,11 @@
 // import Web3IndexerService from 'janus-searchengine'
-let Web3IndexerService = require('janus-searchengine')
+// let Web3IndexerService = require('janus-searchengine')
 // import Web3Config from '../../utils/Web3Config.json'
 
 // initial state
-// shape: [{ hash, title }]
 const state = {
   result: [],
-  value: ['tag1'],
+  value: '',
   data: []
 }
 
@@ -14,8 +13,8 @@ const state = {
 const getters = {
   getSearchValue: state => state.value,
   getResults ({ commit }) {
-    let indexerService = new Web3IndexerService()
-    return indexerService
+    // let indexerService = new Web3IndexerService()
+    // return indexerService
     // commit('gotData', await indexerService.ListByTags('0x2ad73382a193c13f73524ae3c8b40c614fb4a9c0', 0, this.value))
   }
 }
@@ -38,7 +37,7 @@ const actions = {
   //   )
   // }
   getResults ({ commit }) {
-    return Web3IndexerService
+    // return Web3IndexerService
     // let indexerService = new Web3IndexerService(Web3Config)
     // commit('gotData', await indexerService.ListByTags('0x2ad73382a193c13f73524ae3c8b40c614fb4a9c0', 0, this.value))
   }
@@ -47,10 +46,8 @@ const actions = {
 // mutations
 const mutations = {
   setResults (state, result) {
+    console.log(state)
     state.result = result
-  },
-  gotData (state, data) {
-    state.data = data
   },
   updateSearch (state, searchValue) {
     state.value = searchValue
