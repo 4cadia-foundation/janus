@@ -8,50 +8,60 @@
 </template>
 
 <script>
-import ItemResult from '@/components/ItemResult'
-import { mapState, mapGetters } from 'vuex'
+import ItemResult from "@/components/ItemResult";
+import { mapState, mapGetters, mapActions } from "vuex";
+import Web3IndexerService from "janus-searchengine";
+import Web3Config from "../utils/Web3Config.json";
 
 export default {
-  name: 'SearchResult',
+  name: "SearchResult",
   components: {
-    'v-item-result': ItemResult
+    "v-item-result": ItemResult
   },
   computed: {
     ...mapState({
       searchResult: state => state.search.result,
       searchValue: state => state.search.value
     }),
-    ...mapGetters('validation', ['getExceptionByType']),
-    ...mapGetters('search', ['getSearchValue']),
-    // ...mapActions('search', ['getResults']),
-    resultIsEmpty: function (value) {
-      return this.searchResult === []
+    ...mapGetters("validation", ["getExceptionByType"]),
+    ...mapGetters("search", ["getSearchValue", "getResults"]),
+    ...mapActions("search", ["getResults"]),
+    resultIsEmpty: function(value) {
+      return this.searchResult === [];
     },
-    hasExceptions: function () {
-      return this.exceptions.length > 0
+    hasExceptions: function() {
+      return this.exceptions.length > 0;
     },
-    hasEmptyReturn: function () {
-      return this.getExceptionByType('Empty Return')
+    hasEmptyReturn: function() {
+      return this.getExceptionByType("Empty Return");
     }
   },
-  data () {
+  data() {
     return {
       exceptions: []
-    }
+    };
   },
   methods: {
-    getSearchResult: function () {
+    async getSearchResult() {
+      let indexerService = new Web3IndexerService(Web3Config);
+      let result = await indexerService.ListByTags(
+        "0x5b4381941250afa470732a64f6cd215f903ceaf3",
+        0,
+        ["tag1"]
+      );
+      console.log(result);
+      return indexerService;
     },
-    validate: function (e) {
+    validate: function(e) {
       if (this.isEmpty(this.searchResult)) {
-        this.exceptions.push(this.resultIsEmpty)
+        this.exceptions.push(this.resultIsEmpty);
       }
     }
   },
-  mounted () {
-    this.getSearchResult()
+  mounted() {
+    this.getSearchResult();
   }
-}
+};
 </script>
 <style scoped>
 .list-results {

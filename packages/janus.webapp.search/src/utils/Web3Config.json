@@ -1,6 +1,6 @@
 {
-    "rpc": "http://127.0.0.1:9545",
-    "indexeraddress": "0xd0b8ff82df46dbc6942524a41e1d500141e040b7",
+    "rpc": "http://127.0.0.1:8545",
+    "indexeraddress": "0x5150e6e07b19c24f49e15ad8980723780130b763",
     "indexerabi": [
         {
             "inputs": [],
