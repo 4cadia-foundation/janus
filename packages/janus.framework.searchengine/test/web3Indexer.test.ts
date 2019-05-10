@@ -1,11 +1,16 @@
-import Web3IndexerService from '../service/Web3IndexerService';
-import IndexerResult from '../entity/IndexerResult';
-import Website from '../entity/Website';
+import Web3IndexerService from '../src/service/Web3IndexerService';
+import IndexerResult from '../src/entity/IndexerResult';
+import Website from '../src/entity/Website';
+import Web3Config from '../src/entity/Web3Config';
 
 let indexerService;
 
+let contractAddress = '';
+let contractAbi;
+let rpc = '';
+
 beforeEach(() => {
-    indexerService = new Web3IndexerService();
+    indexerService = new Web3IndexerService(new Web3Config(rpc, contractAbi, contractAddress));
 });
 
 describe('ListByTags tests', function () {

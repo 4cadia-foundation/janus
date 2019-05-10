@@ -1,14 +1,15 @@
 {
   "name": "janus-searchengine",
-  "version": "1.0.35",
-  "description": "teste",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "version": "1.0.48",
+  "description": "janus search engine",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
   "scripts": {
     "build": "tsc",
     "build:watch": "tsc --watch",
     "lint": "tslint --project \"./tsconfig.json\"",
-    "test": "jest"
+    "test": "jest",
+    "coverage": "npx jest --coverage"
   },
   "author": "",
   "license": "ISC",

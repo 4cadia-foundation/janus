@@ -1,17 +1,16 @@
-import IWeb3IndexerService from '../interface/IWeb3IndexerService'
-const Web3 = require('web3');
+import Web3 from 'web3';
 import Website from '../entity/Website';
 
-import Web3Config from '../web3config.json';
 import IndexerResult from '../entity/IndexerResult';
+import Web3Config from '../entity/Web3Config';
 
-export default class Web3IndexerService implements IWeb3IndexerService {
+export default class Web3IndexerService {
     private _web3;
     private _indexerSmartContract;
 
-    constructor() {
-        this._web3 = new Web3(Web3Config.rpc);
-        this._indexerSmartContract = new this._web3.eth.Contract(Web3Config.indexerabi, Web3Config.indexeraddress);
+    constructor(web3Config: Web3Config) {
+        this._web3 = new Web3(web3Config.rpc);
+        this._indexerSmartContract = new this._web3.eth.Contract(web3Config.indexerabi, web3Config.indexeraddress);
     }
 
     public async ListByTags(ownerAddress: string, gas: number, tags: string[]): Promise<IndexerResult> {
