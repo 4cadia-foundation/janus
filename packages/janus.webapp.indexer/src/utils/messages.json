@@ -1,0 +1,30 @@
+{
+  "success": "Your search returned about { number } results.",
+  "errors": [
+    {
+      "httpCode": 403,
+      "type": "Forbidden",
+      "text": "An error happened during your search. Try again later." 
+    },
+    {
+      "httpCode": 400,
+      "type": "Bad Request",
+      "text": "Search failed due to technical problems. Try again later." 
+    },
+    {
+      "httpCode": 404,
+      "type": "Not Found",
+      "text": "Janus haven’t found this page. Return to our homepage to start searching."
+    }
+  ],
+  "exceptions": [
+    {
+      "type": "Empty Return",
+      "text": "Janus haven’t found any content about { keyword }. Try something different." 
+    },
+    {
+      "type": "Empty Field",
+      "text": "Field is empty. Type something to search." 
+    }
+  ]
+}
