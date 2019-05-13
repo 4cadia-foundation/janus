@@ -6,11 +6,13 @@
         msg="Welcome to Your Vue.js App"
       />
     </div>
+    <v-upload/>
   </div>
 </template>
 
 <script>
 import HelloWorld from '@/components/HelloWorld'
+import FormUpload from '@/components/FormUpload'
 
 export default {
   name: 'Home',
@@ -20,7 +22,8 @@ export default {
     }
   },
   components: {
-    'v-hello': HelloWorld
+    'v-hello': HelloWorld,
+    'v-upload': FormUpload
   }
 }
 </script>
