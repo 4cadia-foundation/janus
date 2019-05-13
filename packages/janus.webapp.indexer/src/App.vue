@@ -15,7 +15,7 @@ export default {
   name: 'App',
 
   components: {
-    'v-header': Header
+    'v-header': Header,
   }
 }
 </script>

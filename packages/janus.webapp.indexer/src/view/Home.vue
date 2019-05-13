@@ -1,31 +1,26 @@
 <template>
   <div class="container">
-    <h1>{{title}}</h1>
+    <!-- <h1>{{title}}</h1> -->
     <div class="wrapper">
-      <v-hello
-        msg="Welcome to Your Vue.js App"
-      />
+      <v-upload/>
     </div>
-    <v-upload/>
   </div>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld'
-import FormUpload from '@/components/FormUpload'
+import FormUpload from "@/components/FormUpload";
 
 export default {
-  name: 'Home',
-  data () {
+  name: "Home",
+  data() {
     return {
-      title: 'Janus Plataform'
-    }
+      title: "Janus Upload Files"
+    };
   },
   components: {
-    'v-hello': HelloWorld,
-    'v-upload': FormUpload
+    "v-upload": FormUpload
   }
-}
+};
 </script>
 
 <style scoped>
