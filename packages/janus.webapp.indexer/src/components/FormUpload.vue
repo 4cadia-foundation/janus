@@ -5,8 +5,9 @@
   <div id="app">
     <div class="container">
       <!--UPLOAD-->
-      <form enctype="multipart/form-data" novalidate v-if="isInitial || isSaving">
-        <div>
+      <form enctype="multipart/form-data" novalidate v-if="isInitial || isSaving" class="form">
+        <div class="txt-wallet">
+          <label for="text">Wallet Address</label>
           <input type="text" class="metaMask">
         </div>
         <div class="dropbox">
@@ -19,13 +20,21 @@
             accept="image/*"
             class="input-file"
           >
-          <p v-if="isInitial">
-            Drag your file(s) here to begin
-            <br>or click to browse
-          </p>
+          <p v-if="isInitial">Drag your file(s) here to begin or click to browse</p>
           <p v-if="isSaving">Uploading {{ fileCount }} files...</p>
         </div>
-        <input type="text" class="returnUpload">
+        <div class="txt-folder">
+          <label for="text">Folder Path</label>
+          <input type="text" class="returnUpload">
+        </div>
+        <div class="txt-aling">
+          <label for="text">Content Hash</label>
+          <input type="text" class="returnUpload">
+        </div>
+        <div class="btn-form">
+          <button type="button" class="btn-cancel">Cancel</button>
+          <button type="button" class="btn-index">Index content</button>
+        </div>
       </form>
     </div>
   </div>
@@ -113,18 +122,22 @@ export default {
   background: rgb(214, 222, 222);
   color: dimgray;
   padding: 0px 0px;
-  min-height: 130px; /* minimum height */
+  display: flex;
   position: relative;
   cursor: pointer;
   border-radius: 100px;
+  width: 50%;
+  margin: auto;
 }
 
 .input-file {
   opacity: 0; /* invisible but it's there! */
   width: 100%;
-  height: 200px;
+  height: 100px;
   position: absolute;
   cursor: pointer;
+  top: 0%;
+  right: 0%;
 }
 
 .dropbox:hover {
@@ -134,13 +147,14 @@ export default {
 .dropbox p {
   font-size: 1.2em;
   text-align: center;
-  padding: 50px 0;
+  margin: auto;
+  padding: 15px;
 }
 .metaMask {
   padding: 0px 0px;
   position: relative;
   border-radius: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 17px;
   width: 600px;
   height: 30px;
 }
@@ -151,6 +165,72 @@ export default {
   border-radius: 20px;
   width: 600px;
   height: 30px;
+}
+label {
   margin-top: 40px;
+  margin: 0;
+  padding: 0;
+  color: gray;
+  display: block;
+}
+.txt-wallet {
+  text-align: left;
+}
+.txt-folder {
+  text-align: left;
+}
+.txt-content {
+  text-align: left;
+}
+.txt-aling {
+  margin-top: 10px;
+  text-align: left;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.btn-cancel {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out;
+  background-color: 15s ease-in-out;
+  border-color: 0.15s ease-in-out;
+  box-shadow: 0.15s ease-in-out;
+  cursor: pointer;
+}
+.btn-index {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out;
+  background-color: 15s ease-in-out;
+  border-color: 0.15s ease-in-out;
+  box-shadow: 0.15s ease-in-out;
+  cursor: pointer;
+}
+.btn-form {
+  margin-left: 395px;
+  padding: 10px;
 }
 </style>
