@@ -8,19 +8,19 @@
 </template>
 
 <script>
-import FormUpload from "@/components/FormUpload";
+import FormUpload from '@/components/FormUpload'
 
 export default {
-  name: "Home",
-  data() {
+  name: 'Home',
+  data () {
     return {
-      title: "Janus Upload Files"
-    };
+      title: 'Janus Upload Files'
+    }
   },
   components: {
-    "v-upload": FormUpload
+    'v-upload': FormUpload
   }
-};
+}
 </script>
 
 <style scoped>
