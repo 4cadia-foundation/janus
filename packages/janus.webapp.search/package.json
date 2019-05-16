@@ -12,7 +12,7 @@
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
     "fix": "npm run lint -- --fix",
     "build": "node build/build.js",
-    "deploy": "push-dir --dir=dist --branch=ipfs --cleanup"
+    "deploy": "push-dir --dir=dist --branch=dist --cleanup"
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
@@ -22,7 +22,7 @@
     "vue": "^2.6.10",
     "vue-router": "^3.0.1",
     "vuex": "^3.1.0",
-    "web3": "^1.0.0-beta.52"
+    "web3": "0.19.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

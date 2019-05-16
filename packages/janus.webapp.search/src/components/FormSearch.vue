@@ -1,28 +1,43 @@
 <template>
   <div class="content">
-    <form
-      v-on:submit="validateForm"
-      class="form">
+    <form @submit.prevent="handleSubmit" class="form">
       <div class="form-content col">
         <div class="form-field row">
-            <input
-              type="text"
-              class="form-control input-search"
-              v-model="searchInput"
-              :placeholder="placeholder"
-              v-bind:class="{ 'is-invalid': attemptSubmit && searchIsEmpty }"
-            >
-            <v-button/>
+          <input
+            type="text"
+            class="form-control input-search"
+            name="search"
+            v-model="searchInput"
+            :placeholder="placeholder"
+            v-on:blur="fieldIsEmpty"
+            v-bind:class="{ 'is-invalid': attemptSubmit && this.isEmpty(this.searchInput) }"
+          >
+          <v-button/>
+          <div class="errors">
+            <li v-for="(exception, index) in this.exceptions.search" :key="index">
+              {{ exception }}
+            </li>
+          </div>
+        </div>
+        <div class="form-field row">
+          <input
+            type="text"
+            class="form-control input-search"
+            name="teste"
+            v-model="teste"
+            :placeholder="'TESTE'"
+            v-on:blur="fieldIsEmpty"
+            v-bind:class="{ 'is-invalid': attemptSubmit && this.isEmpty(this.teste) }"
+          >
+          <v-button/>
+          <!-- <div v-if="hasExceptions" class="errors">
+            <v-error v-for="(exception, index) in this.exceptions[teste]" :key="index" :error="error"></v-error>
+          </div> -->
         </div>
       </div>
     </form>
-    <div v-if="hasExceptions" class="errors">
-      <ul class="errors-list">
-        <li v-for="(exception, index) in this.exceptions" :key="index">{{ exception }}</li>
-      </ul>
-    </div>
     <div>
-      <v-search/>
+      <v-search ref="searchResult"/>
     </div>
   </div>
 </template>
@@ -31,50 +46,81 @@
 import ButtonSearch from '@/components/ButtonSearch'
 import { mapGetters } from 'vuex'
 import SearchResult from '@/components/SearchResult'
+import ItemError from '@/components/ItemError'
 
 export default {
   name: 'FormSearch',
   components: {
     'v-button': ButtonSearch,
-    'v-search': SearchResult
+    'v-search': SearchResult,
+    'v-error': ItemError
   },
   data () {
     return {
       placeholder: 'Search something on Janus...',
-      searchInput: '',
+      searchInput: null,
+      teste: null,
       attemptSubmit: false,
-      exceptions: []
+      exceptions: {
+        search: [],
+        teste: {}
+      }
     }
   },
   computed: {
     ...mapGetters('validation', [
       'getExceptionByType'
     ]),
-    searchIsEmpty: function () {
-      return this.searchInput === ''
-    },
     hasExceptions: function () {
+      // Verifique se eu tenho erros
       return this.exceptions.length > 0
-    },
-    hasEmptyField: function () {
-      return this.getExceptionByType('Empty Field')
     }
   },
   methods: {
-    handleSubmit: function (e) {
-      this.$store.commit('search/updateSearch', this.searchInput)
+    isEmpty (value) {
+      // Verifique se o campo é vazio
+      return value === '' || value == null
+    },
+    hasException: function (field, exceptionType) {
+      // Verifique se eu tenho erros
+      return this.exceptions[field].some(exception => exception[exceptionType])
+    },
+    getErrors: function (fieldName) {
+      // Verifique se eu tenho erros
+      // return this.exceptions.field.find(fieldName)
+      return this.exceptions[fieldName]
+    },
+    fieldIsEmpty: function (e) {
+      // O campo está vazio?
+      console.log(this.exceptions.search)
+      if (this.isEmpty(e.srcElement.value) && !this.hasException(e.srcElement.name, 'EmptyField')) {
+        this.exceptions[e.srcElement.name].push({EmptyField: 'TEste'})
+      }
+      // else if (!this.hasException('EmptyField', e.srcElement.name)) {
+      //   // Eu já mostrei esse erro antes?
+      //   // Não
+      //   this.exceptions.push({
+      //     // Mostre o erro
+      //     field: e.srcElement.name, type: 'EmptyField', message: this.getExceptionByType('Empty Field')
+      //   })
+      // }
     },
     validateForm: function (e) {
+      // Diga que eu apertei o enter
       this.attemptSubmit = true
-      if (this.searchIsEmpty) {
-        this.exceptions.push(this.hasEmptyField)
-      } else {
-        this.handleSubmit()
-      }
+      // Eu tenho erros?
+      console.log(this.exceptions)
+    },
+    handleSubmit: function (e) {
+      // Valide meu form
+      // this.validateForm()
+      // Mande meu input pra store
+      // this.$store.commit('search/updateSearch', this.searchInput)
+      // Chame os resultados
+      // this.$refs.searchResult.getResults()
     }
   },
-  mounted () {
-  }
+  mounted () {}
 }
 </script>
 

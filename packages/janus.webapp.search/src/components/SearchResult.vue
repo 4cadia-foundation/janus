@@ -1,67 +1,71 @@
 <template>
   <div class="result">
-    <h2>{{ searchValue }}</h2>
-    <ul class="list list-results">
-      <v-item-result v-for="(item, index) in searchResult" :key="index" :item="item"></v-item-result>
-    </ul>
+    <div v-if="hasExceptions" class="errors">
+      <ul class="errors-list">
+        <li v-for="(exception, index) in this.exceptions" :key="index">{{ exception }}</li>
+      </ul>
+    </div>
+    <div v-else>
+      <ul class="list list-results">
+        <v-item-result v-for="(item, index) in searchResults.websites" :key="index" :item="item"></v-item-result>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
-import ItemResult from "@/components/ItemResult";
-import { mapState, mapGetters, mapActions } from "vuex";
-import Web3IndexerService from "janus-searchengine";
-import Web3Config from "../utils/Web3Config.json";
+import ItemResult from '@/components/ItemResult'
+import { mapState, mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: "SearchResult",
+  name: 'SearchResult',
   components: {
-    "v-item-result": ItemResult
+    'v-item-result': ItemResult
   },
   computed: {
     ...mapState({
-      searchResult: state => state.search.result,
+      searchResults: state => state.search.result,
       searchValue: state => state.search.value
     }),
-    ...mapGetters("validation", ["getExceptionByType"]),
-    ...mapGetters("search", ["getSearchValue", "getResults"]),
-    ...mapActions("search", ["getResults"]),
-    resultIsEmpty: function(value) {
-      return this.searchResult === [];
+    ...mapGetters('search', ['getSearchValue']),
+    ...mapGetters('validation', ['getExceptionByType']),
+    ...mapActions('search', ['getSearchResults']),
+    resultIsEmpty: function () {
+      if (this.searchResults) {
+        return this.searchResults.websites.length === 0
+      }
     },
-    hasExceptions: function() {
-      return this.exceptions.length > 0;
+    hasExceptions: function () {
+      return this.exceptions.length > 0
     },
-    hasEmptyReturn: function() {
-      return this.getExceptionByType("Empty Return");
+    hasEmptyReturn: function () {
+      return this.getExceptionByType('Empty Return')
     }
   },
-  data() {
+  data () {
     return {
       exceptions: []
-    };
-  },
-  methods: {
-    async getSearchResult() {
-      let indexerService = new Web3IndexerService(Web3Config);
-      let result = await indexerService.ListByTags(
-        "0x5b4381941250afa470732a64f6cd215f903ceaf3",
-        0,
-        ["tag1"]
-      );
-      console.log(result);
-      return indexerService;
-    },
-    validate: function(e) {
-      if (this.isEmpty(this.searchResult)) {
-        this.exceptions.push(this.resultIsEmpty);
-      }
     }
   },
-  mounted() {
-    this.getSearchResult();
+  methods: {
+    validate: function (e) {
+      if (this.resultIsEmpty) {
+        console.warn('[SearchResults] Search return is empty')
+        this.exceptions.push(this.hasEmptyReturn)
+      } else {
+        this.exceptions = []
+      }
+    },
+    getResults: function () {
+      this.$store.dispatch('search/getSearchResults').then(() => {
+        console.log('[SearchResults] Action dispatched')
+        this.validate()
+      })
+    }
+  },
+  mounted () {
   }
-};
+}
 </script>
 <style scoped>
 .list-results {

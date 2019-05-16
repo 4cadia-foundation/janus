@@ -2,16 +2,16 @@
   <li class="list-item item">
     <div class="item-title">
       <a class="link" :href="item.IpfsHash">
-        <h2 class="item-text link-text">{{ item.Title || capitalize }} </h2>
+        <h2 class="item-text link-text">{{ item.title || capitalize }} </h2>
       </a>
     </div>
     <div class="item-link">
       <a class="link" :href="item.IpfsHash">
-        <h5 class="item-text link-text">{{ item.IpfsHash }}</h5>
+        <h5 class="item-text link-text">{{ item.storageHash }}</h5>
       </a>
     </div>
     <div class="item-description">
-      <p class="item-text description">{{ item.Description }}</p>
+      <p class="item-text description">{{ item.description }}</p>
     </div>
   </li>
 </template>
@@ -32,6 +32,8 @@ export default {
       type: Object,
       required: true
     }
+  },
+  mounted () {
   }
 }
 </script>
