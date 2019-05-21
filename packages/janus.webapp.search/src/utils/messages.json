@@ -8,23 +8,27 @@
     },
     {
       "httpCode": 400,
-      "type": "Bad Request",
+      "type": "BadRequest",
       "text": "Search failed due to technical problems. Try again later." 
     },
     {
       "httpCode": 404,
-      "type": "Not Found",
+      "type": "NotFound",
       "text": "Janus haven’t found this page. Return to our homepage to start searching."
     }
   ],
   "exceptions": [
     {
-      "type": "Empty Return",
-      "text": "Janus haven’t found any content about { keyword }. Try something different." 
+      "type": "EmptyReturn",
+      "text": "Janus haven’t found any content about { keyword }. Try search for something different." 
     },
     {
-      "type": "Empty Field",
-      "text": "Field is empty. Type something to search." 
+      "type": "EmptyField",
+      "text": "Field is empty! Type something to search." 
+    },
+    {
+      "type": "InvalidField",
+      "text": "Field is invalid! Type only alphanumeric characters to search." 
     }
   ]
 }

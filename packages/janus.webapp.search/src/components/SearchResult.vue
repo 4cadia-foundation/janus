@@ -1,12 +1,14 @@
 <template>
   <div class="result">
-    <div v-if="hasExceptions" class="errors">
-      <ul class="errors-list">
-        <li v-for="(exception, index) in this.exceptions" :key="index">{{ exception }}</li>
+    <v-loader v-bind:class="{ 'visible': this.loading }" />
+    <div v-if="hasExceptions" class="result_errors">
+      <ul class="errors_list">
+        <li class="error" v-for="(exception, index) in this.exceptions" :key="index">{{ exception }}</li>
       </ul>
     </div>
-    <div v-else>
-      <ul class="list list-results">
+    <div class="result_content" v-else>
+      <p class="result_header">We found {{ searchResults.websites.length }} results from this search</p>
+      <ul class="list list--results">
         <v-item-result v-for="(item, index) in searchResults.websites" :key="index" :item="item"></v-item-result>
       </ul>
     </div>
@@ -14,13 +16,15 @@
 </template>
 
 <script>
-import ItemResult from '@/components/ItemResult'
 import { mapState, mapGetters, mapActions } from 'vuex'
+import ItemResult from '@/components/ItemResult'
+import Loader from '@/components/Loader'
 
 export default {
   name: 'SearchResult',
   components: {
-    'v-item-result': ItemResult
+    'v-item-result': ItemResult,
+    'v-loader': Loader
   },
   computed: {
     ...mapState({
@@ -39,27 +43,32 @@ export default {
       return this.exceptions.length > 0
     },
     hasEmptyReturn: function () {
-      return this.getExceptionByType('Empty Return')
+      return this.getExceptionByType('EmptyReturn')
     }
   },
   data () {
     return {
-      exceptions: []
+      exceptions: [],
+      loading: false,
+      results: null
     }
   },
   methods: {
     validate: function (e) {
+      this.exceptions = []
       if (this.resultIsEmpty) {
         console.warn('[SearchResults] Search return is empty')
-        this.exceptions.push(this.hasEmptyReturn)
-      } else {
-        this.exceptions = []
+        let exception = this.hasEmptyReturn.replace('{ keyword }', this.searchValue)
+        this.exceptions.push(exception)
       }
     },
     getResults: function () {
+      this.loading = true
       this.$store.dispatch('search/getSearchResults').then(() => {
         console.log('[SearchResults] Action dispatched')
         this.validate()
+        this.loading = false
+        console.log(this)
       })
     }
   },
@@ -68,7 +77,23 @@ export default {
 }
 </script>
 <style scoped>
-.list-results {
-  padding: 0%;
+.result {
+  position: relative;
+}
+.result_content {
+  max-width: 80%;
+  margin: auto;
+}
+.result_errors {
+  margin: 0 30px 30px;
+}
+.result_header {
+  margin: 0 auto 20px;
+  text-align: left;
+}
+.error {
+  color: rgb(63, 61, 75);
+  font-size: 20px;
+  line-height: 1.5;
 }
 </style>

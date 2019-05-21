@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <v-header/>
-    <img src="./assets/eth1.jpg">
+    <router-link to="/">
+      <img class="logo" src="./assets/ethereum.png">
+    </router-link>
     <div class="main">
       <router-view/>
     </div>
@@ -31,14 +33,31 @@ ul {
 
 h1 {
   margin: 0.67em 0;
+  color: #666666;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: #5436D6;
+  cursor: pointer;
+}
+
+a:active,
+a:visited {
+  color: #6142ed;
 }
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Montserrat', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+}
+
+.logo {
+  width: 150px;
 }
 
 .btn {
@@ -50,5 +69,14 @@ h1 {
   max-width: 50%;
   position: relative;
   margin: auto;
+}
+
+.errors {
+  text-align: left;
+  padding: 0 0 0 5px;
+  margin-top: 10px;
+  font-size: .875rem;
+  color: #dc3545;
+  list-style: none;
 }
 </style>

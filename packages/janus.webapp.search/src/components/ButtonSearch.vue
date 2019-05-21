@@ -19,6 +19,8 @@
 export default {
   name: 'ButtonSearch',
   components: {
+  },
+  props: {
   }
 }
 </script>
@@ -35,12 +37,13 @@ export default {
   cursor: pointer;
 }
 
-.btn:active {
-  color: #99abaf;
+.btn:active svg {
+  color: #5436D6;
 }
 
 .icon-search {
   width: 100%;
   height: 100%;
+  color: #666666;
 }
 </style>

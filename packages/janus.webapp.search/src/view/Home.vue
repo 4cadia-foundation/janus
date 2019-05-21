@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h1>{{title}}</h1>
-    <div class="wrapper">
+    <div>
       <v-form-search />
       </div>
   </div>
@@ -23,5 +23,5 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 </style>

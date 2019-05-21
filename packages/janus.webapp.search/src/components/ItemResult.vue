@@ -1,17 +1,19 @@
 <template>
-  <li class="list-item item">
-    <div class="item-title">
-      <a class="link" :href="item.IpfsHash">
-        <h2 class="item-text link-text">{{ item.title || capitalize }} </h2>
-      </a>
-    </div>
-    <div class="item-link">
-      <a class="link" :href="item.IpfsHash">
-        <h5 class="item-text link-text">{{ item.storageHash }}</h5>
-      </a>
-    </div>
-    <div class="item-description">
-      <p class="item-text description">{{ item.description }}</p>
+  <li class="list-item">
+    <div class="item">
+      <div class="item_title item--text">
+        <a class="link" :href="item.IpfsHash">
+          <h2 class="link-text">{{ item.title || capitalize }} </h2>
+        </a>
+      </div>
+      <div class="item_link item--text">
+        <a class="link" :href="item.IpfsHash">
+          <h5 class="link_text">{{ item.storageHash }}</h5>
+        </a>
+      </div>
+      <div class="item_description item--text">
+        <p class="description">{{ item.description }}</p>
+      </div>
     </div>
   </li>
 </template>
@@ -39,16 +41,27 @@ export default {
 </script>
 <style scoped>
 .list-item {
+  pointer-events: all;
+  user-select: none;
+  height: 80px;
+  overflow: hidden;
+  padding: 10px 20px 20px;
+  transition: all 0.15s ease 0s;
   text-align: left;
-  list-style: none;
-  margin: 30px 0;
-  background: #f9f9f9;
-  padding: 10px;
-  max-width: 50%;
-  margin: auto;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
+  margin: 0 auto 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-image: initial;
+  border-color: rgb(204, 204, 204);
+  border-radius: 4px;
+  background:  rgb(250, 250, 250);
 }
-.item-text {
+.item--text {
   margin: 5px 0;
+  color: #666666;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: left;
+  line-height: 1.5;
 }
 </style>
