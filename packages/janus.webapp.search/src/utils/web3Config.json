@@ -1,4 +1,5 @@
 {
+    "ipfs": "http://ec2-54-158-29-17.compute-1.amazonaws.com/ipfs/",
     "rpc": "https://rinkeby.infura.io/v3/9d29be50765b44a08196e457db9b40db",
     "indexeraddress": "0x50ae17b684fd694926865f1e1858553cc17670a2",
     "indexerabi": [

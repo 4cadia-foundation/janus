@@ -13,9 +13,6 @@ const getters = {
   getErrorByType: (state, getters) => (type) => {
     return state.errors.find(error => error.type === type).text
   },
-  errorMatchHttp: (state, getters) => (httpCode) => {
-    return state.errors.find(error => error.httpCode === httpCode).text
-  },
   getExceptionByType: (state, getters) => (type) => {
     return state.exceptions.find(exception => exception.type === type).text
   }

@@ -1,9 +1,6 @@
 <template>
   <div id="app">
     <v-header/>
-    <router-link to="/">
-      <img class="logo" src="./assets/ethereum.png">
-    </router-link>
     <div class="main">
       <router-view/>
     </div>

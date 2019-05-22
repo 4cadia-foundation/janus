@@ -2,14 +2,14 @@
   <li class="list-item">
     <div class="item">
       <div class="item_title item--text">
-        <a class="link" :href="item.IpfsHash">
+        <router-link :href="ipfsUrl + item.storageHash" target="_blank" class="link">
           <h2 class="link-text">{{ item.title || capitalize }} </h2>
-        </a>
+        </router-link>
       </div>
       <div class="item_link item--text">
-        <a class="link" :href="item.IpfsHash">
+        <router-link :href="ipfsUrl + item.storageHash" target="_blank" class="link">
           <h5 class="link_text">{{ item.storageHash }}</h5>
-        </a>
+        </router-link>
       </div>
       <div class="item_description item--text">
         <p class="description">{{ item.description }}</p>
@@ -32,6 +32,10 @@ export default {
   props: {
     item: {
       type: Object,
+      required: true
+    },
+    ipfsUrl: {
+      type: String,
       required: true
     }
   },
