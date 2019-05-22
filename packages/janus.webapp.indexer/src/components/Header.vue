@@ -29,7 +29,7 @@ export default {
 
 <style scoped>
 .header {
-  padding: 0px 30px;
+  padding: 20px 30px;
 }
 .menu {
   position: relative;
