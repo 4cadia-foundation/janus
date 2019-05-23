@@ -1,19 +1,17 @@
 <template>
   <li class="list-item">
     <div class="item">
-      <div class="item_title item--text">
-        <router-link :href="ipfsUrl + item.storageHash" target="_blank" class="link">
-          <h2 class="link-text">{{ item.title || capitalize }} </h2>
-        </router-link>
-      </div>
-      <div class="item_link item--text">
-        <router-link :href="ipfsUrl + item.storageHash" target="_blank" class="link">
-          <h5 class="link_text">{{ item.storageHash }}</h5>
-        </router-link>
-      </div>
-      <div class="item_description item--text">
-        <p class="description">{{ item.description }}</p>
-      </div>
+      <a :href="ipfsUrl + item.storageHash" target="_blank" class="link">
+        <div class="item_title item--text">
+          <h2 class="title_text text">{{ item.title || capitalize }} </h2>
+        </div>
+        <div class="item_hash item--text">
+            <h5 class="hash_text text">{{ item.storageHash }}</h5>
+        </div>
+        <div class="item_description item--text">
+          <p class="description_text text">{{ item.description }}</p>
+        </div>
+      </a>
     </div>
   </li>
 </template>
@@ -56,16 +54,22 @@ export default {
   border-width: 1px;
   border-style: solid;
   border-image: initial;
-  border-color: rgb(204, 204, 204);
+  border-color: var(--color-gray-lighter);
   border-radius: 4px;
-  background:  rgb(250, 250, 250);
+  background:  var(--color-white);
+}
+.list-item:hover {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
 }
 .item--text {
   margin: 5px 0;
-  color: #666666;
+  color: var(--color-gray);
   font-size: 14px;
   font-weight: 400;
   text-align: left;
   line-height: 1.5;
+}
+.link:hover .title_text {
+  color: var(--color-primary);
 }
 </style>

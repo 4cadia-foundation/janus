@@ -36,7 +36,7 @@ export default {
   border-top: 2px solid rgba(83,167,250, 0.2);
   border-right: 2px solid rgba(83,167,250, 0.2);
   border-bottom: 2px solid rgba(83,167,250, 0.2);
-  border-left: 2px solid #5436D6;
+  border-left: 2px solid var(--color-primary);
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);

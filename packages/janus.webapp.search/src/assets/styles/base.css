@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+h1 {
+  margin: 0.67em 0;
+  color: var(--color-gray);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-gray);
+  cursor: pointer;
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+.logo {
+  width: 150px;
+}
+
+.btn {
+  background-color: transparent;
+  border-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.wrapper {
+  max-width: 50%;
+  position: relative;
+  margin: auto;
+}
+
+.errors {
+  text-align: left;
+  padding: 0 0 0 5px;
+  margin-top: 10px;
+  font-size: .875rem;
+  color: var(--color-red);
+  list-style: none;
+}
+
+.invalid {
+  color: var(--color-red);
+  border-color: var(--color-red);
+}

@@ -33,17 +33,15 @@ export default {
   position: absolute;
   right: 0;
   top: 0;
-  outline: none;
-  cursor: pointer;
 }
 
 .btn:active svg {
-  color: #5436D6;
+  color: var(--color-primary);
 }
 
 .icon-search {
   width: 100%;
   height: 100%;
-  color: #666666;
+  color: var(--color-gray);
 }
 </style>

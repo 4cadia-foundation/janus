@@ -24,7 +24,6 @@ const actions = {
     if (indexerService !== 'undefinied') {
       console.log('[Web3IndexerService] Connected')
       let providerAddress = indexerService._web3.eth.givenProvider.selectedAddress
-      console.log(indexerService)
       var searchResult = await indexerService.ListByTags(providerAddress, 0, getters.getArraySearch)
       if (!searchResult.success) {
         let root = this

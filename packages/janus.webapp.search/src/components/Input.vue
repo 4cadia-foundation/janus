@@ -8,7 +8,7 @@
       :value="value"
       @input="$emit('input', $event.target.value)"
       v-on:keyup="handleKeyUp"
-      v-bind:class="{ 'is-invalid': this.hasExceptions }"
+      v-bind:class="{ 'invalid': this.hasExceptions }"
     >
     <div class="errors">
       <li v-for="(exception, index) in this.exceptions" :key="index">
@@ -98,8 +98,8 @@ export default {
   padding-bottom: 0px;
   padding-left: 16px;
   padding-right: 16px;
-  color: rgb(63, 61, 75);
-  background-color: rgb(255, 255, 255);
+  color: var(--color-gray);
+  background-color: var(--color-white);
   height: 3rem;
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
@@ -107,7 +107,7 @@ export default {
   border-width: 1px;
   border-style: solid;
   border-image: initial;
-  border-color: rgb(204, 204, 204);
+  border-color: var(--color-gray-lighter);
   border-radius: 4px;
   box-sizing: border-box;
 }
@@ -116,9 +116,10 @@ export default {
 }
 .field:focus {
   outline: none;
-  border-color: rgb(78, 63, 206);
+  border-color: var(--color-primary);
 }
-.field.is-invalid {
-  border-color: #dc3545;
+.field.invalid {
+  color: var(--color-red);
+  border-color: var(--color-red);
 }
 </style>

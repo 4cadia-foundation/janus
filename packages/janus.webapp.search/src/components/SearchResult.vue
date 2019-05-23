@@ -67,6 +67,12 @@ export default {
     }
   },
   methods: {
+    reset: function (params) {
+      this.loading = false
+      this.exceptions = []
+      this.errors = []
+      this.$store.commit('search/updateSearchResults', [])
+    },
     validate: function (e) {
       this.exceptions = []
       this.errors = []
@@ -78,7 +84,6 @@ export default {
         let exception = this.hasEmptyReturn.replace('{ keyword }', this.searchValue)
         this.exceptions.push(exception)
       } else {
-        console.log(this.searchResults.length)
         this.resultsNumber = this.searchResults.length
       }
     },
@@ -92,7 +97,7 @@ export default {
     }
   },
   mounted () {
-    console.log(this.searchIpfs)
+    this.reset()
   }
 }
 </script>
@@ -113,7 +118,7 @@ export default {
 }
 .result_messages--exceptions .message {
   font-size: 20px;
-  color: rgb(63, 61, 75);
+  color: var(--color-gray);
 }
 .result_messages--errors {
   text-align: left;
@@ -122,7 +127,7 @@ export default {
   list-style: circle;
 }
 .result_messages--errors .message {
-  color: #dc3545;
+  color: var(--color-red);
   margin: 10px auto;
 }
 </style>
