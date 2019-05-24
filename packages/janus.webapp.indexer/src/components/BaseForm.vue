@@ -6,32 +6,42 @@
           <v-input
             placeholderTxt="e.g. 0xAc03BB73b6a9e108530AFf4Df5077c2B3D481e5A"
             inputType="text"
-            inputName="Wallet Address"
+            inputName="address"
+            inputLabel="Wallet Address"
             v-model="address"
-            ref="searchInput"
+            ref="inputAddress"
+          />
+        </div>
+        <div class="form_field">
+          <v-file-input
+            inputName="file"
+            v-model="file"
+            ref="inputFile"
           />
         </div>
         <div class="form_field">
           <v-input
             placeholderTxt="e.g. file://index.html"
             inputType="text"
-            inputName="Folder Path"
+            inputName="folder"
+            inputLabel="Folder Path"
             v-model="folder"
-            ref="searchInput"
+            ref="inputFolder"
           />
         </div>
         <div class="form_field">
           <v-input
             placeholderTxt="e.g. 0xAc03BB73b6a9e108530AFf4Df5077c2B3D481e5A"
             inputType="text"
-            inputName="Content Hash"
+            inputName="hash"
+            inputLabel="Content Hash"
             v-model="hash"
-            ref="searchInput"
+            ref="inputHash"
           />
         </div>
         <div class="form_control">
-          <v-button class="btn btn--alert" buttonName="Cancel"/>
-          <v-button class="btn btn--success" buttonName="Index content"/>
+          <button type="submit" class="btn btn--alert">Cancel</button>
+          <button type="submit" class="btn btn--success">Index content</button>
         </div>
       </div>
     </form>
@@ -40,13 +50,13 @@
 
 <script>
 import Input from '@/components/Input'
-import BaseButton from '@/components/BaseButton'
+import FileInput from '@/components/FileInput'
 
 export default {
   name: 'FormSearch',
   components: {
     'v-input': Input,
-    'v-button': BaseButton
+    'v-file-input': FileInput
   },
   data () {
     return {
@@ -54,7 +64,8 @@ export default {
       exceptions: [],
       address: null,
       folder: null,
-      hash: null
+      hash: null,
+      file: null
     }
   },
   computed: {

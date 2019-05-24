@@ -95,12 +95,11 @@ export default {
 .input {
   padding-top: 0px;
   padding-left: 16px;
-  color: #3f3d4b;
+  color: var(--color-gray);
   background-color: rgb(255, 255, 255);
   height: 3rem;
-  box-shadow: #0000001a 0px 2px 4px;
+  box-shadow: var(--color-gray) 0px 2px 4px;
   font-size: 1rem;
-  font-family: "Source Sans Pro", -apple-system, sans-serif;
   border-width: 1px;
   border-style: solid;
   border-image: initial;
@@ -112,23 +111,23 @@ export default {
   border-radius: 16px;
 }
 .input.is-invalid {
-  border-color: #dc3545;
+  border-color: var(--color-red);
 }
 .errors-list {
   text-align: left;
   padding: 0 0 0 5px;
   margin-top: 10px;
   font-size: .875rem;
-  color: #dc3545;
+  color: var(--color-red);
 }
 .button {
   -webkit-appearance: none;
   align-items: center;
   background-color: #fff;
   border-radius: 4px;
-  border: 1px solid #bdbdbd;
+  border: 1px solid var(--color-gray);
   box-shadow: none;
-  color: #3f3d4b;
+  color: var(--color-gray);
   cursor: pointer;
   display: inline-flex;
   font-size: 1rem;
