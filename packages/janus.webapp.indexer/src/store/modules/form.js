@@ -1,12 +1,14 @@
 // initial state
 const state = {
-  input: '',
+  walletAddress: null,
+  folderPath: null,
+  hashAddress: null,
+  uploadedFiles: [],
   return: []
 }
 
 // getters
 const getters = {
-  getInput: state => state.input
 }
 
 // actions
@@ -15,8 +17,17 @@ const actions = {
 
 // mutations
 const mutations = {
-  setInput (state, input) {
-    state.input = input
+  setWalletAddress (state, walletAddress) {
+    state.walletAddress = walletAddress
+  },
+  setFolderPath (state, folderPath) {
+    state.folderPath = folderPath
+  },
+  setHashAddress (state, hashAddress) {
+    state.hashAddress = hashAddress
+  },
+  setUploadedFiles (state, uploadedFiles) {
+    state.uploadedFiles.push(uploadedFiles)
   }
 }
 

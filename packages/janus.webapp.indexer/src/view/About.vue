@@ -111,7 +111,7 @@ export default {
 }
 
 .text {
-  color: #796d6d;
+  color: #cccccc;
   text-align: justify;
 }
 

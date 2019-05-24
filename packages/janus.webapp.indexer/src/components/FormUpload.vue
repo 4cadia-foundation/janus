@@ -121,7 +121,7 @@ export default {
 .dropbox {
   outline-offset: -10px;
   background: rgb(214, 222, 222);
-  color: dimgray;
+  color: var(--color-gray);
   padding: 0px 0px;
   display: flex;
   position: relative;
@@ -142,7 +142,7 @@ export default {
 }
 
 .dropbox:hover {
-  background: lightblue; /* when mouse over to the drop zone, change color */
+  background: var(--color-gray); /* when mouse over to the drop zone, change color */
 }
 
 .dropbox p {
@@ -171,7 +171,7 @@ label {
   margin-top: 40px;
   margin: 0;
   padding: 0;
-  color: gray;
+  color: var(--color-gray);
   display: block;
 }
 .txt-wallet {
