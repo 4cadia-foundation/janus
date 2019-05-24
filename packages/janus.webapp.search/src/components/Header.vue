@@ -37,6 +37,7 @@ export default {
   align-items: center;
   justify-content: flex-end;
   display: flex;
+  margin: auto;
 }
 .menu-item {
   display: inline-block;
