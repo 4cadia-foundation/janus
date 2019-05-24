@@ -133,6 +133,7 @@ export default {
 }
 .field.invalid {
   border-color: var(--color-red);
+  color: var(--color-red);
 }
 .content--file .field {
   opacity: 0; /* invisible but it's there! */

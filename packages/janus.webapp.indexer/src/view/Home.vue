@@ -1,8 +1,11 @@
 <template>
   <div class="container">
-    <!-- <h1>{{title}}</h1> -->
+    <router-link to="/">
+      <img class="logo" src="../assets/ethereum.png">
+    </router-link>
+    <h1>{{title}}</h1>
     <div class="wrapper">
-      <v-upload/>
+      <v-form-upload class="content"/>
     </div>
   </div>
 </template>
@@ -14,11 +17,11 @@ export default {
   name: 'Home',
   data () {
     return {
-      title: 'Janus Upload Files'
+      title: 'Janus Indexer'
     }
   },
   components: {
-    'v-upload': FormUpload
+    'v-form-upload': FormUpload
   }
 }
 </script>

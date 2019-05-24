@@ -10,7 +10,7 @@
         :name="inputName"
         :value="value"
         @input="$emit('input', $event.target.value)"
-        v-on:keyup="handleKeyUp"
+        v-on:click="handleUpload"
       >
       <p class="separator">or</p>
       <button type="button" class="btn btn--icon">Browse Files</button>
@@ -76,13 +76,9 @@ export default {
       this.uploadedFiles = []
       this.uploadError = null
     },
-    handleKeyUp: function (event) {
+    handleUpload: function (event) {
       this.fieldIsValid(this.isEmpty(this.value), 'EmptyField')
-      this.fieldIsValid(!this.isAlphaNumeric(this.value), 'InvalidField')
-    },
-    handleValidate: function (event) {
-      this.handleKeyUp()
-      return this.hasExceptions
+      this.save()
     },
     fieldIsValid: function (exception, type) {
       let exceptionType = this.filterExceptionByType(type)
@@ -94,10 +90,6 @@ export default {
     },
     filterExceptionByType: function (exceptionType) {
       return this.exceptions.filter(exception => exception.type === exceptionType)
-    },
-    isAlphaNumeric: function (value) {
-      var re = /^[a-zA-Z0-9]+$/
-      return value ? re.test(value) : true
     },
     isEmpty: function (value) {
       return value === '' || value == null

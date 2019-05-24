@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Home from '@/view/Home'
 import NotFound from '@/view/NotFound'
 import About from '@/view/About'
-import Form from '@/view/Form'
+import FormUploadExample from '@/components/FormUploadExample'
 
 Vue.use(Router)
 
@@ -15,9 +15,9 @@ export default new Router({
       component: Home
     },
     {
-      path: '/Form',
+      path: '/form',
       name: 'Form',
-      component: Form
+      component: FormUploadExample
     },
     {
       path: '/404',
@@ -25,7 +25,7 @@ export default new Router({
       component: NotFound
     },
     {
-      path: '/About',
+      path: '/about',
       name: 'About',
       component: About
     },
