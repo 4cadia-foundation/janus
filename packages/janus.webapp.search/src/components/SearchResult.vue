@@ -98,6 +98,9 @@ export default {
   },
   mounted () {
     this.reset()
+    this.$root.$on('formSubmit', () => {
+      this.getResults()
+    })
   }
 }
 </script>

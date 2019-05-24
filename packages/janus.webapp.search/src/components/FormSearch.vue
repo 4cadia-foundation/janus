@@ -14,20 +14,17 @@
         </div>
       </div>
     </form>
-    <v-search ref="searchResult"/>
   </div>
 </template>
 
 <script>
 import Input from '@/components/Input'
-import SearchResult from '@/components/SearchResult'
 import ButtonSearch from '@/components/ButtonSearch'
 
 export default {
   name: 'FormSearch',
   components: {
     'v-input': Input,
-    'v-search': SearchResult,
     'v-button': ButtonSearch
   },
   data () {
@@ -48,7 +45,7 @@ export default {
       let isValid = this.$refs.searchInput.handleValidate()
       if (!isValid) {
         this.$store.commit('search/updateSearch', this.search)
-        this.$refs.searchResult.getResults()
+        this.$root.$emit('formSubmit')
       }
     }
   },
