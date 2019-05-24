@@ -62,10 +62,10 @@ export default {
     return {
       attemptSubmit: false,
       exceptions: [],
-      address: null,
-      folder: null,
-      hash: null,
-      file: null
+      address: '',
+      folder: '',
+      hash: '',
+      file: ''
     }
   },
   computed: {
