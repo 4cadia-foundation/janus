@@ -8,7 +8,7 @@
         type="file"
         :class="this.isValid"
         :name="inputName"
-        :inputValue="value"
+        :value="value"
         @input="$emit('input', $event.target.value)"
         v-on:keyup="handleKeyUp"
       >
@@ -108,21 +108,11 @@ export default {
     }
   },
   props: {
-    placeholderTxt: {
-      type: String
-    },
-    inputType: {
-      type: String,
-      required: true
-    },
     inputName: {
       type: String,
       required: true
     },
-    inputLabel: {
-      type: String
-    },
-    inputValue: {
+    value: {
       type: String,
       required: true
     }
