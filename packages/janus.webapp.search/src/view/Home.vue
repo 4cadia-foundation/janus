@@ -1,8 +1,6 @@
 <template>
   <div class="container">
-    <router-link to="/">
-      <img class="logo" src="../assets/ethereum.png">
-    </router-link>
+    <img class="logo" src="../assets/images/ethereum.png">
     <h1>{{title}}</h1>
     <div>
       <v-form-search ref="formSearch" />
@@ -30,4 +28,7 @@ export default {
 </script>
 
 <style>
+.container {
+  clear: both;
+}
 </style>

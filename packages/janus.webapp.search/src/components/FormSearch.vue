@@ -8,6 +8,8 @@
             inputType="text"
             inputName="search"
             v-model="search"
+            :required="true"
+            :alphaNumeric="false"
             ref="searchInput"
           />
           <v-button/>

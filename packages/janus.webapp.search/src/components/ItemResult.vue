@@ -3,7 +3,7 @@
     <div class="item">
       <a :href="ipfsUrl + item.storageHash" target="_blank" class="link">
         <div class="item_title item--text">
-          <h2 class="title_text text">{{ item.title || capitalize }} </h2>
+          <h2 class="title_text text">{{ item.title || capitalize }}</h2>
         </div>
         <div class="item_hash item--text">
             <h5 class="hash_text text">{{ item.storageHash }}</h5>

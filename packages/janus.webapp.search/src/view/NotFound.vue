@@ -22,7 +22,7 @@ export default {
   color: rgb(63, 61, 75);
 }
 .error_image {
-  background: url('../assets/404.png');
+  background: url('../assets/images/404.png');
   background-repeat: no-repeat;
   width: 300px;
   margin: auto;

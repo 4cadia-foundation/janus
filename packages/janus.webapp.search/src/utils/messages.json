@@ -1,5 +1,5 @@
 {
-  "success": "Your search returned about { number } results.",
+  "success": "Your search returned about { results_count } results.",
   "errors": [
     {
       "type": "Forbidden",
@@ -21,15 +21,15 @@
   "exceptions": [
     {
       "type": "EmptyReturn",
-      "text": "Janus haven’t found any content about { keyword }. Try search for something different." 
+      "text": "Janus haven’t found any content about { keyword }. Try search for differents or more general keywords." 
     },
     {
       "type": "EmptyField",
-      "text": "Field is empty! Type something to search." 
+      "text": "This field cannot be empty." 
     },
     {
       "type": "InvalidField",
-      "text": "Field is invalid! Type only alphanumeric characters to search." 
+      "text": "This field only accepts numbers and letters. Please enter another value" 
     }
   ]
 }

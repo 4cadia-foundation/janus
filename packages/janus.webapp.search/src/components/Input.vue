@@ -40,8 +40,8 @@ export default {
   },
   methods: {
     handleKeyUp: function (event) {
-      this.fieldIsValid(this.isEmpty(this.value), 'EmptyField')
-      this.fieldIsValid(!this.isAlphaNumeric(this.value), 'InvalidField')
+      if (this.required) this.fieldIsValid(this.isEmpty(this.value), 'EmptyField')
+      if (this.alphaNumeric) this.fieldIsValid(!this.isAlphaNumeric(this.value), 'InvalidField')
     },
     handleValidate: function (event) {
       this.handleKeyUp()
@@ -78,6 +78,12 @@ export default {
     },
     value: {
       type: String
+    },
+    required: {
+      type: Boolean
+    },
+    alphaNumeric: {
+      type: Boolean
     }
   },
   mounted () {

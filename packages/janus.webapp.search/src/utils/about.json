@@ -1,0 +1,27 @@
+{
+  "list_highlight": [
+    {
+      "title": "Who is Janus?",
+      "text": "Jano (in Latin: Janus) was a Roman god of changes and transitions, as can be seen in the quotations 'Janus has power over all beginnings ...' and 'In Janus's power are the beginnings' in relation to changes (beginnings and beginnings), with all this explanation, we present to the Janus Platform.",
+      "image": "janus.png"
+    }
+  ],
+  "list_icon": [
+    {
+      "title": "No central point of control",
+      "icon": "./static/images/decentralized.png" 
+    },
+    {
+      "title": "Ownership of data",
+      "icon": "./static/images/data.png" 
+    },
+    {
+      "title": "Dramatic reduction in hacks and data breaches",
+      "icon": "./static/images/safety.png" 
+    },
+    {
+      "title": "Interoperability",
+      "icon": "./static/images/interoperability.png" 
+    }
+  ]
+}
