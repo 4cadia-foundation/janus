@@ -11,17 +11,13 @@
     },
     {
       "type": "NotFound",
-      "text": "Janus haven’t found this page. Return to our homepage to start searching."
-    },
-    {
-      "type": "invalid owner address",
-      "text": "The owner address is invalid. Configure your Metamask to use the search" 
+      "text": "Janus couldn't find this page. Return to our homepage to start searching."
     }
   ],
   "exceptions": [
     {
       "type": "EmptyReturn",
-      "text": "Janus haven’t found any content about { keyword }. Try search for differents or more general keywords." 
+      "text": "Sorry! Janus couldn't find any result for { keyword }. <p class='subtitle'>Try to search for differents or more general keywords.</p>" 
     },
     {
       "type": "EmptyField",

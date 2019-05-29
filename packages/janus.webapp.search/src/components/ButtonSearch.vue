@@ -33,6 +33,7 @@ export default {
   position: absolute;
   right: 0;
   top: 0;
+  color: var(--color-gray);
 }
 
 .btn:active svg {
@@ -42,6 +43,16 @@ export default {
 .icon-search {
   width: 100%;
   height: 100%;
-  color: var(--color-gray);
 }
+
+.submited .btn {
+  right: 10%;
+  height: 100%;
+  color: white;
+}
+
+.submited .btn:active svg {
+  color: var(--color-gray-lighter);
+}
+
 </style>

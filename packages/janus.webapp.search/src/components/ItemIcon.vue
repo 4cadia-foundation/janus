@@ -1,12 +1,10 @@
 <template>
-  <li class="list-icon">
-    <div class="item">
-      <div class="item_icon">
-        <img class="icon" :src="item.icon">
-      </div>
-      <div class="item_title">
-        <h5 class="title">{{ item.title || capitalize }}</h5>
-      </div>
+  <li class="item">
+    <div class="item_icon">
+      <img class="icon" :src="item.icon">
+    </div>
+    <div class="item_title">
+      <h5 class="title">{{ item.title || capitalize }}</h5>
     </div>
   </li>
 </template>
@@ -32,14 +30,11 @@ export default {
 }
 </script>
 <style scoped>
-.list-icon {
-  display: inline-block;
-  width: 100px;
-  margin: auto 100px;
-}
 .item {
-  display: flex;
-  flex-direction: column;
+  padding: 20px;
+  width: 20%;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 6px;
+  background: white;
 }
 .item_icon {
   width: 60px;
@@ -48,5 +43,8 @@ export default {
 .icon {
   width: 100%;
   height: auto;
+}
+.icon:hover {
+  filter: hue-rotate(180deg);
 }
 </style>

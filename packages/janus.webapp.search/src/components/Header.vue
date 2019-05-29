@@ -6,7 +6,7 @@
     <div class="header_menu">
       <ul class="menu">
         <li class="menu-item">
-          <router-link to="/">Home</router-link>
+          <router-link to="/">Search</router-link>
         </li>
         <li class="menu-item">
           <router-link to="/about">About Us</router-link>
@@ -34,9 +34,10 @@ export default {
 
 <style scoped>
 .header {
-  padding: 20px 30px;
+  padding: 10px 30px;
   display: flex;
   justify-content: space-between;
+  background: white;
 }
 .header_logo .logo {
   width: 25px;

@@ -45,7 +45,6 @@ export default {
 .list-item {
   pointer-events: all;
   user-select: none;
-  height: 80px;
   overflow: hidden;
   padding: 10px 20px 20px;
   transition: all 0.15s ease 0s;

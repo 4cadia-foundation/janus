@@ -3,7 +3,7 @@
     {
       "title": "Who is Janus?",
       "text": "Jano (in Latin: Janus) was a Roman god of changes and transitions, as can be seen in the quotations 'Janus has power over all beginnings ...' and 'In Janus's power are the beginnings' in relation to changes (beginnings and beginnings), with all this explanation, we present to the Janus Platform.",
-      "image": "janus.png"
+      "image": "./static/janus.png"
     }
   ],
   "list_icon": [

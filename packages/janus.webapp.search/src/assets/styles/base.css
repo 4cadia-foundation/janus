@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+body {
+  background: #f9f9f9;
+}
+
 ul {
   list-style: none;
 }

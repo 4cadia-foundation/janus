@@ -11,8 +11,9 @@
             :required="true"
             :alphaNumeric="false"
             ref="searchInput"
-          />
-          <v-button/>
+          >
+            <v-button/>
+          </v-input>
         </div>
       </div>
     </form>
@@ -67,5 +68,10 @@ export default {
 }
 .form_field {
   position: relative;
+}
+.submited .content,
+.submited .form {
+  max-width: 100%;
+  transition: all linear .5s;
 }
 </style>

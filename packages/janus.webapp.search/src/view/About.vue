@@ -55,4 +55,11 @@ export default {
   margin: 20px auto 50px;
 }
 
+.list-icon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 90%;
+  margin: auto;
+}
 </style>
