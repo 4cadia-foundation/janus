@@ -8,7 +8,7 @@
         <path d="M0 0h24v24H0z" fill="none"></path>
       </svg>
     </button>
-    <v-modal ref="modal" :header="this.mensagem"> <p name="body">TESTE</p> </v-modal>
+    <v-modal ref="modal"></v-modal>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
   components: {
     'v-modal': Modal
   },
-  data() {
+  data () {
     return {
       // activeAccount: 'Active account does not exists'
     }
