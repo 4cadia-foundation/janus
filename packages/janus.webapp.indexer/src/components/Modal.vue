@@ -51,16 +51,17 @@ export default {
       this.showModal = true
     },
     handleCivic: function () {
+      // Usado disable por estar importando de url externa
+      // eslint-disable-next-line
       let civicSip = new civic.sip({appId: '-uXno0-XF'})
 
       let exemplo = 'BASIC_SIGNUP'
-
       let options = civicSip.ScopeRequests[exemplo]
 
       civicSip.signup({style: 'popup', scopeRequest: options})
       // Listen for data
       civicSip.on('auth-code-received', function (event) {
-        console.log(event)
+        // console.log(event)
         const data = {'token': event.response}
         axios.post(process.env.IDENTITY_BASE_URL, data)
           .then((response) => {
