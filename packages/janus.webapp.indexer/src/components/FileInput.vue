@@ -8,9 +8,10 @@
         type="file"
         :class="this.isValid"
         :name="inputName"
-        :value="value"
-        @input="$emit('input', $event.target.value)"
-        v-on:click="handleUpload"
+        :value="filename"
+        @input="$emit('input', $event.target.files)"
+        v-on:change="handleUpload($event.target.files)"
+        :accept="this.accept"
       >
       <p class="separator">or</p>
       <button type="button" class="btn btn--icon">Browse Files</button>
@@ -41,7 +42,8 @@ export default {
       isValid: this.hasExceptions ? 'invalid' : '',
       uploadedFiles: [],
       uploadError: null,
-      currentStatus: null
+      currentStatus: null,
+      filename: ''
     }
   },
   computed: {
@@ -65,7 +67,7 @@ export default {
     },
     uploadMessage () {
       let message = 'Drag your file(s) here'
-      if (this.isSaving) message = 'Uploading ' + this.uploadedFiles.length + 'files...'
+      if (this.isSaving) message = 'Uploading ' + this.filename
       return message
     }
   },
@@ -76,8 +78,9 @@ export default {
       this.uploadedFiles = []
       this.uploadError = null
     },
-    handleUpload: function (event) {
-      this.fieldIsValid(this.isEmpty(this.value), 'EmptyField')
+    handleUpload: function (files) {
+      this.filename = files[0].name
+      this.fieldIsValid(this.isEmpty(this.filename), 'EmptyField')
       this.save()
     },
     fieldIsValid: function (exception, type) {
@@ -95,7 +98,6 @@ export default {
       return value === '' || value == null
     },
     save (formData) {
-      // upload data to the server
       this.currentStatus = STATUS_SAVING
     }
   },
@@ -107,6 +109,10 @@ export default {
     value: {
       type: String,
       required: true
+    },
+    accept: {
+      type: String,
+      required: false
     }
   },
   mounted () {

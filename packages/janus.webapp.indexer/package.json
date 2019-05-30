@@ -18,7 +18,7 @@
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.19",
     "ipfs-http-client": "^30.1.3",
-    "janusndxr": "0.0.23",
+    "janusndxr": "0.0.33",
     "vue": "^2.6.10",
     "vue-router": "^3.0.1",
     "vuex": "^3.1.0",
