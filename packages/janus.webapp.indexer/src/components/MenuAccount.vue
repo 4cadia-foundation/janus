@@ -8,17 +8,20 @@
         <path d="M0 0h24v24H0z" fill="none"></path>
       </svg>
     </button>
+    <v-modal ref="modal" :header="this.mensagem"> <p name="body">TESTE</p> </v-modal>
   </div>
 </template>
 
 <script>
+import Modal from '@/components/Modal'
 import { mapState } from 'vuex'
 
 export default {
 
   name: 'MenuAccount',
-  components: {},
-  // eslint-disable-next-line
+  components: {
+    'v-modal': Modal
+  },
   data() {
     return {
       // activeAccount: 'Active account does not exists'
@@ -29,7 +32,7 @@ export default {
   }),
   methods: {
     handleClick: function (value) {
-      alert('Account Feature Soon!')
+      this.$refs.modal.openModal()
     }
   }
 }
@@ -42,6 +45,7 @@ export default {
   display: flex;
   align-items: center;
 }
+
 .btn {
   border: 0;
   width: 40px;
@@ -52,11 +56,14 @@ export default {
   color: var(--color-gray);
   padding: 0;
 }
+
 .btn:hover svg {
   color: var(--color-navy);
 }
+
 .icon-account {
   width: 100%;
   height: 100%;
 }
+
 </style>
