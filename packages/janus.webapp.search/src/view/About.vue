@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <h1>{{title}}</h1>
     <div class="content">
       <div class="col">
         <v-highlight v-for="(item, index) in this.content.list_highlight" :key="index" :highlight="item" float="right"/>
@@ -24,7 +23,6 @@ export default {
   name: 'About',
   data () {
     return {
-      title: 'About Janus Plataform',
       content: aboutContent
     }
   },
@@ -37,8 +35,8 @@ export default {
 
 <style scoped>
 .content {
-  width: 90%;
-  margin: auto;
+  /* width: 90%; */
+  /* margin: auto; */
 }
 
 .col {
