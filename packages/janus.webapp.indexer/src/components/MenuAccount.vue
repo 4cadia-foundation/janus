@@ -34,6 +34,11 @@ export default {
     handleClick: function (value) {
       this.$refs.modal.openModal()
     }
+  },
+  data: function () {
+    return {
+      enableIdentity: process.env.IDENTITY
+    }
   }
 }
 </script>
