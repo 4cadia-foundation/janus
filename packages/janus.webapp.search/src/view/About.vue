@@ -34,9 +34,8 @@ export default {
 </script>
 
 <style scoped>
-.content {
-  /* width: 90%; */
-  /* margin: auto; */
+.container {
+  margin-top: 0;
 }
 
 .col {
@@ -57,7 +56,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 90%;
   margin: auto;
 }
 </style>
