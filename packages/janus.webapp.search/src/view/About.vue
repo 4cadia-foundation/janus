@@ -6,9 +6,7 @@
       </div>
       <div class="col">
         <h2 class="subtitle"> Advantages of using Web 3.0</h2>
-        <ul class="list-icon">
-          <v-item-icon v-for="(item, index) in this.content.list_icon" :key="index" :item="item"/>
-        </ul>
+        <v-list-icon :list="this.content.list_icon"/>
       </div>
     </div>
   </div>
@@ -16,7 +14,7 @@
 
 <script>
 import Highlight from '@/components/Highlight'
-import ItemIcon from '@/components/ItemIcon'
+import ListIcon from '@/components/ListIcon'
 import aboutContent from '@/utils/about.json'
 
 export default {
@@ -28,7 +26,7 @@ export default {
   },
   components: {
     'v-highlight': Highlight,
-    'v-item-icon': ItemIcon
+    'v-list-icon': ListIcon
   }
 }
 </script>
@@ -43,19 +41,10 @@ export default {
 }
 
 .subtitle {
-  color: #424242;
+  color: var(--color-primary);
   margin: 50px 0;
-  font-family: sans-serif;
-  font-weight: bold;
-  font-size: 25px;
+  font-size: 2.3vw;
   max-width: 60%;
-  margin: 20px auto 50px;
-}
-
-.list-icon {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: auto;
+  margin: 100px auto 50px;
 }
 </style>

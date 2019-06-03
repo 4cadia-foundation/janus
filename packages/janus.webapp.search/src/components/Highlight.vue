@@ -38,24 +38,23 @@ export default {
 <style scoped>
 .highlight {
   position: relative;
-  height: 400px;
+  height: 30vw;
   display: flex;
   align-items: center;
+  margin-bottom: 5%;
 }
 .highlight::after,
 .highlight::before {
   content: '';
   display: block;
-  top: 0;
+  top: -30%;
   right: 0;
   position: absolute;
   z-index: -1;
   width: 100%;
-  height: 100%;
-  padding: 100px 0;
+  height: 130%;
   -webkit-transform: skew(0deg, -10deg);
   transform: skew(0deg, -5deg);
-  margin-top: -200px;
 }
 .highlight::after {
   background: url('../assets/images/pattern-black.png');
@@ -72,12 +71,12 @@ export default {
   text-align: left;
 }
 .content--text .title {
-  font-size: 2.5em;
+  font-size: 3vw;
   color: white;
   margin-top: 0;
 }
 .content--text .text {
-  font-size: 1.3em;
+  font-size: 1.5vw;
 }
 .content--image img {
   position: absolute;
