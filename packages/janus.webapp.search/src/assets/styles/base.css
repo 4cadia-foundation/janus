@@ -18,6 +18,10 @@ h1 {
   line-height: 1.5;
 }
 
+p {
+  margin-top: 40px;
+}
+
 a {
   text-decoration: none;
   color: var(--color-gray);
@@ -57,4 +61,11 @@ a:hover {
 .invalid {
   color: var(--color-red);
   border-color: var(--color-red);
+}
+
+.subtitle {
+  color: var(--color-gray);
+  font-size: 2.3vw;
+  max-width: 60%;
+  margin: 0 auto 3vw;
 }

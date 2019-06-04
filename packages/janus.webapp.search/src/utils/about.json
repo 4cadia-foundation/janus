@@ -8,20 +8,35 @@
   ],
   "list_icon": [
     {
-      "title": "No central point of control",
-      "icon": "./static/images/decentralized.png" 
-    },
+      "title": "Advantages of using blockchain",
+      "data": [
+        {
+          "title": "Distributed",
+          "icon": "./static/images/decentralized.png",
+          "text": "The Blockchain has no central authority, data is stored on a distributed network of nodes, each network node is able to replicate and store a copy of the data. Because of this, a single node does not affect the availability or security of the network."
+        },
+        {
+          "title": "Immutable",
+          "icon": "./static/images/interoperability.png",
+          "text": "Confirmed blocks are very unlikely to be reversed, meaning that once data has been registered into the blockchain it is extremely difficult to remove or change it. Every interaction is tracked and permanently recorded on a distributed and public ledger."
+        },
+        {
+          "title": "Secure",
+          "icon": "./static/images/safety.png",
+          "text": "After a block has been added to the end of the blockchain it is very difficult to go back and alter the contents of the block. That’s because each block contains its own hash, along with the hash of the block before it. Hash codes are created by a math function that turns digital information into a string of numbers and letters. If that information is edited in any way, the hash code changes as well."
+        },
+        {
+          "title": "Trusty",
+          "icon": "./static/images/data.png",
+          "text": "The trusty of the Blockchain is based on the believe of two or more participants, computers must 'prove' that they have done 'work' by solving a complex computational math problem. If a computer solves one of these problems, they become eligible to add a block to the blockchain."
+        }
+      ]
+    }
+  ],
+  "list_paragraph": [
     {
-      "title": "Ownership of data",
-      "icon": "./static/images/data.png" 
-    },
-    {
-      "title": "Dramatic reduction in hacks and data breaches",
-      "icon": "./static/images/safety.png" 
-    },
-    {
-      "title": "Interoperability",
-      "icon": "./static/images/interoperability.png" 
+      "title": "What is Blockchain?",
+      "text": "<p>A blockchain is a digitized, decentralized, public ledger of all cryptocurrency transactions. Constantly growing as ‘completed’ blocks (the most recent transactions) are recorded and added to it in chronological order, it allows market participants to keep track of digital currency transactions without central recordkeeping. Each node (a computer connected to the network) gets a copy of the blockchain, which is downloaded automatically.</p><p>Originally developed as the accounting method for the virtual currency Bitcoin, blockchains – which use what's known as distributed ledger technology (DLT) – are appearing in a variety of commercial applications today.</p><p>Currently, the technology is primarily used to verify transactions, within digital currencies though it is possible to digitize, code and insert practically any document into the blockchain. Doing so creates an indelible record that cannot be changed; furthermore, the record’s authenticity can be verified by the entire community using the blockchain instead of a single centralized authority.</p>"
     }
   ]
 }

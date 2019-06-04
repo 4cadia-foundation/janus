@@ -35,5 +35,22 @@ npm run fix
 # run build production and send the dist folder to another branch
 npm run deploy
 ```
-
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+## Git Flow
+
+ - Create a feature from master named: "feature/[ JIRA TAG ]"
+
+ - Commit and push alterations from feature
+
+ - Checkout to the Develop branch and then Merge/Pull Request your feature 
+
+ - Push the alterations on Develop branch
+
+ - Checkout to the Master branch and then Merge/Pull Request your feature 
+
+ - Push the alterations on Master branch
+
+ - Run `npm run build` to generate Dist folder
+
+ - Run `npm run deploy` to send Dist folder to 'dist' named branch

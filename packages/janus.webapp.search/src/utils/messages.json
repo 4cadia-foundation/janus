@@ -17,7 +17,7 @@
   "exceptions": [
     {
       "type": "EmptyReturn",
-      "text": "Sorry! Janus couldn't find any result for { keyword }. <p class='subtitle'>Try to search for differents or more general keywords.</p>" 
+      "text": "<p class='subtitle'>Sorry! Janus couldn't find any result for { keyword }. </p><p>Try to search for differents or more general keywords.</p>" 
     },
     {
       "type": "EmptyField",

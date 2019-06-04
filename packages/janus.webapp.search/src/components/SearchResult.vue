@@ -3,13 +3,13 @@
     <v-loader v-bind:class="{ 'visible': this.loading }" />
     <div v-if="hasExceptions" class="result_messages result_messages--exceptions">
       <ul class="messages_list">
-        <li class="message" v-for="(exception, index) in this.exceptions" :key="index">{{ exception }}</li>
+        <li class="message" v-for="(exception, index) in this.exceptions" :key="index" v-html="exception"></li>
       </ul>
     </div>
     <div v-else-if="hasErrors" class="result_messages result_messages--errors">
       <p class="messages_header">We found some errors in your search. See what we found:</p>
       <ul class="messages_list">
-        <li class="message" v-for="(error, index) in this.errors" :key="index">{{ error.message }}</li>
+        <li class="message" v-for="(error, index) in this.errors" :key="index" v-html="error.message"></li>
       </ul>
     </div>
     <div class="result_content" v-else>

@@ -1,12 +1,14 @@
 <template>
   <div :class="'highlight float--' + float">
-    <div class="highlight_content">
-      <div class="content content--text">
-        <h1 class="title" v-html="highlight.title"></h1>
-        <div class="text" v-html="highlight.text"></div>
-      </div>
-      <div class="content content--image">
-        <img :src="highlight.image" alt="">
+    <div class="highlight_background">
+      <div class="highlight_content">
+        <div class="content content--text">
+          <h1 class="title" v-html="highlight.title"></h1>
+          <div class="text" v-html="highlight.text"></div>
+        </div>
+        <div class="content content--image">
+          <img :src="highlight.image" alt="">
+        </div>
       </div>
     </div>
   </div>
@@ -38,37 +40,41 @@ export default {
 <style scoped>
 .highlight {
   position: relative;
-  height: 30vw;
-  display: flex;
-  align-items: center;
-  margin-bottom: 5%;
+  min-height: 20vh;
+  height: 40vw;
+  overflow: hidden;
+  max-height: 90vh;
 }
-.highlight::after,
-.highlight::before {
+.highlight_background {
+  z-index: -1;
+  height: 100%;
+  -webkit-transform: skew(0deg, -3deg) translateY(-9%);
+  transform: skew(0deg, -3deg) translateY(-9%);;
+  background-color: #202020;
+}
+.highlight_background:before {
   content: '';
   display: block;
-  top: -30%;
-  right: 0;
-  position: absolute;
-  z-index: -1;
   width: 100%;
-  height: 130%;
-  -webkit-transform: skew(0deg, -10deg);
-  transform: skew(0deg, -5deg);
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url('../assets/images/box_pattern.png');
+  filter: brightness(70%);
 }
-.highlight::after {
-  background: url('../assets/images/pattern-black.png');
-  opacity: .8;
-}
-.highlight::before {
-  background: var(--color-navy);
+.highlight_content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: skew(0deg, 3deg);
 }
 .content--text {
-  width: 50%;
-  vertical-align: middle;
   margin-left: 60px;
   color: white;
   text-align: left;
+  width: 50%;
 }
 .content--text .title {
   font-size: 3vw;
@@ -78,10 +84,14 @@ export default {
 .content--text .text {
   font-size: 1.5vw;
 }
+.content--image,
+.content--text {
+  vertical-align: middle;
+}
+.content--image {
+  width: 40vw;
+}
 .content--image img {
-  position: absolute;
-  right: 5%;
-  top: 0;
-  height: 90%;
+  width: 100%;
 }
 </style>
