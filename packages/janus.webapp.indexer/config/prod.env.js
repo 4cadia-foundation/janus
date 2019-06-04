@@ -1,7 +1,7 @@
 'use strict'
 module.exports = {
   NODE_ENV: '"production"',
-  IDENTITY_BASE_URL: '"http://localhost:5000/api/auth"',
+  IDENTITY_BASE_URL: '"https://janus-identity-provider.herokuapp.com/api/auth"',
   IDENTITY: true,
   CIVICID: '"-uXno0-XF"',
   DISABLE_IDENTITY_CIVIC: false,
