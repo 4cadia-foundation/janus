@@ -1,10 +1,11 @@
 import Web3IndexerService from 'janus-searchengine'
 import Web3Config from '../../utils/web3Config.json'
+import StorageConfig from '../../../static/storageConfig.json'
 
 // initial state
 const state = {
   result: [],
-  ipfs: Web3Config.ipfs,
+  ipfs: StorageConfig.storageLink,
   value: '',
   errors: []
 }
