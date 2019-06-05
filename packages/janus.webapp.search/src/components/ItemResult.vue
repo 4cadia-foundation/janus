@@ -1,7 +1,7 @@
 <template>
   <li class="list-item">
     <div class="item">
-      <a :href="ipfsUrl + item.storageHash" target="_blank" class="link">
+      <a :href="ipfsUrl + item.storageHash + '/index.html'" target="_blank" class="link">
         <div class="item_title item--text">
           <h2 class="title_text text">{{ item.title || capitalize }}</h2>
         </div>
