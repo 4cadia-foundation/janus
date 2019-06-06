@@ -65,4 +65,3 @@ describe('ListByTags tests', function () {
         expect(result.success).toBe(expectedResultSucces);
     });
 });
-

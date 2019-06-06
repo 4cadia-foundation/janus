@@ -1,6 +1,6 @@
 {
   "name": "janus-searchengine",
-  "version": "1.0.48",
+  "version": "2.0.1",
   "description": "janus search engine",
   "main": "dist/main.js",
   "types": "dist/main.d.ts",

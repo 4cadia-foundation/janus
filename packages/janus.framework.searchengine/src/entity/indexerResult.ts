@@ -7,7 +7,7 @@ export default class IndexerResult {
 
     constructor(){
         this.websites = [];
-        this.success = false;
+        this.success = true;
         this.errors = [];
     }
 }

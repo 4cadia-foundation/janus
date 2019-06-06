@@ -13,21 +13,17 @@ export default class Web3IndexerService {
         this._indexerSmartContract = new this._web3.eth.Contract(web3Config.indexerabi, web3Config.indexeraddress);
     }
 
-    public async ListByTags(ownerAddress: string, gas: number, tags: string[]): Promise<IndexerResult> {
-        let indexerResult = new IndexerResult();
-        indexerResult.success = this._web3.utils.isAddress(ownerAddress);
+    public async ListByTags(tags: string[]): Promise<IndexerResult> {
 
-        if (!indexerResult.success) {
-            indexerResult.errors.push('invalid owner address');
-            return indexerResult;
-        }
+        let indexerResult = new IndexerResult();
 
         let result = await this._indexerSmartContract.methods.getWebSite(tags)
-            .call({ from: ownerAddress, gas: gas })
+            .call()
             .then(a => { return a; });
 
+        let i = 0;
+
         result.forEach(element => {
-            let i = 0;
             if (element && element.length > 0) {
                 let storageHash = element.split(';')[0];
                 let title = element.split(';')[1];
@@ -36,6 +32,8 @@ export default class Web3IndexerService {
                 i++;
             }
         });
+
+        console.log(indexerResult);
 
         return indexerResult;
     }
