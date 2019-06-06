@@ -44,9 +44,10 @@ export default {
   },
   methods: {
     handleSubmit: function (e) {
+      this.$refs.searchInput.blur()
       this.attemptSubmit = true
       let isValid = this.$refs.searchInput.handleValidate()
-      if (!isValid) {
+      if (isValid) {
         this.$store.commit('search/updateSearch', this.search)
         this.$root.$emit('formSubmit')
       }

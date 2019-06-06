@@ -28,7 +28,7 @@ export default {
 .btn {
   border-radius: 16px;
   width: 50px;
-  height: 50px;
+  height: 100%;
   vertical-align: middle;
   position: absolute;
   right: 0;

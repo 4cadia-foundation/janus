@@ -21,6 +21,7 @@ export default {
 <style>
 @import './assets/styles/variables.css';
 @import './assets/styles/base.css';
+@import './assets/styles/utils.css';
 #app {
   font-family: 'Montserrat', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

@@ -6,7 +6,7 @@
           <h2 class="title_text text">{{ item.title || capitalize }}</h2>
         </div>
         <div class="item_hash item--text">
-            <h5 class="hash_text text">{{ item.storageHash }}</h5>
+            <h3 class="hash_text text">{{ item.storageHash }}</h3>
         </div>
         <div class="item_description item--text">
           <p class="description_text text">{{ item.description }}</p>
@@ -67,6 +67,18 @@ export default {
   font-weight: 400;
   text-align: left;
   line-height: 1.5;
+}
+.title_text {
+  font-size: 1.7em;
+}
+.hash_text {
+  font-size: 1em;
+}
+.description_text {
+  margin-bottom: 0;
+}
+.link {
+  text-decoration: none;
 }
 .link:hover .title_text {
   color: var(--color-primary);

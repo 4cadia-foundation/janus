@@ -1,0 +1,45 @@
+.logo {
+  width: 150px;
+}
+
+.btn {
+  background-color: transparent;
+  border-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.wrapper {
+  max-width: 50%;
+  position: relative;
+  margin: auto;
+}
+
+.main {
+  /* max-width: 1440px; */
+  margin: auto;
+}
+
+.errors {
+  text-align: left;
+  padding: 0 0 0 5px;
+  margin-top: 10px;
+  font-size: .875rem;
+  color: var(--color-red);
+  list-style: none;
+}
+
+.invalid {
+  color: var(--color-red);
+  border-color: var(--color-red);
+}
+
+.subtitle {
+  max-width: 60%;
+  margin: 0 auto 3vw;
+}
+
+.router-link-exact-active {
+  color: var(--color-primary) !important;
+  font-weight: bold;
+}

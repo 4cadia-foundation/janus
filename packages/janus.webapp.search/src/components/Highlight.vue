@@ -60,8 +60,9 @@ export default {
   position: absolute;
   top: 0;
   left: 0;
-  background-image: url('../assets/images/box_pattern.png');
-  filter: brightness(70%);
+  background-image: url('../assets/images/pattern-prisma.png');
+  background-size: 80px;
+  opacity: .3;
 }
 .highlight_content {
   height: 100%;
@@ -69,20 +70,17 @@ export default {
   align-items: center;
   justify-content: space-between;
   transform: skew(0deg, 3deg);
+  max-width: 90%;
+  margin: auto;
 }
 .content--text {
-  margin-left: 60px;
   color: white;
   text-align: left;
   width: 50%;
 }
 .content--text .title {
-  font-size: 3vw;
-  color: white;
   margin-top: 0;
-}
-.content--text .text {
-  font-size: 1.5vw;
+  color: white;
 }
 .content--image,
 .content--text {
@@ -90,6 +88,7 @@ export default {
 }
 .content--image {
   width: 40vw;
+  max-width: 800px;
 }
 .content--image img {
   width: 100%;

@@ -9,10 +9,10 @@
         </div>
         <div class="content">
           <div class="item_title">
-            <h5 class="title">{{ item.title || capitalize }}</h5>
+            <h3 class="title">{{ item.title || capitalize }}</h3>
           </div>
           <div class="item_text">
-            <h5 class="text">{{ item.text }}</h5>
+            <p class="text">{{ item.text }}</p>
           </div>
         </div>
       </li>
@@ -58,7 +58,7 @@ export default {
 }
 .item_icon {
   width: 6vw;
-  height: 6vw;
+  max-width: 80px;
   margin-right: 40px;
   position: relative;
 }
@@ -82,12 +82,7 @@ export default {
   width: 80%;
 }
 .item_title {
-  font-size: 1.8vw;
   margin-bottom: 10px;
   color: var(--color-navy);
-}
-.item_text h5 {
-  font-size: 1.4vw;
-  font-weight: 100;
 }
 </style>

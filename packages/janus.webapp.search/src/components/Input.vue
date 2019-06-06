@@ -4,6 +4,7 @@
       <label :for="inputName" v-if="inputLabel">{{ inputLabel }}</label>
       <input
         class="field"
+        ref="input"
         :type="inputType"
         :name="inputName"
         :placeholder="placeholderTxt"
@@ -43,13 +44,16 @@ export default {
     }
   },
   methods: {
+    blur: function () {
+      this.$refs.input.blur()
+    },
     handleKeyUp: function (event) {
       if (this.required) this.fieldIsValid(this.isEmpty(this.value), 'EmptyField')
       if (this.alphaNumeric) this.fieldIsValid(!this.isAlphaNumeric(this.value), 'InvalidField')
     },
     handleValidate: function (event) {
       this.handleKeyUp()
-      return this.hasExceptions
+      return !this.hasExceptions
     },
     fieldIsValid: function (exception, type) {
       let exceptionType = this.filterExceptionByType(type)
@@ -113,7 +117,7 @@ export default {
   padding-right: 16px;
   color: var(--color-gray);
   background-color: var(--color-white);
-  height: 3rem;
+  height: 60px;
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 6px;
   font-size: 1rem;
@@ -130,10 +134,6 @@ export default {
 .field:focus {
   outline: none;
   border-color: var(--color-primary);
-}
-.field.invalid {
-  color: var(--color-red);
-  border-color: var(--color-red);
 }
 .submited .errors {
   max-width: 80%;

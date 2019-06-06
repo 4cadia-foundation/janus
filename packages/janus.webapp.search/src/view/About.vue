@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import aboutContent from '@/utils/about.json'
+import aboutContent from '../../static/content/about.json'
 import Highlight from '@/components/Highlight'
 import ListIcon from '@/components/ListIcon'
 import Paragraph from '@/components/Paragraph'

@@ -118,9 +118,10 @@ export default {
 .result_counter {
   margin: 0 auto 20px;
   text-align: left;
+  color: var(--color-gray);
 }
 .result_messages--exceptions .message {
-  font-size: 20px;
+  font-size: 1.5em;
   color: var(--color-gray);
 }
 .result_messages--errors {
