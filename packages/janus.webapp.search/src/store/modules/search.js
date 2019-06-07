@@ -1,11 +1,10 @@
 import Web3IndexerService from 'janus-searchengine'
-import Web3Config from '../../utils/web3Config.json'
-import StorageConfig from '../../../static/storageConfig.json'
+import Web3Config from '../../../static/Web3Config.json'
 
 // initial state
 const state = {
   result: [],
-  ipfs: StorageConfig.storageLink,
+  ipfs: Web3Config.ipfs,
   value: '',
   errors: []
 }
@@ -29,7 +28,7 @@ const actions = {
         let root = this
         searchResult.errors.map(function (value, key) {
           let errorMessage = root.getters['validation/getErrorByType'](value) ? root.getters['validation/getErrorByType'](value) : value
-          commit('updateErrors', {error: value, message: errorMessage})
+          commit('updateErrors', { error: value, message: errorMessage })
         })
       } else {
         console.log('[IndexerResult] Search result was commited ', searchResult)
