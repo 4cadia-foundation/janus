@@ -73,6 +73,7 @@ export default {
 }
 .hash_text {
   font-size: 1em;
+  word-break: break-all;
 }
 .description_text {
   margin-bottom: 0;

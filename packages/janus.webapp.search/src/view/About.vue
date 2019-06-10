@@ -1,23 +1,16 @@
 <template>
-  <div class="container">
-    <div class="content">
-      <div class="col hero">
-        <v-highlight :highlight="this.content.list_highlight[0]" float="right"/>
-      </div>
-      <div class="col">
-        <v-paragraph :paragraph="this.content.list_paragraph[0]">
-        </v-paragraph>
-      </div>
-      <div class="col">
-        <v-list-icon :list="this.content.list_icon[0]"/>
-      </div>
+  <div class="container container--about">
+    <div class="col" v-for="(block, index) in this.content" :key="index">
+      <v-hero v-if="block['type']=='list_hero'" :hero="block['content'][0]" float="right" classes="gray"/>
+      <v-list-icon v-if="block['type']=='list_icon'" :list="block['content'][0]"/>
+      <v-paragraph v-if="block['type']=='list_paragraph'" :paragraph="block['content'][0]"/>
     </div>
   </div>
 </template>
 
 <script>
 import aboutContent from '../../static/content/about.json'
-import Highlight from '@/components/Highlight'
+import Hero from '@/components/Hero'
 import ListIcon from '@/components/ListIcon'
 import Paragraph from '@/components/Paragraph'
 
@@ -29,32 +22,19 @@ export default {
     }
   },
   components: {
-    'v-highlight': Highlight,
+    'v-hero': Hero,
     'v-list-icon': ListIcon,
     'v-paragraph': Paragraph
+  },
+  mounted: function () {
   }
 }
 </script>
 
 <style scoped>
 .container {
-  margin-top: 0;
-  background: var(--color-gray-darker);
-  overflow: hidden;
-}
-.content {
   background: white;
   width: 90vw;
   margin: auto;
-}
-.hero {
-  width: 100vw;
-  margin-left: -5vw;
-}
-.col {
-  position: relative;
-}
-.col:not(:first-child) {
-  padding: 3vw 0;
 }
 </style>

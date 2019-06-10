@@ -39,4 +39,12 @@ export default {
   width: 100%;
   height: 100%;
 }
+
+/* Media Mobile */
+@media (max-width: 768px) {
+  .account {
+    text-align: center;
+  }
+}
+
 </style>

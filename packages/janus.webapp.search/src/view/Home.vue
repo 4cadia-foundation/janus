@@ -36,7 +36,7 @@ export default {
 <style>
 .container {
   clear: both;
-  margin-top: 60px;
+  margin-top: 100px;
 }
 .submited {
   margin-top: 0;
@@ -45,5 +45,18 @@ export default {
 .submited .title {
   display: none;
   transition: all linear .5s;
+}
+
+/* Media Mobile */
+@media (max-width: 768px) {
+  .container {
+    margin-top: 50px;
+  }
+  .container.submited {
+    margin-top: 0;
+  }
+  .title {
+    font-size: 1.4em;
+  }
 }
 </style>

@@ -3,16 +3,16 @@
     <h2 class="subtitle">{{list.title}}</h2>
     <ul class="list">
       <li class="item" v-for="(item, index) in list.data" :key="index">
-        <div class="item_icon">
+        <div class="item_icon" v-if="item.icon">
           <img class="icon" :src="item.icon">
           <img class="icon shadow" :src="item.icon">
         </div>
         <div class="content">
-          <div class="item_title">
-            <h3 class="title">{{ item.title || capitalize }}</h3>
+          <div class="item_title" v-if="item.title">
+            <h5 class="title" v-html="item.title || capitalize"></h5>
           </div>
-          <div class="item_text">
-            <p class="text">{{ item.text }}</p>
+          <div class="item_text" v-if="item.text">
+            <h5 class="text" v-html="item.text"></h5>
           </div>
         </div>
       </li>
@@ -43,6 +43,10 @@ export default {
 }
 </script>
 <style scoped>
+.list-icon .subtitle {
+  margin-bottom: 40px;
+  font-size: 1.8em;
+}
 .list {
   margin: auto;
   max-width: 80%;
@@ -58,7 +62,7 @@ export default {
 }
 .item_icon {
   width: 6vw;
-  max-width: 80px;
+  height: 6vw;
   margin-right: 40px;
   position: relative;
 }
@@ -84,5 +88,23 @@ export default {
 .item_title {
   margin-bottom: 10px;
   color: var(--color-navy);
+}
+.item_text h5 {
+  font-weight: 100;
+}
+/* Media Mobile */
+@media (max-width: 768px) {
+  .item {
+    padding: 10%;
+    display: block;
+  }
+  .item .content {
+    width: fit-content;
+  }
+  .item_icon {
+    width: 60px;
+    height: auto;
+    margin-bottom: 20px;
+  }
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <div class="paragraph">
-    <h2 class="subtitle" v-html="paragraph.title"></h2>
+    <h2 class="subtitle" v-if="paragraph.title" v-html="paragraph.title"></h2>
     <div class="content">
-      <div class="text" v-html="paragraph.text"></div>
+      <div class="text" v-if="paragraph.text" v-html="paragraph.text"></div>
       <slot></slot>
     </div>
   </div>
@@ -30,7 +30,7 @@ export default {
   margin: auto;
   align-items: center;
 }
-.text{
+.text {
   text-align: left;
 }
 </style>

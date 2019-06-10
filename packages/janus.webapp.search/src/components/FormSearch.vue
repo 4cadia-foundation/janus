@@ -75,4 +75,10 @@ export default {
   max-width: 100%;
   transition: all linear .5s;
 }
+/* Media Mobile */
+@media (max-width: 768px) {
+  .form {
+    max-width: 90%;
+  }
+}
 </style>

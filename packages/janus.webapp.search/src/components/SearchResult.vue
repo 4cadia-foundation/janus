@@ -17,7 +17,7 @@
         <p class="result_counter" v-if="this.hasWebsites">We found {{ this.resultsNumber }} result(s) from this search</p>
       </div>
       <ul class="list list--results">
-        <v-item-result v-for="(item, index) in searchResults" :key="index" :item="item" :ipfsUrl="searchIpfs"></v-item-result>
+        <v-item-result v-for="(item, index) in searchResults" :key="index" :item="item" :ipfsUrl="searchStorageLink"></v-item-result>
       </ul>
     </div>
   </div>
@@ -47,7 +47,7 @@ export default {
       searchResults: state => state.search.result,
       searchValue: state => state.search.value,
       searchErrors: state => state.search.errors,
-      searchIpfs: state => state.search.ipfs
+      searchStorageLink: state => state.search.storageLink
     }),
     ...mapGetters('search', ['getSearchValue', 'getSearchResults']),
     ...mapGetters('validation', ['getExceptionByType']),
@@ -107,6 +107,7 @@ export default {
 <style scoped>
 .result {
   position: relative;
+  margin-bottom: 100px;
 }
 .result_content {
   max-width: 80%;
@@ -133,5 +134,12 @@ export default {
 .result_messages--errors .message {
   color: var(--color-red);
   margin: 10px auto;
+}
+/* Media Mobile */
+@media (max-width: 768px) {
+  .result_messages--exceptions .message {
+    font-size: 1em;
+    padding: 0 30px;
+  }
 }
 </style>
