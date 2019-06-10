@@ -43,8 +43,7 @@ const actions = {
     }
   },
   getWeb3Config ({ commit }) {
-    let currentUrl = location.origin
-    axios.get(`${currentUrl}/static/configs/web3Config.json`)
+    axios.get(`./static/configs/web3Config.json`)
       .then((response) => {
         console.log('[getWeb3Config] Request was successfully returned!')
         commit('updateWeb3Config', response.data)
