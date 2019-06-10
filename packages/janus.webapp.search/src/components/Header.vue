@@ -38,11 +38,14 @@ export default {
   },
   methods: {
     toggleShowMenu: function () {
-      this.showMenu = !this.showMenu
-      this.$root.$emit('toggleMenu', this.showMenu)
+      if (window.innerWidth < 768) {
+        this.showMenu = !this.showMenu
+        this.$root.$emit('toggleMenu', this.showMenu)
+      }
     }
   },
-  mounted: function () {}
+  mounted: function () {
+  }
 }
 </script>
 
