@@ -37,8 +37,9 @@ export default {
     }
   },
   methods: {
-    toggleShowMenu: function (value) {
+    toggleShowMenu: function () {
       this.showMenu = !this.showMenu
+      this.$root.$emit('toggleMenu', this.showMenu)
     }
   },
   mounted: function () {}

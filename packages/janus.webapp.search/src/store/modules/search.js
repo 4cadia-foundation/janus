@@ -1,5 +1,6 @@
 import axios from 'axios'
 import Web3IndexerService from 'janus-searchengine'
+import web3ConfigStatic from '../../../static/configs/web3Config.json'
 
 // initial state
 const state = {
@@ -32,7 +33,9 @@ const actions = {
           commit('updateErrors', { error: value, message: errorMessage })
         })
       } else {
-        console.log('[IndexerResult] Search result was commited ', searchResult)
+        // Debug search result
+        // console.log('[IndexerResult] Search result was commited ', searchResult)
+        console.log('[IndexerResult] Search result was commited ')
         commit('updateSearchResults', searchResult.websites)
       }
     } else {
@@ -40,15 +43,15 @@ const actions = {
     }
   },
   getWeb3Config ({ commit }) {
-    axios.get('./static/configs/web3Config.json')
+    let currentUrl = location.origin
+    axios.get(`${currentUrl}/static/configs/web3Config.json`)
       .then((response) => {
-        console.log('[getWeb3Config] Action being executed')
-        console.log('updateWeb3Config', response.data)
+        console.log('[getWeb3Config] Request was successfully returned!')
         commit('updateWeb3Config', response.data)
       }, (err) => {
-        console.log(err.response)
-        console.log(err)
-        console.error('getWeb3Config requisition error', err)
+        console.error('[getWeb3Config] Request returned with an error - ', err)
+        console.warn('[getWeb3Config] Web3IndexerService will use local Web3Config: ', web3ConfigStatic)
+        commit('updateWeb3Config', web3ConfigStatic)
       })
   }
 }
