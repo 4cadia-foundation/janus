@@ -13,14 +13,14 @@ const getters = {}
 const actions = {
   async registerWeb3 ({commit}) {
     console.log('[registerWeb3] Action being executed')
-    commit('registerWeb3Instance', await getWeb3)
+    commit('registerWeb3Instance', await getWeb3())
   }
 }
 
 // mutations
 const mutations = {
   registerWeb3Instance (state, payload) {
-    console.log('[registerWeb3instance] Mutation being executed')
+    // console.log('[registerWeb3instance] Mutation being executed')
     state.instance = payload
     state.account = payload.accounts['0']
   }

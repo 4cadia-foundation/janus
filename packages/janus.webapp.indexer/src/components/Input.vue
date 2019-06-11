@@ -104,7 +104,9 @@ export default {
   margin: 20px auto;
 }
 .field_label {
-  color: var(--color-gray);
+  color: var(--color-white);
+  margin-bottom: 10px;
+  display: block;
 }
 .field {
   padding-top: 0px;
