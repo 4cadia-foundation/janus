@@ -1,0 +1,77 @@
+[
+  {
+    "type": "list_hero",
+    "content": [
+      {
+        "title": "What is Janus?",
+        "text": "<p>We present Janus Platform, a Ethereum Blockchain system that will lead you to the future of descentralized web. Here you will be able to store and find content on the Web 3.0.</p><p><em>The future is here</em></p>",
+        "image": "./static/images/janus.png"
+      }
+    ]
+  },
+  {
+    "type": "list_icon",
+    "content": [
+      {
+        "title": "Janus Plataform Tools",
+        "data": [
+          {
+            "title": "Indexer Dapp",
+            "text": "<p>Indexer front-end is an interface that allows the user to access needed services to push a content in the blockchain and attach it in the Janus system. It also charges gas and tributes for this services, working as a facilitator.</p><p>The indexer front end helps to publish and index the websites. Publish in the IPFS and return the valid hash or validate the ipfs hash entered and index the informations on the Janus platform.</p>"
+          },
+          {
+            "title": "Search Dapp",
+            "text": "<p>Search front-end is an interface that allows the user to search for websites and contents that were indexed in the Janus platform. The search interface is an easy way to find websites and contents uploaded on the blockchain, it locates the matching tags the user is looking for with the ones on the system and return a list of results that may interest for the user.</p>"
+          },
+          {
+            "title": "Janusndxr Package",
+            "text": "<p>The package is essential for the decentralization of the core, so it can contribute with many different sides of the project only by installing it on the node modules and doesn’t create any dependency between them. It is named janusndxr in the NPM platform and to download the package thru command line it is named after janusndxr-cli. The janusndxr is a connection between the front-end and the Smart Contract. To install the package there is the CLI or the published Repository.</p>"
+          },
+          {
+            "title": "Search - Smart Contract",
+            "text": "<p>This Smart Contract is assigned to provide instructions for the Front-end and the janusndxr to do the indexation of a content on the Janus Platform and to provide the information when asked to search for them.</p>"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "list_paragraph",
+    "content": [
+      {
+        "title": "What is Blockchain?",
+        "text": "<p>A blockchain is a digitized, decentralized, public ledger of all cryptocurrency transactions. Constantly growing as ‘completed’ blocks (the most recent transactions) are recorded and added to it in chronological order, it allows market participants to keep track of digital currency transactions without central recordkeeping. Each node (a computer connected to the network) gets a copy of the blockchain, which is downloaded automatically.</p><p>Originally developed as the accounting method for the virtual currency Bitcoin, blockchains – which use what's known as distributed ledger technology (DLT) – are appearing in a variety of commercial applications today.</p><p>Currently, the technology is primarily used to verify transactions, within digital currencies though it is possible to digitize, code and insert practically any document into the blockchain. Doing so creates an indelible record that cannot be changed; furthermore, the record’s authenticity can be verified by the entire community using the blockchain instead of a single centralized authority.</p>"
+      }
+    ]
+  },
+  {
+    "type": "list_icon",
+    "content": [
+      {
+        "title": "Advantages of using blockchain",
+        "data": [
+          {
+            "title": "Distributed",
+            "icon": "./static/images/decentralized.png",
+            "text": "The Blockchain has no central authority, data is stored on a distributed network of nodes, each network node is able to replicate and store a copy of the data. Because of this, a single node does not affect the availability or security of the network."
+          },
+          {
+            "title": "Immutable",
+            "icon": "./static/images/interoperability.png",
+            "text": "Confirmed blocks are very unlikely to be reversed, meaning that once data has been registered into the blockchain it is extremely difficult to remove or change it. Every interaction is tracked and permanently recorded on a distributed and public ledger."
+          },
+          {
+            "title": "Secure",
+            "icon": "./static/images/safety.png",
+            "text": "After a block has been added to the end of the blockchain it is very difficult to go back and alter the contents of the block. That’s because each block contains its own hash, along with the hash of the block before it. Hash codes are created by a math function that turns digital information into a string of numbers and letters. If that information is edited in any way, the hash code changes as well."
+          },
+          {
+            "title": "Trusty",
+            "icon": "./static/images/data.png",
+            "text": "The trusty of the Blockchain is based on the believe of two or more participants, computers must 'prove' that they have done 'work' by solving a complex computational math problem. If a computer solves one of these problems, they become eligible to add a block to the blockchain."
+          }
+        ]
+      }
+    ]
+  }
+]

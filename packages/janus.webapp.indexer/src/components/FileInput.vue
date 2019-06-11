@@ -8,13 +8,12 @@
         type="file"
         :class="this.isValid"
         :name="inputName"
-        :value="filename"
         @input="$emit('input', $event.target.files)"
         v-on:change="handleUpload($event.target.files)"
         :accept="this.accept"
       >
       <p class="separator">or</p>
-      <button type="button" class="btn btn--icon">Browse Files</button>
+      <button type="button" class="btn">Browse Files</button>
     </div>
     <div class="errors">
       <li v-for="(exception, index) in this.exceptions" :key="index">
@@ -66,7 +65,7 @@ export default {
       return this.currentStatus === STATUS_FAILED
     },
     uploadMessage () {
-      let message = 'Drag your file(s) here'
+      let message = 'Drag your ZIP file here'
       if (this.isSaving) message = 'Uploading ' + this.filename
       return message
     }
@@ -74,14 +73,15 @@ export default {
   methods: {
     reset () {
       // reset form to initial state
-      this.currentStatus = STATUS_INITIAL
       this.uploadedFiles = []
       this.uploadError = null
+      this.filename = ''
+      this.currentStatus = STATUS_INITIAL
     },
     handleUpload: function (files) {
       this.filename = files[0].name
+      this.currentStatus = STATUS_SAVING
       this.fieldIsValid(this.isEmpty(this.filename), 'EmptyField')
-      this.save()
     },
     fieldIsValid: function (exception, type) {
       let exceptionType = this.filterExceptionByType(type)
@@ -96,17 +96,10 @@ export default {
     },
     isEmpty: function (value) {
       return value === '' || value == null
-    },
-    save (formData) {
-      this.currentStatus = STATUS_SAVING
     }
   },
   props: {
     inputName: {
-      type: String,
-      required: true
-    },
-    value: {
       type: String,
       required: true
     },
@@ -130,9 +123,9 @@ export default {
   position: relative;
   text-align: left;
   margin: 20px auto;
+  color: var(--color-white);
 }
 .field_label {
-  color: var(--color-gray);
   display: block;
   width: 100%;
   text-align: center;
@@ -142,7 +135,6 @@ export default {
   padding-bottom: 0px;
   padding-left: 16px;
   padding-right: 16px;
-  color: var(--color-gray);
   background-color: var(--color-white);
   height: 3rem;
   width: 100%;
@@ -151,7 +143,6 @@ export default {
   border-width: 1px;
   border-style: solid;
   border-image: initial;
-  border-color: var(--color-gray-lighter);
   border-radius: 4px;
   box-sizing: border-box;
 }
@@ -166,12 +157,11 @@ export default {
   border-color: var(--color-red);
 }
 .content--file {
-  color: var(--color-gray);
   padding: 30px 0;
   position: relative;
   cursor: pointer;
   margin: auto;
-  border: 1px dashed var(--color-gray);
+  border: 3px dashed;
   border-radius: 10px;
   text-align: center;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
@@ -196,7 +186,7 @@ export default {
   height: 1px;
   width: 10%;
   display: inline-block;
-  background-color: var(--color-gray);
+  background-color: var(--color-white);
   position: relative;
   margin: 0 5px;
   vertical-align: middle;
@@ -209,11 +199,12 @@ export default {
   background-size: contain;
   background-repeat: no-repeat;
   text-align: center;
+  filter: invert(100%);
 }
 .file_icon--initial {
-  background-image: url('../assets/icon-cloud-upload.svg');
+  background-image: url('../assets/images/icon-cloud-upload.svg');
 }
 .file_icon--success {
-  background-image: url('../assets/icon-cloud-done.svg');
+  background-image: url('../assets/images/icon-cloud-done.svg');
 }
 </style>

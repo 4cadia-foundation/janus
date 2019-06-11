@@ -1,11 +1,17 @@
 :root {
-  --color-primary: #5436D6;
+  --color-primary: #7757f9;
   --color-black: #000e1a;
   --color-white: #fff;
   --color-blue: #007ce0;
+  --color-cyan: #4ee4e6;
   --color-red: #dc3545;
+  --color-pink: #f55a96;
   --color-green: #28C081;
-  --color-navy: #004175;
+  --color-navy: #090827;
   --color-gray-lighter: #cccccc;
   --color-gray: #424242;
+  --color-gray-darker: #1a1a1a;
+  --media-phone: 768px;
+  --media-tablet: 992px;
+  --media-desktop: 1200px;
 }

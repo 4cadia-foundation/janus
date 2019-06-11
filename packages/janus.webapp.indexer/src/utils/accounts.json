@@ -1,0 +1,14 @@
+{
+    "list_accounts": [
+        {
+        "title": "Anonymous",
+        "icon-account": "xxxx",
+        "description": "teste teste"
+    },
+    {
+        "title": "Basic",
+        "iconte-account": "xxxx",
+        "description": "teste teste"
+    }
+    ]
+}

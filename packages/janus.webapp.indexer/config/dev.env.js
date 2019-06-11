@@ -8,5 +8,6 @@ module.exports = merge(prodEnv, {
   IDENTITY: true,
   CIVICID: '"-uXno0-XF"',
   DISABLE_IDENTITY_CIVIC: false,
-  DISABLE_IDENTITY_METAMASK: true
+  DISABLE_IDENTITY_METAMASK: false,
+  DISABLE_IDENTITY_UPORT: true
 })

@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/view/Home'
+import Indexer from '@/view/Indexer'
 import NotFound from '@/view/NotFound'
 import About from '@/view/About'
-import FormUploadExample from '@/components/FormUploadExample'
+import Profile from '@/view/Profile'
 
 Vue.use(Router)
 
@@ -15,9 +16,9 @@ export default new Router({
       component: Home
     },
     {
-      path: '/form',
-      name: 'Form',
-      component: FormUploadExample
+      path: '/indexer',
+      name: 'Indexer',
+      component: Indexer
     },
     {
       path: '/404',
@@ -29,6 +30,12 @@ export default new Router({
       name: 'About',
       component: About
     },
+    {
+      path: '/profile',
+      name: 'Profile',
+      component: Profile
+    },
+    { path: '/documentation', redirect: '/' },
     { path: '*', redirect: '/404' }
   ]
 })
