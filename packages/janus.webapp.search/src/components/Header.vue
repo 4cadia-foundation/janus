@@ -1,9 +1,9 @@
 <template>
   <div class="header">
-    <a href="/" class="header_logo">
+    <div @click="handleClick" class="header_logo">
       <img class="logo" src="../assets/images/logo_clear.png">
       <h2 class="title">Janus Search</h2>
-    </a>
+    </div>
     <div :class="`header_menu ${this.showMenu ? 'open' : ''}`">
       <button class="menu-hamburguer btn--icon" @click='toggleShowMenu()'></button>
       <ul class="menu">
@@ -39,6 +39,10 @@ export default {
         this.showMenu = !this.showMenu
         this.$root.$emit('toggleMenu', this.showMenu)
       }
+    },
+    handleClick: function () {
+      this.$router.push({ name: 'Home' })
+      location.reload()
     }
   },
   mounted: function () {
