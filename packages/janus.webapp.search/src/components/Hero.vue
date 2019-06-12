@@ -126,4 +126,15 @@ export default {
     width: 80%;
   }
 }
+@media (min-width: 1920px) {
+  .hero .content--text .title {
+    font-size: 2vw;
+  }
+  .hero .content--text {
+    font-size: 1.2vw;
+  }
+  .hero_content {
+    padding: 6vw 0;
+  }
+}
 </style>

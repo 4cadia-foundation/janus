@@ -168,4 +168,13 @@ export default {
 .submited .field::-ms-input-placeholder {
   color: white;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  border: 1px solid var(--color-gray);
+  -webkit-text-fill-color: var(--color-white);
+  -webkit-box-shadow: 0 0 0 1000px var(--color-primary) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
 </style>

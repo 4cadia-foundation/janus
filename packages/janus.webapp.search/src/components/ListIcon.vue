@@ -9,10 +9,10 @@
         </div>
         <div class="content">
           <div class="item_title" v-if="item.title">
-            <h5 class="title" v-html="item.title || capitalize"></h5>
+            <h3 class="title" v-html="item.title || capitalize"></h3>
           </div>
           <div class="item_text" v-if="item.text">
-            <h5 class="text" v-html="item.text"></h5>
+            <div class="text" v-html="item.text"></div>
           </div>
         </div>
       </li>
@@ -105,6 +105,20 @@ export default {
     width: 60px;
     height: auto;
     margin-bottom: 20px;
+  }
+}
+@media (min-width: 1920px) {
+  .list-icon .subtitle {
+    font-size: 2vw;
+  }
+  .item .content {
+    width: fit-content;
+  }
+  .item_title .title {
+    font-size: 1.5vw;
+  }
+  .item_text .text {
+    font-size: 1vw;
   }
 }
 </style>

@@ -17,13 +17,15 @@ export default {
   name: 'Home',
   data () {
     return {
-      title: 'Janus Plataform',
+      title: 'Janus Search',
       submited: false
     }
   },
   components: {
     'v-form-search': FormSearch,
     'v-search-result': SearchResult
+  },
+  methods: {
   },
   mounted () {
     this.$root.$on('formSubmit', () => {

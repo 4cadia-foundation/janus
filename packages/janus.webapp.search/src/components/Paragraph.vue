@@ -33,4 +33,12 @@ export default {
 .text {
   text-align: left;
 }
+@media (min-width: 1920px) {
+  .paragraph .subtitle {
+    font-size: 2vw;
+  }
+  .text {
+    font-size: 1.2vw;
+  }
+}
 </style>
