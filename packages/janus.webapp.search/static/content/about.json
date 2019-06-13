@@ -29,7 +29,7 @@
           },
           {
             "title": "Search - Smart Contract",
-            "text": "<p> This Smart Contract is assigned to provide instructions for the Front-end and the janusndxr to do the indexation of a content on the Janus Platform and to provide the information when asked to search for them. What is Blockchain?</p>"
+            "text": "<p> This Smart Contract is assigned to provide instructions for the Front-end and the janusndxr to do the indexation of a content on the Janus Platform and to provide the information when asked to search for them.</p>"
           }
         ]
       }
