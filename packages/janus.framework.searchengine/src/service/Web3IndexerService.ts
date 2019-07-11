@@ -17,6 +17,12 @@ export default class Web3IndexerService {
 
         let indexerResult = new IndexerResult();
 
+        for (let i = 0; i < tags.length; i++) {
+
+            tags[i] = tags[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        
+        }
+
         let result = await this._indexerSmartContract.methods.getWebSite(tags)
             .call()
             .then(a => { return a; });
