@@ -13,23 +13,26 @@ export default class Web3IndexerService {
         this._indexerSmartContract = new this._web3.eth.Contract(web3Config.indexerabi, web3Config.indexeraddress);
     }
 
-    public async ListByTags(tags: string[]): Promise<IndexerResult> {
+    public async ListByTags(tags: string[],
+        pageNumber: number,
+        pageSize: number)
+        : Promise<IndexerResult> {
 
         let indexerResult = new IndexerResult();
 
         for (let i = 0; i < tags.length; i++) {
 
             tags[i] = tags[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
-        
+
         }
 
-        let result = await this._indexerSmartContract.methods.getWebSite(tags)
+        let result = await this._indexerSmartContract.methods.getWebSite(tags, pageNumber, pageSize)
             .call()
             .then(a => { return a; });
 
         let i = 0;
 
-        result.forEach(element => {
+        result[0].forEach(element => {
             if (element && element.length > 0) {
                 let storageHash = element.split(';')[0];
                 let title = element.split(';')[1];
@@ -38,7 +41,7 @@ export default class Web3IndexerService {
                 i++;
             }
         });
-
+        indexerResult.webSitesCount = parseInt(result[1]);
         console.log(indexerResult);
 
         return indexerResult;
