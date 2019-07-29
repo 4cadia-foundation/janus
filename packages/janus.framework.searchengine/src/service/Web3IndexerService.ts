@@ -7,10 +7,12 @@ import Web3Config from '../entity/Web3Config';
 export default class Web3IndexerService {
     private _web3;
     private _indexerSmartContract;
+    private _jnsSmartContract;
 
     constructor(web3Config: Web3Config) {
         this._web3 = new Web3(web3Config.rpc);
         this._indexerSmartContract = new this._web3.eth.Contract(web3Config.indexerabi, web3Config.indexeraddress);
+        this._jnsSmartContract = new this._web3.eth.Contract(web3Config.jnsabi, web3Config.jnsaddress);
     }
 
     public async ListByTags(tags: string[],
@@ -23,26 +25,36 @@ export default class Web3IndexerService {
         for (let i = 0; i < tags.length; i++) {
 
             tags[i] = tags[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
-
         }
 
         let result = await this._indexerSmartContract.methods.getWebSite(tags, pageNumber, pageSize)
             .call()
             .then(a => { return a; });
 
-        let i = 0;
+        for (let i = 0; i < result[0].length; i++) {
+            let element = result[0][i];
 
-        result[0].forEach(element => {
             if (element && element.length > 0) {
                 let storageHash = element.split(';')[0];
                 let title = element.split(';')[1];
                 let description = element.split(';')[2];
-                indexerResult.websites[i] = new Website(storageHash, title, description);
-                i++;
+
+                let jns = await this._jnsSmartContract.methods.getDomainByStorageHash(storageHash)
+                    .call()
+                    .then(a => { return a; });
+
+                indexerResult.websites[i] = new Website(
+                    storageHash,
+                    title,
+                    description,
+                    jns.topDomain,
+                    jns.domain);
             }
-        });
+        }
+
         indexerResult.webSitesCount = parseInt(result[1]);
-        console.log(indexerResult);
+
+        console.log(indexerResult.websites);
 
         return indexerResult;
     }
