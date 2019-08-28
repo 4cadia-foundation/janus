@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import aboutContent from '../../static/content/about.json'
+import contentService from '../api/contentService'
 import Hero from '@/components/Hero'
 import ListIcon from '@/components/ListIcon'
 import Paragraph from '@/components/Paragraph'
@@ -18,7 +18,7 @@ export default {
   name: 'About',
   data () {
     return {
-      content: aboutContent
+      content: []
     }
   },
   components: {
@@ -27,6 +27,9 @@ export default {
     'v-paragraph': Paragraph
   },
   mounted: function () {
+    contentService('about').then((response) => {
+      this.content = response.data
+    })
   }
 }
 </script>

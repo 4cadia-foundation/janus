@@ -107,4 +107,18 @@ export default {
     margin-bottom: 20px;
   }
 }
+@media (min-width: 1920px) {
+  .list-icon .subtitle {
+    font-size: 2vw;
+  }
+  .item .content {
+    width: fit-content;
+  }
+  .item_title .title {
+    font-size: 1.5vw;
+  }
+  .item_text .text {
+    font-size: 1vw;
+  }
+}
 </style>

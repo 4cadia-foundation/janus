@@ -23,17 +23,23 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style>
 .paragraph {
   position: relative;
   width: 80%;
   margin: auto;
   align-items: center;
+  text-align: left;
 }
 .text{
   text-align: left;
 }
-.content {
-  /* font-size: 1.5vw; */
+@media (min-width: 1920px) {
+  .paragraph .subtitle {
+    font-size: 2vw;
+  }
+  .text {
+    font-size: 1.2vw;
+  }
 }
 </style>

@@ -37,8 +37,8 @@
 <script>
 import Input from '@/components/Input'
 import FileInput from '@/components/FileInput'
-import Indexer from 'janusndxr'
-import IndexRequest from 'janusndxr/dist/src/Domain/Entity/IndexRequest'
+import Indexer from 'janusndxr-demo'
+import IndexRequest from 'janusndxr-demo/dist/src/Domain/Entity/IndexRequest'
 import { mapState } from 'vuex'
 
 const STATUS_INITIAL = 0
