@@ -2,22 +2,14 @@
   <div class="header">
     <router-link to="/" class="header_logo">
       <img class="logo" src="../assets/images/logo_clear.png">
-      <h2 class="title">Janus</h2>
+      <h2 class="title">Janus Indexer</h2>
     </router-link>
     <div :class="`header_menu ${this.showMenu ? 'open' : ''}`">
       <button class="menu-hamburguer btn--icon" @click='toggleShowMenu()'></button>
       <ul class="menu">
-        <li class="menu-item" @click='toggleShowMenu()'>
-          <router-link to="/">Home</router-link>
-        </li>
-        <li class="menu-item" @click='toggleShowMenu()'>
-          <router-link to="/indexer">Indexer</router-link>
-        </li>
-        <li class="menu-item" @click='toggleShowMenu()'>
-          <router-link to="/about">About</router-link>
-        </li>
-        <li class="menu-item" @click='toggleShowMenu()'>
-          <a target="_blank" href="https://janusproj.atlassian.net/wiki/spaces/PAP/pages/126320921/What+s+Identity">Identity</a>
+        <li class="menu-item" @click='toggleShowMenu()' v-for="(link, index) in this.links" :key="index">
+          <router-link v-if="link.path" :to="link.path">{{link.title}}</router-link>
+          <a target="_blank" v-if="link.href" :href="link.href">{{link.title}}</a>
         </li>
         <li class="menu-item" @click='toggleShowMenu()'>
           <menu-account />
@@ -28,6 +20,7 @@
 </template>
 
 <script>
+import contentService from '../api/contentService'
 import MenuAccount from '@/components/MenuAccount'
 export default {
   name: 'Header',
@@ -36,7 +29,8 @@ export default {
   },
   data () {
     return {
-      showMenu: false
+      showMenu: false,
+      links: []
     }
   },
   methods: {
@@ -44,7 +38,11 @@ export default {
       this.showMenu = !this.showMenu
     }
   },
-  mounted: function () {}
+  mounted: function () {
+    contentService('links').then((response) => {
+      this.links = response.data
+    })
+  }
 }
 </script>
 

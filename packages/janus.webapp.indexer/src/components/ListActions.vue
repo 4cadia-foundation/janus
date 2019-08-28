@@ -36,19 +36,23 @@ export default {
   display: inline-block;
 }
 .list-actions .menu-item .btn-primary {
-  /* font-size: 1.4vw; */
   height: 50px;
 }
 .list-actions .menu-item .btn-primary:hover {
   box-shadow: rgb(0, 0, 0) 3px 3px 4px;
 }
 .list-actions .menu-item a {
-  /* font-size: 1.4vw; */
   font-weight: bold;
   text-decoration: none;
   color: var(--color-cyan);
 }
 .list-actions .menu-item a:hover {
   color: white;
+}
+@media (min-width: 1920px) {
+  .list-actions .menu-item .btn-primary,
+  .list-actions .menu-item a {
+    font-size: 1vw;
+  }
 }
 </style>

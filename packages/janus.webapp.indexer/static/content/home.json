@@ -1,42 +1,12 @@
-{
-  "list_hero": [
-    {
-      "title": "Janus Indexer",
-      "text": "<p>We present Janus Platform, a Ethereum Blockchain system that will lead you to the future of descentralized web. Here you will be able to store and find content on the Web 3.0.</p><p><em>The future is here</em></p>",
-      "image": ""
-    }
-  ],
-  "list_icon": [
-    {
-      "title": "Advantages of using blockchain",
-      "data": [
-        {
-          "title": "Distributed",
-          "icon": "./static/images/decentralized.png",
-          "text": "The Blockchain has no central authority, data is stored on a distributed network of nodes, each network node is able to replicate and store a copy of the data. Because of this, a single node does not affect the availability or security of the network."
-        },
-        {
-          "title": "Immutable",
-          "icon": "./static/images/interoperability.png",
-          "text": "Confirmed blocks are very unlikely to be reversed, meaning that once data has been registered into the blockchain it is extremely difficult to remove or change it. Every interaction is tracked and permanently recorded on a distributed and public ledger."
-        },
-        {
-          "title": "Secure",
-          "icon": "./static/images/safety.png",
-          "text": "After a block has been added to the end of the blockchain it is very difficult to go back and alter the contents of the block. That’s because each block contains its own hash, along with the hash of the block before it. Hash codes are created by a math function that turns digital information into a string of numbers and letters. If that information is edited in any way, the hash code changes as well."
-        },
-        {
-          "title": "Trusty",
-          "icon": "./static/images/data.png",
-          "text": "The trusty of the Blockchain is based on the believe of two or more participants, computers must 'prove' that they have done 'work' by solving a complex computational math problem. If a computer solves one of these problems, they become eligible to add a block to the blockchain."
-        }
-      ]
-    }
-  ],
-  "list_paragraph": [
-    {
-      "title": "How to use the Indexer?",
-      "text": "<p>The Front-end need to communicate with the Janus NPM package and thru it achieve the Smart Contract to be able to perform the indexation and the search. The Janus NPM Package is available as janusndxr or using the command line as  janusndxr-cli. At the end, the Indexer Engine need to be capable to index the content on Janus platform and generate a hash or validate the given hash and the Search Engine needs to be able to find and return a list with all the results based on the tags the user will input.</p><p>It starts with the indexation process, in the front-end, the user will input the content to be uploaded and give some parameters. The parameter of the front-end are: Tag, Wallet Address or Identity and the Folder Path or Type of Content Hash.</p><p>After that, the front-end makes a call thru the janusndxr. The package have a few options to continue the indexation.</p><ul><li><h3>Path:</h3><p>If the request is made by a path, it searches the IPFS and generate recursively hashes and look for the HTML file where the Spider Method (that's part of the janusndxr) does the sweeping of TAGs, TITLE and DESCRIPTION, after that and with all this information, the package get to the Smart Contract calling the function addWebSite.</p></li><li><h3>File:</h3><p>If the request is made by attaching a file, it will generate only one hash and the Spider Method will do the sweeping of the information as described above.</p></li><li><h3>Hash:</h3><p>If the request is made by inputting a hash, the package will look for it on the IPFS and find the HTML file so the Spider Method can do it’s process as described above.</p></li></ul><p>The addWebSite function will be responsible for indexing the content uploaded at the Janus Platform, as well as save the tags, the title and the description information.</p><p>Once the content is indexed in the Janus Platform it is a searchable content already. In the front-end search engine the user can input values for Tag and it is used to find the content indexed that matches the search using the getWebSite function on the Smart Contract.</p><p>The getWebSite function uses the tag inputted to find on the indexed content matching tags and return an array with the information (Title, hash, description and tag) of the possible wanted content.</p>"
-    }
-  ]
-}
+[
+  {
+    "type": "list_hero",
+    "content": [
+      {
+        "title": "Janus Indexer",
+        "text": "<p>We present Janus Indexer, a Ethereum Blockchain tool that will upload your content on the decentralized Web 3.0</p><p><em>The future is here</em></p>",
+        "image": ""
+      }
+    ]
+  }
+]

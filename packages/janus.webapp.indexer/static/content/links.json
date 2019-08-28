@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Home",
+    "path": "/" 
+  },
+  {
+    "title": "Indexer",
+    "path": "/indexer" 
+  },
+  {
+    "title": "About",
+    "path": "/about" 
+  },
+  {
+    "title": "Identity",
+    "href": "https://janusproj.atlassian.net/wiki/spaces/PAP/pages/126320921/What+s+Identity"
+  }
+]
