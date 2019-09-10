@@ -13,10 +13,15 @@
         <div class="form_card">
           <v-indexer-card :data="cardData" v-if="files.length > 0" :title="fileName" v-on:handleAction="handleCardAction"/>
         </div>
-        <div class="form_message" v-if="this.ipfsLinkHash.length > 0"> <h4 class="highlight">Access your content in: <a target="_blank" :href="`http://ipfs.caralabs.me/ipfs/${this.ipfsLinkHash[0]}`"> {{this.ipfsLinkHash[0]}}</a></h4></div>
+        <div class="form_message" v-if="this.ipfsLinkHash.length > 0">
+          <h4 class="highlight">Access your content in:
+            <a target="_blank" :href="`http://ipfs.caralabs.me/ipfs/${this.ipfsLinkHash[0]}`"> {{this.ipfsLinkHash[0]}}</a>
+          </h4>
+        </div>
         <div class="form_control">
-          <button type="submit" class="btn btn--success" @click="save()"
-            :title="(this.account === undefined) ? 'You need to connect with Metamask' : 'Index here'">Index Content</button>
+          <p class="highlight" v-if="this.account === undefined">{{ this.getExceptionByType('NoMetamask') }}</p>
+          <button type="submit" :class="`btn btn--success`" @click="save()"
+            title="Index Content">Index Content</button>
         </div>
       </div>
     </form>
@@ -29,7 +34,7 @@ import FileInput from '@/components/FileInput'
 import IndexerCard from '@/components/IndexerCard'
 import Indexer from 'janusndxr-demo'
 import IndexRequest from 'janusndxr-demo/dist/src/Domain/Entity/IndexRequest'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import config from '../../static/configs/configDefault.json'
 
 const STATUS_INITIAL = 0
@@ -75,7 +80,10 @@ export default {
     ...mapState({
       account: state => state.web3.address,
       instance: state => state.web3.instance()
-    })
+    }),
+    ...mapGetters('validation', [
+      'getExceptionByType'
+    ])
   },
   methods: {
     handleSubmit (e) {
@@ -107,14 +115,14 @@ export default {
       })
 
       if (this.account === undefined) {
-        this.$notification.error('You need to connect with Metamask')
+        this.$notification.error(this.getExceptionByType('NoMetamask'))
         this.loader.hide()
         return
       }
 
       if (this.files.length === 0) {
         this.currentStatus = STATUS_FAILED
-        this.$notification.error('Zip file or Content Hash must be filled!')
+        this.$notification.error(this.getExceptionByType('EmptyFile'))
         this.loader.hide()
         return
       }
