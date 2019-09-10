@@ -1,132 +1,195 @@
-pragma solidity >= 0.4.21 < 0.6.0;
+pragma solidity >= 0.5.7 < 0.6.0;
 pragma experimental ABIEncoderV2;
 
+import './StringUtils.sol';
+
 contract Indexer {
-
-    address payable private contractOwner;
-
     struct Website{
         string storageHash;
         string title;
         string description;
         string[] tags;
         address owner;
+        bool visible;
     }
 
+    address payable private contractOwner;
     Website[] private websites;
-    
     mapping(string => uint) hashToIndex;
-    
-    mapping(string => uint[]) tagToIndex;
+    mapping(string => uint[]) tagToIndexes;
+    mapping(address => uint[]) addrToIndexes;
 
-    event addWebSiteEvent(string[] _tags);
-    
-    constructor () public{
+    event addWebSiteEvent(string[] tags);
+    event WebsiteAppend(string indexed storageHash, string[] tags, string tile, string description);
+    event WebsiteBurn(string indexed storageHash);
+
+    modifier onlyExistingWebsite(string memory storageHash) {
+        require(websiteExists(storageHash), 'Website does not exist');
+        _;
+    }
+
+    modifier onlyWebsiteOwner(string memory storageHash) {
+        uint index = hashToIndex[storageHash];
+        require(msg.sender == websites[index].owner, 'Not authorized');
+        _;
+    }
+
+    constructor() public {
         contractOwner = msg.sender;
     }
 
     function kill() external {
-        require(msg.sender == contractOwner, "only the contract owner can kill this contract");
+        require(msg.sender == contractOwner, 'Only the contract owner can kill this contract');
         selfdestruct(contractOwner);
     }
 
-    function webSiteExists(string memory storageHash) public view returns(bool exist){
+    function websiteExists(string memory storageHash) public view returns (bool) {
         if(websites.length == 0){
             return false;
         }
 
-        return equal(websites[hashToIndex[storageHash]].storageHash, storageHash);
+        return StringUtils.equal(websites[hashToIndex[storageHash]].storageHash, storageHash);
     }
 
-    function addWebSite (
-        string memory _storageHash, 
-        string[] memory _tags, 
-        string memory _title, 
-        string memory _description) public {
+    function addWebSite(
+        string memory storageHash,
+        string[] memory tags,
+        string memory title,
+        string memory description
+    )
+        public
+    {
+        require(!websiteExists(storageHash), 'Website exists');
 
-        require(!webSiteExists(_storageHash), 'website exists');
+        Website memory newWebsite = Website({
+            storageHash: storageHash,
+            title: title,
+            description: description,
+            tags: tags,
+            owner: msg.sender,
+            visible: true
+        });
 
-        uint index = websites.push(Website({
-            storageHash: _storageHash,
-            title: _title,
-            description: _description,
-            tags: _tags,
-            owner: msg.sender
-        })) -1;
+        uint index = websites.push(newWebsite) - 1;
 
-        hashToIndex[_storageHash] = index;
+        hashToIndex[storageHash] = index;
 
-        for(uint i = 0; i < _tags.length; i++){
-            tagToIndex[_tags[i]].push(index);
+        for(uint i = 0; i < tags.length; i++){
+            tagToIndexes[tags[i]].push(index);
         }
 
-        emit addWebSiteEvent(_tags);
+        addrToIndexes[msg.sender].push(index);
+
+        emit addWebSiteEvent(tags);
     }
-    
-    function getWebSite(
-        string[] memory _tags,
-        uint pageNumber,
-        uint pageSize)
+
+    function appendWebsite(
+        string memory storageHash,
+        string[] memory tags,
+        string memory title,
+        string memory description
+    )
         public
-        view
-        returns(string[] memory, uint){
-        string[] memory result = new string[](pageSize);
-        uint currentItem = 0;
-        uint currentPageSize = 0;
-        for (uint tagsCount = 0; tagsCount < _tags.length; tagsCount++) {
-            uint[] memory websitesOfTag = tagToIndex[_tags[tagsCount]];
+        onlyExistingWebsite(storageHash)
+        onlyWebsiteOwner(storageHash)
+    {
+        uint index = hashToIndex[storageHash];
+
+        if(!StringUtils.equal(title, websites[index].title))
+            websites[index].title = title;
+
+        if(!StringUtils.equal(description, websites[index].description))
+            websites[index].description = description;
+
+        if(tags.length > 0)
+            websites[index].tags = tags;
+
+        emit WebsiteAppend(storageHash, tags, title, description);
+    }
+
+    function burnWebsite(string memory storageHash)
+        public
+        onlyExistingWebsite(storageHash)
+        onlyWebsiteOwner(storageHash)
+    {
+        uint index = hashToIndex[storageHash];
+
+        Website storage website = websites[index];
+        website.visible = false;
+
+        emit WebsiteBurn(website.storageHash);
+    }
+
+    function getWebSite(
+        string[] memory tags,
+        uint pageNumber,
+        uint pageSize
+    )
+        public view
+        returns (string[] memory, uint)
+    {
+        uint foundItemsCount = 0;
+        uint returnedItemsCount = 0;
+        string[] memory returnedItems = new string[](pageSize);
+
+        for (uint tagsCount = 0; tagsCount < tags.length; tagsCount++) {
+            uint[] storage websitesOfTag = tagToIndexes[tags[tagsCount]];
             for (uint siteIndexCount = 0; siteIndexCount < websitesOfTag.length; siteIndexCount++) {
-                 if(currentPageSize < pageSize) {
-                    uint currentPage = currentItem / pageSize;
-                    if (currentPage + 1 == pageNumber){
-                        Website memory website = websites[websitesOfTag[siteIndexCount]];
-                        result[currentPageSize] = concat(website.storageHash, website.title, website.description);
-                        currentPageSize++;
+                uint currentPage = (foundItemsCount / pageSize) + 1;
+                if (currentPage > pageNumber) {
+                    break;
+                }
+
+                Website memory website = websites[websitesOfTag[siteIndexCount]];
+
+                if (website.visible) {
+                    foundItemsCount++;
+
+                    if (currentPage == pageNumber) {
+                        returnedItems[returnedItemsCount] = StringUtils.concat3(
+                            website.storageHash,
+                            website.title,
+                            website.description,
+                            ';'
+                        );
+                        returnedItemsCount++;
                     }
-                 }
-                 currentItem++;
+                }
+
+                if (returnedItemsCount == pageSize) {
+                    break;
+                }
+            }
+
+            if (returnedItemsCount == pageSize) {
+                break;
             }
         }
-        return (result,currentItem);
+
+        return (returnedItems, returnedItemsCount);
     }
 
-    function concat(string memory _a, string memory _b, string memory _c) private pure returns (string memory){
-        bytes memory _ba = bytes(_a);
-        bytes memory _bb = bytes(_b);
-        bytes memory _bc = bytes(_c);
-        bytes memory _v = bytes(";");
-
-        string memory abcd = new string(_ba.length + _v.length + _bb.length + _v.length + _bc.length);   
-
-        bytes memory babcd = bytes(abcd);
-        uint k = 0;
-        for (uint i = 0; i < _ba.length; i++) babcd[k++] = _ba[i];   
-        babcd[k++] = _v[0];
-        for (uint i = 0; i < _bb.length; i++) babcd[k++] = _bb[i];
-        babcd[k++] = _v[0];
-        for (uint i = 0; i < _bc.length; i++) babcd[k++] = _bc[i];
-        return string(babcd);
-    }    
-
-    function compare(string memory _a, string memory _b) private pure returns (int) {
-        bytes memory a = bytes(_a);
-        bytes memory b = bytes(_b);
-        uint minLength = a.length;
-        if (b.length < minLength) minLength = b.length;
-        for (uint i = 0; i < minLength; i ++)
-            if (a[i] < b[i])
-                return -1;
-            else if (a[i] > b[i])
-                return 1;
-        if (a.length < b.length)
-            return -1;
-        else if (a.length > b.length)
-            return 1;
-        else
-            return 0;
+    function getWebsiteByHash(string memory storageHash)
+        public view
+        onlyExistingWebsite(storageHash)
+        returns (Website memory)
+    {
+        uint index = hashToIndex[storageHash];
+        return websites[index];
     }
 
-    function equal(string memory _a, string memory _b) private pure returns (bool) {
-        return compare(_a, _b) == 0;
+    function getAllWebsitesByOwner()
+        public view
+        returns (Website[] memory)
+    {
+        uint[] memory indexes = addrToIndexes[msg.sender];
+
+        Website[] memory results = new Website[](indexes.length);
+
+        for(uint i = 0; i < indexes.length; i++){
+            results[i] = websites[indexes[i]];
+        }
+
+        return results;
     }
 }
