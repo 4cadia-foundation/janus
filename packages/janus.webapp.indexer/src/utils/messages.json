@@ -12,36 +12,36 @@
     {
       "type": "NotFound",
       "text": "Janus haven’t found this page. Return to our homepage to start searching."
-    },
-    {
-      "type": "InstallMetamask",
-      "text": "We couldn't find Metamask in your browser. Please install it first." 
     }
   ],
   "exceptions": [
+    {
+      "type": "NoMetamask",
+      "text": "We couldn't find Metamask in your browser. Please install it first." 
+    },
     {
       "type": "EmptyReturn",
       "text": "Janus haven’t found any content about { keyword }. Try search for something different." 
     },
     {
       "type": "EmptyField",
-      "text": "Field is empty! Type something to search." 
+      "text": "This field is required!" 
+    },
+    {
+      "type": "EmptyFile",
+      "text": "Zip file must be filled. Upload something to start" 
     },
     {
       "type": "InvalidField",
-      "text": "Field is invalid! Type only alphanumeric characters to search." 
+      "text": "Field is invalid! Type only alphanumeric characters." 
     },
     {
       "type": "MaxLength",
-      "text": "The field must be a maximum of { keyword } characters. Try lowering or using another word." 
+      "text": "The field must be a maximum of { keyword } characters." 
     },
     {
       "type": "MinLength",
       "text": "Field must be at least { keyword } characters." 
-    },
-    {
-      "type": "invalidFile",
-      "text": "Zip file must be filled. Upload something to start" 
     }
   ]
 }
