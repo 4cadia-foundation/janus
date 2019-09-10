@@ -10,24 +10,13 @@
             accept=".zip"
           />
         </div>
-        <!-- <button class="btn btn--outline" @click="handleShowHashInput()">
-          Do you have a indexed content hash?
-        </button>
-        <div class="form_field" v-if="this.showHashInput">
-          <v-input
-            placeholderTxt="e.g. QmTzX8TJe14i3ic6yAzuavNzx3WAz9UXSuFMX5qqbiMQSV"
-            inputType="text"
-            inputName="hash"
-            inputLabel="Content Hash"
-            v-model="hash"
-            ref="inputHash"
-          />
-        </div> -->
-        <div v-if="this.ipfsLinkHash.length > 0"> Access your content in: <a target="_blank" :href="`http://ipfs.caralabs.me/ipfs/${this.ipfsLinkHash[0]}`"> {{this.ipfsLinkHash[0]}}</a></div>
+        <div class="form_card">
+          <v-indexer-card :data="cardData" v-if="files.length > 0" :title="fileName" v-on:handleAction="handleCardAction"/>
+        </div>
+        <div class="form_message" v-if="this.ipfsLinkHash.length > 0"> <h4 class="highlight">Access your content in: <a target="_blank" :href="`http://ipfs.caralabs.me/ipfs/${this.ipfsLinkHash[0]}`"> {{this.ipfsLinkHash[0]}}</a></h4></div>
         <div class="form_control">
-          <button type="submit" class="btn btn--alert" @click="reset()">Cancel</button>
           <button type="submit" class="btn btn--success" @click="save()"
-            :title="(this.provider.accounts === undefined) ? 'You need to connect with Metamask' : 'Index here'">Index Content</button>
+            :title="(this.account === undefined) ? 'You need to connect with Metamask' : 'Index here'">Index Content</button>
         </div>
       </div>
     </form>
@@ -37,6 +26,7 @@
 <script>
 import Input from '@/components/Input'
 import FileInput from '@/components/FileInput'
+import IndexerCard from '@/components/IndexerCard'
 import Indexer from 'janusndxr-demo'
 import IndexRequest from 'janusndxr-demo/dist/src/Domain/Entity/IndexRequest'
 import { mapState } from 'vuex'
@@ -50,16 +40,22 @@ export default {
   name: 'FormIndexer',
   components: {
     'v-input': Input,
-    'v-file-input': FileInput
+    'v-file-input': FileInput,
+    'v-indexer-card': IndexerCard
   },
   data () {
     return {
       attemptSubmit: false,
-      // hash: '',
       files: FileList,
+      fileName: '',
       ipfsLinkHash: [],
-      showHashInput: false,
-      loader: {}
+      loader: {},
+      isUploading: false,
+      cardData: {
+        'title': '',
+        'description': '',
+        'tags': ''
+      }
     }
   },
   computed: {
@@ -76,40 +72,46 @@ export default {
       return this.currentStatus === STATUS_FAILED
     },
     ...mapState({
-      account: state => state.web3.account,
-      provider: state => state.web3.instance
+      account: state => state.web3.address,
+      instance: state => state.web3.instance()
     })
   },
   methods: {
     handleSubmit (e) {
       this.attemptSubmit = true
     },
-    handleShowHashInput (e) {
-      this.showHashInput = !this.showHashInput
+    handleCardAction (action) {
+      if (action === 'remove') {
+        this.reset()
+      } else {
+        this.cardData = {
+          'title': 'This is a Title',
+          'description': 'This is a Description',
+          'tags': 'Tag1, Tag2, Tag3'
+        }
+      }
     },
     reset () {
       // reset form to initial state
       this.currentStatus = STATUS_INITIAL
-      this.files = []
+      this.files = {}
       this.uploadError = null
-      // this.hash = ''
       this.ipfsLinkHash = []
       this.$refs.inputFile.reset()
     },
     save () {
       this.ipfsLinkHash = []
-      // this.hash = ''
       this.loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.formContainer
       })
 
-      if (this.provider.accounts === undefined) {
+      if (this.account === undefined) {
         this.$notification.error('You need to connect with Metamask')
         this.loader.hide()
         return
       }
 
-      if (this.files.length === 0 && this.hash === '') {
+      if (this.files.length === 0) {
         this.currentStatus = STATUS_FAILED
         this.$notification.error('Zip file or Content Hash must be filled!')
         this.loader.hide()
@@ -125,12 +127,9 @@ export default {
       if (this.files.length > 0) {
         indexRequest.Content = this.files[0]
         indexRequest.ContentType = 'zip'
-      } else {
-        indexRequest.Content = this.hash
-        indexRequest.ContentType = 'hash'
       }
 
-      let indexer = new Indexer(this.provider.web3().currentProvider)
+      let indexer = new Indexer(this.instance.currentProvider)
       indexer.AddContent(indexRequest, indexResult => {
         this.loader.hide()
         if (indexResult.Success) {
@@ -168,6 +167,11 @@ export default {
   },
   mounted () {
     this.reset()
+  },
+  watch: {
+    files: function (newVal, oldVal) {
+      this.fileName = newVal[0] ? newVal[0].name : ''
+    }
   }
 }
 </script>
@@ -175,75 +179,29 @@ export default {
 <style scoped>
 .content {
   max-width: 1024px;
-  margin: auto;
-}
-.form {
-  max-width: 60%;
   margin: 0 auto 100px;
+  padding-top: 60px;
 }
 .form_field {
   position: relative;
+  height: 100%;
+  background: white;
+  border: 3px dashed var(--color-blue);
+  border-radius: 20px;
+  transition: .2s all linear;
+  margin-bottom: 30px;
+}
+.form_field:hover {
+  box-shadow: 0px 0px 50px 0px rgba(0, 156, 222, 0.38) inset;
+}
+.form_card {
+  color: var(--color-black);
 }
 .form_control {
   text-align: right;
   margin-top: 30px;
 }
-.separator::before,
-.separator::after {
-  content: '';
-  height: 1px;
-  width: 40%;
-  display: inline-block;
-  background-color: var(--color-gray);
-  position: relative;
-  margin: 0 5px;
-  vertical-align: middle;
-}
-.alert {
-  position: relative;
-  padding: .75rem 1.25rem;
-  margin-bottom: 1rem;
-  border: 1px solid transparent;
-  border-radius: .25rem;
-  transition: all ease-in-out .5s;
-}
-.alert-danger {
-  color: #721c24;
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
-}
-.alert-success {
-  color: #1c7223;
-  background-color: #d7f8dd;
-  border-color: #c6f5ca;
-}
-.alert-link {
-  font-weight: 700;
-  color: #491217;
-}
-.invisible {
-  opacity: 0;
-  padding: 0;
-  font-size: 0;
-}
-.close {
-  float: right;
-  font-size: 16px;
-  font-weight: 100%;
-  line-height: 1;
-  text-shadow: black;
-  opacity: .5;
-}
-.close-danger{
-  color: red;
-}
-.close.success{
-  color: green;
-}
-button.close {
-  padding: 0;
-  background-color: transparent;
-  border: 0;
-  -webkit-appearance: none;
+.form_message {
+  color: var(--color-navy);
 }
 </style>

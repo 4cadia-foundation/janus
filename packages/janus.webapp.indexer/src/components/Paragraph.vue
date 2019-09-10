@@ -1,6 +1,6 @@
 <template>
   <div class="paragraph">
-    <h2 class="subtitle" v-if="paragraph.title" v-html="paragraph.title"></h2>
+    <h2 class="title" v-if="paragraph.title" v-html="paragraph.title"></h2>
     <div class="content">
       <div class="text" v-if="paragraph.text" v-html="paragraph.text"></div>
       <slot></slot>
@@ -23,23 +23,15 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 .paragraph {
   position: relative;
-  width: 80%;
   margin: auto;
+  padding: 10px 30px;
   align-items: center;
-  text-align: left;
+  /* text-align: left; */
 }
-.text{
+.paragraph .text {
   text-align: left;
-}
-@media (min-width: 1920px) {
-  .paragraph .subtitle {
-    font-size: 2vw;
-  }
-  .text {
-    font-size: 1.2vw;
-  }
 }
 </style>

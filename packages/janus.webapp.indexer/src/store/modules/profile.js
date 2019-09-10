@@ -3,7 +3,6 @@ const state = {
   userId: [],
   data: [],
   response: [],
-  authenticated: false,
   metamaskStatus: false
 }
 
@@ -12,7 +11,8 @@ const getters = {
 }
 
 // actions
-const actions = {}
+const actions = {
+}
 
 // mutations
 const mutations = {
@@ -22,19 +22,11 @@ const mutations = {
   setData (state, data) {
     state.data = data
   },
-  setAuthentication (state, authenticated) {
-    state.authenticated = authenticated
-  },
   setResponse (state, response) {
     state.response = response
     state.userId = response.userId
     state.data = response.data
-    if (response.userId !== undefined && response.userId.length > 0) {
-      state.authenticated = true
-    } else {
-      state.authenticated = false
-    }
-    console.log('setResponse ', state.data)
+    // console.log('setResponse ', state.data)
   }
 }
 
