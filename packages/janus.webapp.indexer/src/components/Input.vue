@@ -1,11 +1,12 @@
 <template>
-  <div class="field_content" :class="'content--' + this.inputType">
-    <label :for="inputName" class="field_label">{{ inputLabel }}</label>
+  <div :class="`field_content content--${inputType} ${isValid}`">
+    <label :for="inputName" :class="`field_label`">{{ inputLabel }}</label>
     <input
       class="field"
       :class="this.isValid"
       :type="inputType"
       :name="inputName"
+      :minlength="minlength"
       :placeholder="placeholderTxt"
       :value="value"
       @input="$emit('input', $event.target.value)"
@@ -23,13 +24,12 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Input',
+  name: 'BaseInput',
   components: {
   },
   data () {
     return {
-      exceptions: [],
-      isValid: this.hasExceptions ? 'invalid' : ''
+      exceptions: []
     }
   },
   computed: {
@@ -38,12 +38,17 @@ export default {
     ]),
     hasExceptions: function () {
       return this.exceptions.filter(exception => exception.show === true).length > 0
+    },
+    isValid: function () {
+      return this.hasExceptions ? 'invalid' : ''
     }
   },
   methods: {
-    handleKeyUp: function (event) {
-      this.fieldIsValid(this.isEmpty(this.value), 'EmptyField')
-      this.fieldIsValid(!this.isAlphaNumeric(this.value), 'InvalidField')
+    handleKeyUp: function (value) {
+      if (this.required) this.fieldIsValid(this.isEmpty(this.value), 'EmptyField')
+      if (this.alphaNumeric) this.fieldIsValid(!this.isAlphaNumeric(this.value), 'InvalidField')
+      if (this.maxlength) this.fieldIsValid(this.isMaxLength(this.value), 'MaxLength')
+      if (this.minlength) this.fieldIsValid(this.isMinLength(this.value), 'MinLength')
     },
     handleValidate: function (event) {
       this.handleKeyUp()
@@ -60,12 +65,18 @@ export default {
     filterExceptionByType: function (exceptionType) {
       return this.exceptions.filter(exception => exception.type === exceptionType)
     },
+    isEmpty: function (value) {
+      return value === '' || value == null
+    },
     isAlphaNumeric: function (value) {
       var re = /^[a-zA-Z0-9]+$/
       return value ? re.test(value) : true
     },
-    isEmpty: function (value) {
-      return value === '' || value == null
+    isMaxLength: function (value) {
+      return value.length > this.maxlength
+    },
+    isMinLength: function (value) {
+      return value.length < this.minlength
     }
   },
   props: {
@@ -83,15 +94,28 @@ export default {
     inputLabel: {
       type: String
     },
+    maxlength: {
+      type: String
+    },
+    minlength: {
+      type: String
+    },
+    alphaNumeric: {
+      type: Boolean
+    },
+    required: {
+      type: Boolean
+    },
     value: {
-      type: String,
       required: true
     }
   },
   mounted () {
     this.exceptions.push(
       {type: 'EmptyField', message: this.getExceptionByType('EmptyField'), show: false},
-      {type: 'InvalidField', message: this.getExceptionByType('InvalidField'), show: false}
+      {type: 'InvalidField', message: this.getExceptionByType('InvalidField'), show: false},
+      {type: 'MaxLength', message: this.getExceptionByType('MaxLength').replace('{ keyword }', this.maxlength), show: false},
+      {type: 'MinLength', message: this.getExceptionByType('MinLength').replace('{ keyword }', this.minlength), show: false}
     )
   }
 }
@@ -104,7 +128,7 @@ export default {
   margin: 20px auto;
 }
 .field_label {
-  color: var(--color-white);
+  color: var(--color-gray);
   margin-bottom: 10px;
   display: block;
 }
@@ -134,8 +158,9 @@ export default {
   border-color: var(--color-primary);
 }
 .field.invalid {
-  border-color: var(--color-red);
   color: var(--color-red);
+  border-color: var(--color-red);
+  border-left-width: 5px;
 }
 .content--file .field {
   opacity: 0; /* invisible but it's there! */
@@ -146,5 +171,13 @@ export default {
   top: 0%;
   right: 0%;
   padding: 0;
+}
+
+.field:-webkit-autofill,
+.field:-webkit-autofill:hover,
+.field:-webkit-autofill:focus,
+.field:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    -webkit-text-fill-color: black !important;
 }
 </style>

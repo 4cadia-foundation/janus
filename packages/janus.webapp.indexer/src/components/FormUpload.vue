@@ -30,6 +30,7 @@ import IndexerCard from '@/components/IndexerCard'
 import Indexer from 'janusndxr-demo'
 import IndexRequest from 'janusndxr-demo/dist/src/Domain/Entity/IndexRequest'
 import { mapState } from 'vuex'
+import config from '../../static/content/configDefault.json'
 
 const STATUS_INITIAL = 0
 const STATUS_SAVING = 1
@@ -129,7 +130,14 @@ export default {
         indexRequest.ContentType = 'zip'
       }
 
-      let indexer = new Indexer(this.instance.currentProvider)
+      let indexer
+
+      if (localStorage.getItem('IpfsRpcHost') === null && localStorage.getItem('indexerSmAddress') === null && localStorage.getItem('EthereumRpcHost') === null && localStorage.getItem('indexerSmAbi') === null) {
+        indexer = new Indexer(this.instance.currentProvider, config.IpfsRpcHost, config.indexerSmAddress, config.EthereumRpcHost, config.indexerSmAbi)
+      } else {
+        indexer = new Indexer(this.instance.currentProvider, localStorage.IpfsRpcHost, localStorage.indexerSmAddress, localStorage.EthereumRpcHost, localStorage.indexerSmAbi)
+      }
+
       indexer.AddContent(indexRequest, indexResult => {
         this.loader.hide()
         if (indexResult.Success) {
@@ -144,7 +152,7 @@ export default {
               }
             } else {
               this.$notification.success(`Success! Thank you for contributing with your content!`)
-              this.$notification.success(`Access your content in: http://ipfs.caralabs.me/ipfs/${this.ipfsLinkHash[0]}`, {infiniteTimer: true})
+              this.$notification.success(`Access your content in: http://ipfs.4cadia.com/ipfs/${this.ipfsLinkHash[0]}`, {infiniteTimer: true})
             }
           }
           if (warnings.length > 0) {
