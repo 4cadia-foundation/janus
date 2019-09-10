@@ -5,12 +5,16 @@
       "path": "/"
     },
     {
+      "title": "About",
+      "path": "/about"
+  },
+    {
         "title": "Indexer",
         "path": "/indexer"
     },
     {
-        "title": "About",
-        "path": "/about"
+      "title": "Settings",
+      "path":"/settings"
     },
     {
         "title": "Identity",
