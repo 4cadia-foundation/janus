@@ -14,8 +14,8 @@
       "text": "Janus haven’t found this page. Return to our homepage to start searching."
     },
     {
-      "type": "invalid owner address",
-      "text": "The owner address is invalid. Configure your Metamask to use the search" 
+      "type": "InstallMetamask",
+      "text": "We couldn't find Metamask in your browser. Please install it first." 
     }
   ],
   "exceptions": [
@@ -30,6 +30,18 @@
     {
       "type": "InvalidField",
       "text": "Field is invalid! Type only alphanumeric characters to search." 
+    },
+    {
+      "type": "MaxLength",
+      "text": "The field must be a maximum of { keyword } characters. Try lowering or using another word." 
+    },
+    {
+      "type": "MinLength",
+      "text": "Field must be at least { keyword } characters." 
+    },
+    {
+      "type": "invalidFile",
+      "text": "Zip file must be filled. Upload something to start" 
     }
   ]
 }

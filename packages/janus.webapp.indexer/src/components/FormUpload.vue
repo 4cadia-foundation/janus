@@ -30,7 +30,7 @@ import IndexerCard from '@/components/IndexerCard'
 import Indexer from 'janusndxr-demo'
 import IndexRequest from 'janusndxr-demo/dist/src/Domain/Entity/IndexRequest'
 import { mapState } from 'vuex'
-import config from '../../static/content/configDefault.json'
+import config from '../../static/configs/configDefault.json'
 
 const STATUS_INITIAL = 0
 const STATUS_SAVING = 1
