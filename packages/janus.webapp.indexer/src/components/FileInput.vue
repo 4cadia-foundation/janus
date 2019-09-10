@@ -4,16 +4,15 @@
       <p class="file_icon" :class="'file_icon--' + this.currentStatus"></p>
       <label :for="inputName" class="field_label">{{ uploadMessage }}</label>
       <input
-        class="field"
         type="file"
-        :class="this.isValid"
+        :class="`field ${this.isValid}`"
         :name="inputName"
         @input="$emit('input', $event.target.files)"
         v-on:change="handleUpload($event.target.files)"
         :accept="this.accept"
       >
-      <p class="separator">or</p>
-      <button type="button" class="btn">Browse Files</button>
+      <p class="separator">or click to choose a file</p>
+      <button type="button" class="btn">Browse File</button>
     </div>
     <div class="errors">
       <li v-for="(exception, index) in this.exceptions" :key="index">
@@ -122,13 +121,16 @@ export default {
 .field_content {
   position: relative;
   text-align: left;
-  margin: 20px auto;
+  /* margin: 20px auto; */
   color: var(--color-white);
 }
 .field_label {
   display: block;
   width: 100%;
   text-align: center;
+  color: var(--color-navy);
+  font-size: 1.563em;
+  margin-top: 30px;
 }
 .field {
   padding-top: 0px;
@@ -146,7 +148,8 @@ export default {
   border-radius: 4px;
   box-sizing: border-box;
 }
-.field:hover {
+.field:hover,
+.field.active {
   box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 6px;
 }
 .field:focus {
@@ -157,17 +160,14 @@ export default {
   border-color: var(--color-red);
 }
 .content--file {
-  padding: 30px 0;
+  padding: 60px 0;
   position: relative;
   cursor: pointer;
   margin: auto;
-  border: 3px dashed;
-  border-radius: 10px;
   text-align: center;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
 }
 .content--file .field {
-  opacity: 0; /* invisible but it's there! */
+  opacity: 0;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -178,33 +178,23 @@ export default {
   z-index: 1;
 }
 .content--file .separator {
-  margin: 10px 0;
-}
-.content--file .separator::before,
-.content--file .separator::after {
-  content: '';
-  height: 1px;
-  width: 10%;
-  display: inline-block;
-  background-color: var(--color-white);
-  position: relative;
-  margin: 0 5px;
-  vertical-align: middle;
+  margin: 10px 0 30px;
+  color: var(--color-navy);
 }
 .file_icon {
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 100px;
   display: block;
   margin: 0 auto 10px;
   background-size: contain;
   background-repeat: no-repeat;
   text-align: center;
-  filter: invert(100%);
 }
 .file_icon--initial {
-  background-image: url('../assets/images/icon-cloud-upload.svg');
+  background-image: url('../assets/images/upload.svg');
 }
-.file_icon--success {
-  background-image: url('../assets/images/icon-cloud-done.svg');
+.file_icon--success,
+.file_icon--saving {
+  background-image: url('../assets/images/upload-success.svg');
 }
 </style>

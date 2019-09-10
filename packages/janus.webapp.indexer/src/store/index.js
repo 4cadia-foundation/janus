@@ -10,15 +10,7 @@ Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 
-export default new Vuex.Store({
-  state: {
-    logged_in: false
-  },
-  mutations: {
-    logged_in (state, value) {
-      state.logged_in = value
-    }
-  },
+const vuexStore = new Vuex.Store({
   modules: {
     form,
     validation,
@@ -28,3 +20,5 @@ export default new Vuex.Store({
   },
   strict: debug
 })
+
+export default vuexStore

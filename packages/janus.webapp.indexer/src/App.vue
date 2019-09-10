@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-modal ref="modal"></v-modal>
+    <v-modal-login ref="loginModal"/>
     <v-header/>
     <div class="main">
       <router-view/>
@@ -12,14 +12,14 @@
 
 /* eslint-disable */ 
 import Header from '@/components/Header'
-import Modal from '@/components/Modal'
+import LoginModal from '@/components/LoginModal'
 
 export default {
   name: 'App',
 
   components: {
     'v-header': Header,
-    'v-modal': Modal
+    'v-modal-login': LoginModal
   },
   created(){ 
     // this.$store.dispatch('web3/registerWeb3')
@@ -30,6 +30,7 @@ export default {
 <style>
 @import './assets/styles/variables.css';
 @import './assets/styles/base.css';
+@import './assets/styles/typography.css';
 @import './assets/styles/utils.css';
 #app {
   font-family: 'Montserrat', Helvetica, Arial, sans-serif;
@@ -37,4 +38,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
+
 </style>

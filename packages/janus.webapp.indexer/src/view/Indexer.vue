@@ -1,24 +1,32 @@
 <template>
   <div class="container container--indexer">
-    <h1>{{title}}</h1>
-    <div class="wrapper">
-      <v-form-upload/>
+    <div class="row row--full">
+      <v-hero
+        :hero="hero"
+        float="right"
+        classes="colapsed"
+      ></v-hero>
     </div>
+    <v-form-upload/>
   </div>
 </template>
 
 <script>
 import FormUpload from '@/components/FormUpload'
+import Hero from '@/components/Hero'
 
 export default {
   name: 'Home',
   data () {
     return {
-      title: 'Janus Indexer'
+      hero: {
+        title: 'Indexer'
+      }
     }
   },
   components: {
-    'v-form-upload': FormUpload
+    'v-form-upload': FormUpload,
+    'v-hero': Hero
   }
 }
 </script>
@@ -27,7 +35,6 @@ export default {
 .container--indexer {
   background: none;
   color: white;
-  margin-top: 4vw;
 }
 .container--indexer h1 {
   color: white;

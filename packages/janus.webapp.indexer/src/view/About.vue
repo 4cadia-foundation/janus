@@ -1,9 +1,16 @@
 <template>
   <div class="container container--about">
     <div class="col" v-for="(block, index) in this.content" :key="index">
-      <v-hero v-if="block['type']=='list_hero'" :hero="block['content'][0]" float="right" classes="gray"/>
-      <v-list-icon v-if="block['type']=='list_icon'" :list="block['content'][0]"/>
-      <v-paragraph v-if="block['type']=='list_paragraph'" :paragraph="block['content'][0]"/>
+      <div class="row row--full" v-if="block['type']=='list_hero'">
+        <v-hero :hero="block['content']" float="right" classes="">
+        </v-hero>
+      </div>
+      <div class="row" v-if="block['type']=='list_paragraph'">
+        <v-paragraph :paragraph="block['content']"/>
+      </div>
+      <div class="row" v-if="block['type']=='list_card'">
+        <v-cards-list :list="block['content']" cardStyle="wide" />
+      </div>
     </div>
   </div>
 </template>
@@ -11,8 +18,8 @@
 <script>
 import contentService from '../api/contentService'
 import Hero from '@/components/Hero'
-import ListIcon from '@/components/ListIcon'
 import Paragraph from '@/components/Paragraph'
+import CardListBlock from '@/components/CardListBlock'
 
 export default {
   name: 'About',
@@ -23,7 +30,7 @@ export default {
   },
   components: {
     'v-hero': Hero,
-    'v-list-icon': ListIcon,
+    'v-cards-list': CardListBlock,
     'v-paragraph': Paragraph
   },
   mounted: function () {
