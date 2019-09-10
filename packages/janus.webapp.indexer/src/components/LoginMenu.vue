@@ -13,8 +13,8 @@
       <template v-slot:menu>
         <div class="dropdown-content" v-if="isAuthenticated">
             <button class="btn" @click="handleProfile()"> Profile </button>
+            <button class="btn" @click="handleOpenMyAccount()"> Account </button>
             <button class="btn" @click="handleSignOut()"> Sign Out </button>
-            <button class="btn" @click="handleOpenMyAccount()"> My Account </button>
         </div>
         <div class="dropdown-content" v-else>
           <button class="btn" @click="handleOpenModalAuth()"> Sign In </button>

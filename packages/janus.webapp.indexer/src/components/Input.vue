@@ -1,7 +1,18 @@
 <template>
   <div :class="`field_content content--${inputType} ${isValid}`">
     <label :for="inputName" :class="`field_label`">{{ inputLabel }}</label>
-    <input
+    <textarea v-if="inputType === 'textarea'"
+      class="field field--textarea"
+      :class="this.isValid"
+      :name="inputName"
+      :minlength="minlength"
+      :placeholder="placeholderTxt"
+      :value="value"
+      @input="$emit('input', $event.target.value)"
+      v-on:keyup="handleKeyUp"
+      :rows="textareaRows"
+    />
+    <input v-else
       class="field"
       :class="this.isValid"
       :type="inputType"
@@ -87,6 +98,10 @@ export default {
       type: String,
       required: true
     },
+    textareaRows: {
+      type: String,
+      default: '50'
+    },
     inputName: {
       type: String,
       required: true
@@ -101,10 +116,12 @@ export default {
       type: String
     },
     alphaNumeric: {
-      type: Boolean
+      type: Boolean,
+      default: false
     },
     required: {
-      type: Boolean
+      type: Boolean,
+      default: false
     },
     value: {
       required: true
@@ -139,7 +156,7 @@ export default {
   padding-right: 16px;
   color: var(--color-gray);
   background-color: rgb(255, 255, 255);
-  height: 3rem;
+  min-height: 3rem;
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
   font-size: 1rem;
@@ -162,6 +179,9 @@ export default {
   border-color: var(--color-red);
   border-left-width: 5px;
 }
+.field--textarea {
+  max-width: 100%;
+}
 .content--file .field {
   opacity: 0; /* invisible but it's there! */
   width: 100%;
@@ -172,12 +192,17 @@ export default {
   right: 0%;
   padding: 0;
 }
-
 .field:-webkit-autofill,
 .field:-webkit-autofill:hover,
 .field:-webkit-autofill:focus,
 .field:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
     -webkit-text-fill-color: black !important;
+}
+.label--dark .field_label {
+  color: var(--color-gray)
+}
+.label--light .field_label {
+  color: var(--color-white)
 }
 </style>

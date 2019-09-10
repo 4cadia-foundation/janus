@@ -7,6 +7,7 @@
         inputType="text"
         inputName="EthereumRpcHost"
         inputLabel="Node"
+        :required="true"
         v-model="EthereumRpcHost"
         />
       </div>
@@ -16,24 +17,29 @@
         inputType="text"
         inputName="IpfsRpcHost"
         inputLabel="Point to IPFS"
+        :required="true"
         v-model="IpfsRpcHost"
         />
       </div>
       <div class="form_field">
         <v-input
-        placeholderTxt='Enter a Smart Contract Address'
+        placeholderTxt='e.g: 0x0000000000000000000000000000000000000000'
         inputType="text"
         inputName="indexerSmAddress"
         inputLabel="Smart Contract Address"
+        minlength="42"
+        maxlength="46"
+        :alphaNumeric="true"
         v-model="indexerSmAddress"
         />
       </div>
       <div class="form_field">
         <v-input
         placeholderTxt='Enter a Smart Contract ABI'
-        inputType="text"
+        inputType="textarea"
         inputName="indexerSmAbi"
         inputLabel="Smart Contract ABI"
+        :required="true"
         v-model="indexerSmAbi"
         />
       </div>
@@ -47,10 +53,10 @@
 
 <script>
 import Input from '@/components/Input'
-import Config from '../../static/content/configDefault.json'
+import Config from '../../static/configs/configDefault.json'
 
 export default {
-  name: 'FormIndexer',
+  name: 'FormSettings',
   components: {
     'v-input': Input
   },

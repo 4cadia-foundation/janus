@@ -25,11 +25,12 @@
       <template v-slot:footer>
         <form :class="`card-form ${showContent ? 'open' : ''}`">
           <div class="form_field">
-            <h4>Title: </h4>
             <v-input
               placeholderTxt="eg.: QmYbs8fHzYaXufL5gMyWB1XgnvbLRSqv9bb58LJHX3ziVv"
               inputType="text"
               inputName="Title"
+              inputLabel="Title: "
+              class="label--dark"
               v-model="data.title"
               :required="true"
               :alphaNumeric="true"
@@ -37,11 +38,12 @@
             />
           </div>
           <div class="form_field">
-            <h4>Description: </h4>
             <v-input
               placeholderTxt="eg.: QmYbs8fHzYaXufL5gMyWB1XgnvbLRSqv9bb58LJHX3ziVv"
               inputType="text"
-              inputName="Description"
+              inputName="Description: "
+              inputLabel="Title: "
+              class="label--dark"
               v-model="data.description"
               :required="true"
               :alphaNumeric="true"
@@ -49,11 +51,12 @@
             />
           </div>
           <div class="form_field">
-            <h4>Tags: </h4>
             <v-input
               placeholderTxt="eg.: QmYbs8fHzYaXufL5gMyWB1XgnvbLRSqv9bb58LJHX3ziVv"
               inputType="textarea"
               inputName="Tags"
+              inputLabel="Tags: "
+              class="label--dark"
               v-model="data.tags"
               :required="true"
               :alphaNumeric="true"
@@ -144,8 +147,5 @@ export default {
 .card-form.open {
   max-height: 800px;
   transition: max-height 0.25s ease-in;
-}
-.form_field h4 {
-  margin-bottom: 15px;
 }
 </style>
