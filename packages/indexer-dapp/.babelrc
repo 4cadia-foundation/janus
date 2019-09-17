@@ -1,0 +1,3 @@
+{
+  "extends": "../dev-utils/.babelrc.json"
+}

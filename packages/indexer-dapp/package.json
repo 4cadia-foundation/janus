@@ -1,0 +1,21 @@
+{
+  "name": "@4cadia/janus-indexer-dapp",
+  "description": "Janus Platform web client",
+  "version": "1.0.0",
+  "author": "Henrique Barcelos <henrique@4cadia.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.js --hot",
+    "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js --progress --hide-modules"
+  },
+  "dependencies": {
+    "vue": "^2.5.11"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "devDependencies": {}
+}

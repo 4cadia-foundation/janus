@@ -1,0 +1,8 @@
+{
+  "name": "@4cadia/janus-spider",
+  "version": "0.1.0",
+  "description": "Website metadata extractor for the Janus Platform",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "dependencies": {}
+}
