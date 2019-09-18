@@ -80,7 +80,7 @@ export default {
       return value === '' || value == null
     },
     isAlphaNumeric: function (value) {
-      var re = /^[a-zA-Z0-9]+$/
+      var re = /^(\w|\s|[.,-])+$/
       return value ? re.test(value) : true
     },
     isMaxLength: function (value) {
@@ -100,7 +100,7 @@ export default {
     },
     textareaRows: {
       type: String,
-      default: '50'
+      default: '10'
     },
     inputName: {
       type: String,

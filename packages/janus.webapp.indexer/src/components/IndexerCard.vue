@@ -23,12 +23,12 @@
       </template>
 
       <template v-slot:footer>
-        <form :class="`card-form ${showContent ? 'open' : ''}`">
+        <form :class="`card-form ${showContent ? 'open' : ''}`" v-on:submit.prevent>
           <div class="form_field">
             <v-input
               placeholderTxt="eg.: QmYbs8fHzYaXufL5gMyWB1XgnvbLRSqv9bb58LJHX3ziVv"
               inputType="text"
-              inputName="Title"
+              inputName="title"
               inputLabel="Title: "
               class="label--dark"
               v-model="data.title"
@@ -41,8 +41,8 @@
             <v-input
               placeholderTxt="eg.: QmYbs8fHzYaXufL5gMyWB1XgnvbLRSqv9bb58LJHX3ziVv"
               inputType="text"
-              inputName="Description: "
-              inputLabel="Title: "
+              inputName="description"
+              inputLabel="Description: "
               class="label--dark"
               v-model="data.description"
               :required="true"
@@ -54,7 +54,7 @@
             <v-input
               placeholderTxt="eg.: QmYbs8fHzYaXufL5gMyWB1XgnvbLRSqv9bb58LJHX3ziVv"
               inputType="textarea"
-              inputName="Tags"
+              inputName="tags"
               inputLabel="Tags: "
               class="label--dark"
               v-model="data.tags"
@@ -95,9 +95,11 @@ export default {
   },
   methods: {
     handleAction (action) {
-      this.$emit('handleAction', action)
+      // this.$emit('handleAction', action, this.data)
       if (action === 'edit') {
         this.showContent = !this.showContent
+      } else {
+        this.$emit('handleActionRemove')
       }
     }
   },
@@ -145,7 +147,7 @@ export default {
   overflow: hidden;
 }
 .card-form.open {
-  max-height: 800px;
+  max-height: 1024px;
   transition: max-height 0.25s ease-in;
 }
 </style>

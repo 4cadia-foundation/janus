@@ -44,6 +44,11 @@ export default new Router({
       name: 'Settings',
       component: Settings
     },
+    {
+      path: '/account',
+      name: 'Account',
+      component: Account
+    },
     { path: '/documentation', redirect: '/' },
     { path: '*', redirect: '/404' }
   ]

@@ -85,6 +85,7 @@ export default {
   .list .item {
     width: auto !important;
     margin-bottom: 10px;
+    max-width: none;
   }
 }
 </style>

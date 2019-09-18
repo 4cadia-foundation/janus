@@ -80,12 +80,15 @@ export default {
 
 /* Media Mobile */
 @media (max-width: 768px) {
+  .header_menu {
+    flex-direction: row-reverse;
+    align-content: center;
+  }
   .header_menu .menu-hamburguer {
     display: block;
+    height: auto;
     z-index: 3;
-    position: absolute;
-    top: 14px;
-    right: 20px;
+    margin-left: 10px;
     background-image: url('../assets/images/hamburguer.png');
   }
   .header_menu.open .menu {
@@ -93,6 +96,10 @@ export default {
   }
   .header_menu.open .menu-hamburguer {
     background-image: url('../assets/images/close.png');
+  }
+  .header {
+    display: flex;
+    align-items: center;
   }
 }
 </style>
