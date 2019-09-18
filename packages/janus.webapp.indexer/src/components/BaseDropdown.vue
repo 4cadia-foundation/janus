@@ -67,6 +67,7 @@ export default {
   text-align: center;
   min-width: 140px;
   max-width: max-content;
+  width: 100%;
 }
 .dropdown-menu.left {
   left: 0;

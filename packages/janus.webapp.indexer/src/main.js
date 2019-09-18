@@ -11,6 +11,7 @@ import VueNotification from '@kugatsu/vuenotification'
 import VueApexCharts from 'vue-apexcharts'
 import Loading from 'vue-loading-overlay'
 import 'vue-loading-overlay/dist/vue-loading.css'
+import '../static/css/vue-loading.custom.css'
 
 Vue.use(VueAxios, axios)
 Vue.use(VueApexCharts)

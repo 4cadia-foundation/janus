@@ -11,17 +11,37 @@
           />
         </div>
         <div class="form_card">
-          <v-indexer-card :data="cardData" v-if="files.length > 0" :title="fileName" v-on:handleAction="handleCardAction"/>
+          <v-indexer-card
+            :data="cardData"
+            v-if="files.length > 0"
+            :title="fileName"
+            v-on:handleActionRemove="reset"
+          />
         </div>
         <div class="form_message" v-if="this.ipfsLinkHash.length > 0">
-          <h4 class="highlight">Access your content in:
-            <a target="_blank" :href="`http://ipfs.caralabs.me/ipfs/${this.ipfsLinkHash[0]}`"> {{this.ipfsLinkHash[0]}}</a>
+          <h4 class="highlight">
+            Access your content in:
+            <a
+              target="_blank"
+              :href="`http://ipfs.caralabs.me/ipfs/${this.ipfsLinkHash[0]}`"
+            >
+              {{ this.ipfsLinkHash[0] }}</a
+            >
           </h4>
         </div>
         <div class="form_control">
-          <p class="highlight" v-if="this.account === undefined">{{ this.getExceptionByType('NoMetamask') }}</p>
-          <button type="submit" :class="`btn btn--success`" @click="save()"
-            title="Index Content">Index Content</button>
+          <p class="highlight" v-if="this.account === undefined">
+            {{ this.getExceptionByType("NoMetamask") }}
+          </p>
+          <button
+            type="submit"
+            :class="`btn btn--success`"
+            v-if="files.length > 0"
+            @click="save()"
+            title="Index Content"
+          >
+            Index Content
+          </button>
         </div>
       </div>
     </form>
@@ -32,10 +52,10 @@
 import Input from '@/components/Input'
 import FileInput from '@/components/FileInput'
 import IndexerCard from '@/components/IndexerCard'
-import Indexer from 'janusndxr-demo'
-import IndexRequest from 'janusndxr-demo/dist/src/Domain/Entity/IndexRequest'
+import { Indexer, Spider } from '@4cadia/janus-core-indexer'
 import { mapState, mapGetters } from 'vuex'
-import config from '../../static/configs/configDefault.json'
+import IndexRequest from '@4cadia/janus-core-indexer/dist/src/Domain/Entity/IndexRequest'
+import ResumeIndexRequest from '@4cadia/janus-core-indexer/dist/src/Domain/Entity/ResumeIndexRequest'
 
 const STATUS_INITIAL = 0
 const STATUS_SAVING = 1
@@ -52,15 +72,18 @@ export default {
   data () {
     return {
       attemptSubmit: false,
+      resume: {
+        type: ResumeIndexRequest
+      },
       files: FileList,
       fileName: '',
       ipfsLinkHash: [],
       loader: {},
       isUploading: false,
       cardData: {
-        'title': '',
-        'description': '',
-        'tags': ''
+        title: '',
+        description: '',
+        tags: ''
       }
     }
   },
@@ -81,24 +104,30 @@ export default {
       account: state => state.web3.address,
       instance: state => state.web3.instance()
     }),
-    ...mapGetters('validation', [
-      'getExceptionByType'
-    ])
+    ...mapGetters('validation', ['getExceptionByType'])
   },
   methods: {
+    getOptions () {
+      let options = {
+        contractAddress: localStorage.getItem('contractAddress'),
+        contractAbi: localStorage.getItem('contractAbi'),
+        ipfsHost: localStorage.getItem('ipfsHost')
+      }
+
+      options = Object.entries(options).reduce(
+        (acc, [key, value]) =>
+          value ? Object.assign(acc, { [key]: value }) : acc,
+        {}
+      )
+
+      if (options.contractAbi) {
+        options.contractAbi = JSON.parse(options.contractAbi)
+      }
+
+      return options
+    },
     handleSubmit (e) {
       this.attemptSubmit = true
-    },
-    handleCardAction (action) {
-      if (action === 'remove') {
-        this.reset()
-      } else {
-        this.cardData = {
-          'title': 'This is a Title',
-          'description': 'This is a Description',
-          'tags': 'Tag1, Tag2, Tag3'
-        }
-      }
     },
     reset () {
       // reset form to initial state
@@ -109,10 +138,11 @@ export default {
       this.$refs.inputFile.reset()
     },
     save () {
-      this.ipfsLinkHash = []
       this.loader = this.$loading.show({
         container: this.fullPage ? null : this.$refs.formContainer
       })
+
+      this.ipfsLinkHash = []
 
       if (this.account === undefined) {
         this.$notification.error(this.getExceptionByType('NoMetamask'))
@@ -128,55 +158,92 @@ export default {
       }
       // upload data to the server
       this.currentStatus = STATUS_SAVING
+      this.loader.hide()
       this.upload()
     },
-    upload () {
+    extractResume () {
+      this.loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.formContainer
+      })
+
       let indexRequest = new IndexRequest()
-      indexRequest.Address = this.account
+
       if (this.files.length > 0) {
         indexRequest.Content = this.files[0]
         indexRequest.ContentType = 'zip'
-      }
-
-      let indexer
-
-      if (localStorage.getItem('IpfsRpcHost') === null && localStorage.getItem('indexerSmAddress') === null && localStorage.getItem('EthereumRpcHost') === null && localStorage.getItem('indexerSmAbi') === null) {
-        indexer = new Indexer(this.instance.currentProvider, config.IpfsRpcHost, config.indexerSmAddress, config.EthereumRpcHost, config.indexerSmAbi)
       } else {
-        indexer = new Indexer(this.instance.currentProvider, localStorage.IpfsRpcHost, localStorage.indexerSmAddress, localStorage.EthereumRpcHost, localStorage.indexerSmAbi)
+        this.currentStatus = STATUS_FAILED
+        this.$notification.error(this.getExceptionByType('EmptyFile'))
+        this.loader.hide()
+        return
       }
 
-      indexer.AddContent(indexRequest, indexResult => {
+      let options = this.getOptions()
+      let spider = new Spider(null, options)
+      spider
+        .ExtractMetadataContent(indexRequest)
+        .then(resumeIndexRequest => {
+          this.cardData = resumeIndexRequest.metadata
+          this.resume = resumeIndexRequest
+          this.loader.hide()
+        })
+        .finally(() => this.loader.hide())
+    },
+    upload () {
+      this.loader = this.$loading.show({
+        container: this.fullPage ? null : this.$refs.formContainer
+      })
+
+      let options = this.getOptions()
+      let spider = new Spider(null, options)
+
+      let indexRequest = {}
+
+      if (this.files.length > 0) {
+        indexRequest.Content = this.files[0]
+        indexRequest.ContentType = 'zip'
+      } else {
+        this.currentStatus = STATUS_FAILED
+        this.$notification.error(this.getExceptionByType('EmptyFile'))
+        this.loader.hide()
+        return
+      }
+
+      spider.AddContent(indexRequest, indexResult => {
         this.loader.hide()
         if (indexResult.Success) {
-          let warnings = []
-          for (let index = 0; index < indexResult.IndexedFiles.length; index++) {
-            const file = indexResult.IndexedFiles[index]
-            this.ipfsLinkHash.push(file.IpfsHash)
-            if (file.Errors.length > 0) {
-              for (let index = 0; index < file.Errors.length; index++) {
-                const error = file.Errors[index]
-                warnings.push(error)
+          let indexedFile =
+            indexResult.IndexedFiles.find(
+              file => file.FileName === 'index.html'
+            ) || indexResult.IndexedFile[0]
+
+          this.ipfsLinkHash = [indexedFile.IpfsHash]
+
+          let htmlData = {}
+          htmlData.Tags = this.resume.metadata.tags
+          htmlData.Title = this.resume.metadata.title
+          htmlData.Description = this.resume.metadata.description
+          indexedFile.HtmlData = htmlData
+
+          let indexer = new Indexer(this.instance.currentProvider, options)
+          indexer
+            .AddNewWebsite(indexedFile)
+            .then(indexedFileResult => {
+              if (indexedFileResult.Success) {
+                this.$notification.success(
+                  'Success! Thank you for contributing with your content!'
+                )
+              } else {
+                this.$notification.warning('Your content was uploaded successfuly, but could not be indexed!')
               }
-            } else {
-              this.$notification.success(`Success! Thank you for contributing with your content!`)
-              this.$notification.success(`Access your content in: http://ipfs.4cadia.com/ipfs/${this.ipfsLinkHash[0]}`, {infiniteTimer: true})
-            }
-          }
-          if (warnings.length > 0) {
-            const wrngs = warnings.reduce(function (acc, curr) {
-              typeof acc[curr] === 'undefined' ? acc[curr] = 1 : acc[curr] += 1
-              return acc
-            }, {})
-            for (var warning in wrngs) {
-              this.$notification.warning(`${wrngs[warning]} warning(s) were encountered while indexing your file. Fields: ${warning}`)
-            }
-          }
+            })
+            .finally(() => this.loader.hide())
         } else {
           for (let index = 0; index < indexResult.Errors.length; index++) {
             const error = indexResult.Errors[index]
             this.$notification.error(error)
           }
+          this.loader.hide()
         }
       })
     }
@@ -186,7 +253,10 @@ export default {
   },
   watch: {
     files: function (newVal, oldVal) {
-      this.fileName = newVal[0] ? newVal[0].name : ''
+      if (newVal[0]) {
+        this.fileName = newVal[0].name
+        this.extractResume()
+      }
     }
   }
 }
@@ -204,7 +274,7 @@ export default {
   background: white;
   border: 3px dashed var(--color-blue);
   border-radius: 20px;
-  transition: .2s all linear;
+  transition: 0.2s all linear;
   margin-bottom: 30px;
 }
 .form_field:hover {

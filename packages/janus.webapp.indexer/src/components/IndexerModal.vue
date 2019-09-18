@@ -9,42 +9,10 @@
         <div class="modal-subtitle">
           <p>To finish the transaction, please check the informations above to ensure all itens are completed.</p>
         </div>
-        <div class="modal-content">
-          <div class="modal-row">
-            <h4>Title: </h4>
-            <v-input
-              placeholderTxt="eg.: QmYbs8fHzYaXufL5gMyWB1XgnvbLRSqv9bb58LJHX3ziVv"
-              inputType="text"
-              inputName="Title"
-              v-model="titleInput"
-              :required="true"
-              :alphaNumeric="true"
-              ref="titleInput"
-            />
-          </div>
-          <div class="modal-row">
-            <h4>Description: </h4>
-            <v-input
-              placeholderTxt="eg.: QmYbs8fHzYaXufL5gMyWB1XgnvbLRSqv9bb58LJHX3ziVv"
-              inputType="text"
-              inputName="Description"
-              v-model="descriptionInput"
-              :required="true"
-              :alphaNumeric="true"
-              ref="descriptionInput"
-            />
-          </div>
-          <div class="modal-row">
-            <h4>Tags: </h4>
-            <v-input
-              placeholderTxt="eg.: QmYbs8fHzYaXufL5gMyWB1XgnvbLRSqv9bb58LJHX3ziVv"
-              inputType="textarea"
-              inputName="Tags"
-              v-model="tagsInput"
-              :required="true"
-              :alphaNumeric="true"
-              ref="tagsInput"
-            />
+        <div class="modal-content" v-for="(propValue, propName) in modalData" :key="propName">
+          <div v-if="propValue" class="modal-row">
+            <h4>{{ propName }}: </h4>
+            <p>{{ propValue }}</p>
           </div>
         </div>
       </template>
@@ -65,9 +33,6 @@ export default {
   extends: BaseModal,
   data () {
     return {
-      titleInput: '',
-      descriptionInput: '',
-      tagsInput: ''
     }
   },
   components: {
@@ -75,34 +40,22 @@ export default {
     'v-input': Input
   },
   props: {
+    modalData: {
+      type: Object
+    }
   },
   methods: {
-    openModal: function () {
+    openIndexerModal: function () {
       console.log('Open')
       this.$refs.modal.openModal()
     },
+    closeIndexerModal: function () {
+      console.log('Close')
+      this.$refs.modal.closeModal()
+    },
     handleConfirm: function () {
       console.log('Confirm')
-      this.indexContent(this.titleInput, this.descriptionInput, this.tagsInput)
-    },
-    indexContent (titleInput, descriptionInput, tagsInput) {
-      console.log('titleInput', titleInput)
-      console.log('descriptionInput', descriptionInput)
-      console.log('tagsInput', tagsInput)
-
-      this.loader = this.$loading.show({
-        container: this.fullPage ? null : this.$refs.formContainer
-      })
-
-      this.$store.getters.jnsInstance().BuyDomain(titleInput, descriptionInput, tagsInput)
-        .then(newDomain => {
-          if (newDomain.Success && newDomain.Result[0].event === 'DomainRegistered') {
-            console.log('sucesso')
-          }
-          // this.$refs.modalDomain.openModalDomain()
-        })
-        .catch(err => this.$notification.error(err))
-        .finally(() => this.loader.hide())
+      this.$emit('handleConfirm', this.modalData)
     }
   },
   mounted: function () {
@@ -111,21 +64,22 @@ export default {
 </script>
 
 <style>
-.action-modal .modal-container {
-  width: 50vw;
-  color: black;
-}
-.action-modal .modal-content .modal-row {
-  text-align: left;
-}
-.action-modal .modal-content .modal-row h4 {
-  margin: auto;
-}
-.action-modal .modal-row .row-wrapper {
-  margin: 10px 0;
-}
-.action-modal .modal-row .row-content {
-  display: inline-block;
-  vertical-align: middle;
-}
+  .action-modal .modal-container {
+    width: 50vw;
+    color: black;
+  }
+  .action-modal .modal-content .modal-row {
+    text-align: left;
+    margin: 20px auto auto 20px;
+  }
+  .action-modal .modal-content .modal-row h4 {
+    margin: auto;
+  }
+  .action-modal .modal-row .row-wrapper {
+    margin: 10px 0;
+  }
+  .action-modal .modal-row .row-content {
+    display: inline-block;
+    vertical-align: middle;
+  }
 </style>
