@@ -4,6 +4,7 @@
     "module": "commonjs",
     "lib": [],
     "allowJs": false,
+    "checkJs": false,
     "inlineSourceMap": true,
     "strict": true,
     "noUnusedLocals": true,

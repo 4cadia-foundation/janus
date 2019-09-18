@@ -1,5 +1,7 @@
-export default (x: any): any => {
-  console.log('hey');
+import 'foo';
+
+export default (foo: any, x: string): void => {
+  console.log('hey', x);
 };
 
 const foo: Buffer = Buffer.from('foo');
