@@ -1,5 +1,5 @@
 {
-  "name": "@4cadia/janus-indexer-cli",
+  "name": "@4cadia/example-typescript",
   "version": "0.1.0",
   "description": "Janus Platform CLI client",
   "main": "dist/index.js",

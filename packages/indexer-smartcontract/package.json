@@ -1,0 +1,34 @@
+{
+  "name": "@4cadia/janus-indexer-smartcontract",
+  "version": "1.1.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "precommit": "lint-staged",
+    "pretest": "ganache-cli -dq -p 9545 &",
+    "test": "truffle test",
+    "posttest": "kill `lsof -ti :9545`"
+  },
+  "author": "4cadia-foundation",
+  "license": "ISC",
+  "lint-staged": {
+    "*.{js,jsx}": ["eslint --fix", "git add"],
+    "*.json": ["prettier --write", "git add"],
+    "*.sol": ["solium --fix --file", "git add"]
+  },
+  "dependencies": {
+    "assertion-error": "^1.1.0"
+  },
+  "devDependencies": {
+    "cuid": "^2.1.6",
+    "ganache-cli": "^6.7.0",
+    "solc": "^0.5.11",
+    "solium": "^1.2.4",
+    "solium-plugin-security": "^0.1.1",
+    "truffle": "^5.0.34",
+    "truffle-assertions": "^0.9.1"
+  }
+}
