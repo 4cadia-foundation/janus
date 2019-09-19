@@ -4,7 +4,5 @@
   "description": "Janus Platform CLI client",
   "main": "dist/index.js",
   "license": "MIT",
-  "devDependencies": {
-    "@4cadia/janus-dev-utils": "^0.1.0"
-  }
+  "devDependencies": {}
 }

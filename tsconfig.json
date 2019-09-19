@@ -9,9 +9,7 @@
     "strict": true,
     "noUnusedLocals": true,
     "moduleResolution": "node",
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true

@@ -1,9 +1,11 @@
 {
   "env": {
-    "es6": true
+    "es6": true,
+    "node": true,
+    "browser": true
   },
   "extends": [
-    "prettier-standard",
+    "prettier-standard/prettier-file",
     "eslint:recommended",
     "plugin:import/errors",
     "plugin:import/warnings"
@@ -16,23 +18,10 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "plugins": [
-    "import"
-  ],
-  "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": true,
-        "trailingComma": "es5"
-      }
-    ]
-  },
+  "plugins": ["import"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "extends": [
         "prettier/@typescript-eslint",
         "plugin:@typescript-eslint/recommended",
@@ -40,25 +29,20 @@
         "plugin:import/typescript"
       ],
       "parser": "@typescript-eslint/parser",
-      "plugins": [
-        "@typescript-eslint"
-      ]
+      "plugins": ["@typescript-eslint"]
     },
     {
-      "files": [
-        "*.vue"
-      ],
-      "extends": [
-        "plugin:vue/recommended",
-        "prettier/vue"
-      ],
+      "files": ["*.vue"],
+      "extends": ["plugin:vue/recommended", "prettier/vue"],
       "parser": "vue-eslint-parser",
       "parserOptions": {
         "parser": "babel-eslint"
       },
-      "plugins": [
-        "vue"
-      ]
+      "plugins": ["vue"]
+    },
+    {
+      "files": ["*.json"],
+      "plugins": ["json"]
     }
   ]
 }
