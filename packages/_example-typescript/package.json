@@ -4,5 +4,6 @@
   "description": "Janus Platform CLI client",
   "main": "dist/index.js",
   "license": "MIT",
+  "private": true,
   "devDependencies": {}
 }

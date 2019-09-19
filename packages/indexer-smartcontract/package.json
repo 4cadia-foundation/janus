@@ -21,6 +21,7 @@
     "*.sol": ["solium --fix --file", "git add"]
   },
   "dependencies": {
+    "@babel/cli": "^7.6.0",
     "assertion-error": "^1.1.0"
   },
   "devDependencies": {
