@@ -1,5 +1,5 @@
 {
-  "name": "janus-platform",
+  "name": "@4cadia/janus",
   "version": "0.1.0",
   "private": true,
   "workspaces": [

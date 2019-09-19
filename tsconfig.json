@@ -1,15 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es6",
     "module": "commonjs",
-    "lib": [],
     "allowJs": false,
     "checkJs": false,
-    "inlineSourceMap": true,
-    "strict": true,
-    "noUnusedLocals": true,
-    "moduleResolution": "node",
-    "types": ["node"],
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
