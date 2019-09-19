@@ -8,12 +8,12 @@ module.exports = {
     development: {
       host: '127.0.0.1',
       port: 9545,
-      network_id: '*',
+      network_id: '5577',
     },
-    ganache: {
-      host: '127.0.0.1',
-      port: 7545,
-      network_id: '*',
+    rinkeby: {
+      host: 'rinkeby.caralabs.me',
+      port: 18575,
+      network_id: '4',
     },
   },
 };

@@ -1,0 +1,507 @@
+{
+  "Indexer": {
+    "abi": [
+      {
+        "inputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "string[]",
+            "name": "tags",
+            "type": "string[]"
+          }
+        ],
+        "name": "addWebSiteEvent",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "string",
+            "name": "storageHash",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string[]",
+            "name": "tags",
+            "type": "string[]"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "tile",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          }
+        ],
+        "name": "WebsiteAppend",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "string",
+            "name": "storageHash",
+            "type": "string"
+          }
+        ],
+        "name": "WebsiteBurn",
+        "type": "event"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "kill",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "storageHash",
+            "type": "string"
+          }
+        ],
+        "name": "websiteExists",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "storageHash",
+            "type": "string"
+          },
+          {
+            "internalType": "string[]",
+            "name": "tags",
+            "type": "string[]"
+          },
+          {
+            "internalType": "string",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          }
+        ],
+        "name": "addWebSite",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "storageHash",
+            "type": "string"
+          },
+          {
+            "internalType": "string[]",
+            "name": "tags",
+            "type": "string[]"
+          },
+          {
+            "internalType": "string",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          }
+        ],
+        "name": "appendWebsite",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "storageHash",
+            "type": "string"
+          }
+        ],
+        "name": "burnWebsite",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "internalType": "string[]",
+            "name": "tags",
+            "type": "string[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pageNumber",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "pageSize",
+            "type": "uint256"
+          }
+        ],
+        "name": "getWebSite",
+        "outputs": [
+          {
+            "internalType": "string[]",
+            "name": "",
+            "type": "string[]"
+          },
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "storageHash",
+            "type": "string"
+          }
+        ],
+        "name": "getWebsiteByHash",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "storageHash",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "description",
+                "type": "string"
+              },
+              {
+                "internalType": "string[]",
+                "name": "tags",
+                "type": "string[]"
+              },
+              {
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+              },
+              {
+                "internalType": "bool",
+                "name": "visible",
+                "type": "bool"
+              }
+            ],
+            "internalType": "struct Indexer.Website",
+            "name": "",
+            "type": "tuple"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "getAllWebsitesByOwner",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "string",
+                "name": "storageHash",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "title",
+                "type": "string"
+              },
+              {
+                "internalType": "string",
+                "name": "description",
+                "type": "string"
+              },
+              {
+                "internalType": "string[]",
+                "name": "tags",
+                "type": "string[]"
+              },
+              {
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+              },
+              {
+                "internalType": "bool",
+                "name": "visible",
+                "type": "bool"
+              }
+            ],
+            "internalType": "struct Indexer.Website[]",
+            "name": "",
+            "type": "tuple[]"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      }
+    ],
+    "addresses": {
+      "5577": "0x59d3631c86BbE35EF041872d502F218A39FBa150"
+    }
+  },
+  "Migrations": {
+    "abi": [
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "last_completed_migration",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "owner",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "completed",
+            "type": "uint256"
+          }
+        ],
+        "name": "setCompleted",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "new_address",
+            "type": "address"
+          }
+        ],
+        "name": "upgrade",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    ],
+    "addresses": {
+      "5577": "0xD833215cBcc3f914bD1C9ece3EE7BF8B14f841bb"
+    }
+  },
+  "StringUtils": {
+    "abi": [
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "_a",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "_b",
+            "type": "string"
+          }
+        ],
+        "name": "compare",
+        "outputs": [
+          {
+            "internalType": "int256",
+            "name": "",
+            "type": "int256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "_a",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "_b",
+            "type": "string"
+          }
+        ],
+        "name": "equal",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "_haystack",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "_needle",
+            "type": "string"
+          }
+        ],
+        "name": "indexOf",
+        "outputs": [
+          {
+            "internalType": "int256",
+            "name": "",
+            "type": "int256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "pure",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "_a",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "_b",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "_c",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "_sep",
+            "type": "string"
+          }
+        ],
+        "name": "concat3",
+        "outputs": [
+          {
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "pure",
+        "type": "function"
+      }
+    ],
+    "addresses": {
+      "5577": "0xe982E462b094850F12AF94d21D470e21bE9D0E9C"
+    }
+  }
+}
