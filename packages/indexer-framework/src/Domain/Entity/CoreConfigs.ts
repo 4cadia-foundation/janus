@@ -1,6 +1,6 @@
 import { singleton } from 'tsyringe';
 import { Web3Provider } from 'ethers/providers';
-import defaultConfigs from '../../../defaultconfig.json';
+import defaultConfigs from '../../defaultconfig.json';
 
 @singleton()
 export default class CoreConfigs {
@@ -19,10 +19,10 @@ export default class CoreConfigs {
     return cc;
   }
 
-  public contractAddress: string;
-  public contractAbi: object[];
-  public ipfsProtocol: string;
-  public ipfsHost: string;
-  public ipfsPort: string;
+  public contractAddress: string = defaultConfigs.contractAddress;
+  public contractAbi: object[] = defaultConfigs.contractAbi;
+  public ipfsProtocol: string = defaultConfigs.IpfsProtocol;
+  public ipfsHost: string = defaultConfigs.IpfsRpcHost;
+  public ipfsPort: string = defaultConfigs.IpfsRpcPort;
   public web3Provider?: Web3Provider;
 }

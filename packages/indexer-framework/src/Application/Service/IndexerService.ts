@@ -17,7 +17,7 @@ export default class IndexerService implements IIndexerService {
 
   constructor(@inject('CoreConfigs') private _coreConfigs: CoreConfigs) {
     this._web3Provider = new ethers.providers.Web3Provider(
-      _coreConfigs.web3Provider
+      _coreConfigs.web3Provider!
     );
     this._smartContract = Helper.ContractInstance(
       this._web3Provider,
@@ -49,7 +49,7 @@ export default class IndexerService implements IIndexerService {
       );
 
       const receipt = await tx.wait();
-      return (receipt as ContractReceipt).events;
+      return (receipt as ContractReceipt).events!;
     } catch (error) {
       throw new Error(error);
     }
@@ -61,8 +61,8 @@ export default class IndexerService implements IIndexerService {
   public async ListWebsitesByOwner(): Promise<Website[]> {
     const listAllWebsitesByOwner = await this._smartContract.getAllWebsitesByOwner();
     const listWebSites = listAllWebsitesByOwner
-      .filter((website) => website.visible)
-      .map((website) => {
+      .filter(website => website.visible)
+      .map(website => {
         return new Website(
           website.storageHash,
           website.title,
@@ -82,7 +82,7 @@ export default class IndexerService implements IIndexerService {
         target.description
       );
       const receipt = await tx.wait();
-      return (receipt as ContractReceipt).events;
+      return (receipt as ContractReceipt).events!;
     }
 
     throw new Error('Target can`t be nullable');
@@ -92,6 +92,6 @@ export default class IndexerService implements IIndexerService {
     const tx = await this._smartContract.burnWebsite(hash);
     const receipt = await tx.wait();
 
-    return (receipt as ContractReceipt).events;
+    return (receipt as ContractReceipt).events!;
   }
 }

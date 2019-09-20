@@ -3,7 +3,7 @@ import { container, InjectionToken, DependencyContainer } from 'tsyringe';
 import IpfsService from '../../Application/Service/IpfsService';
 import IndexerService from '../../Application/Service/IndexerService';
 import SpiderService from '../../Application/Service/SpiderService';
-import jsonConfig from '../../../defaultconfig.json';
+import jsonConfig from '../../defaultconfig.json';
 import { Web3Provider } from 'ethers/providers';
 import Options from '../../Domain/Pojo/Options';
 import CoreConfigs from '../../Domain/Entity/CoreConfigs';

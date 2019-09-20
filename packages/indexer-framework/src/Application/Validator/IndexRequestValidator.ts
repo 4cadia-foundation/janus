@@ -17,23 +17,23 @@ export default class IndexRequestValidator extends AbstractValidator<
   ) {
     super();
     // let web3 = new Web3(_spiderConfig.RpcHost);
-    this.validateIf((i) => i.Content)
+    this.validateIf(i => i.Content)
       .isNotEmpty()
       .isNotNull()
       .withFailureMessage("Content can't be empty");
 
-    this.validateIf((i) => fs.existsSync(i.Content))
+    this.validateIf(i => fs.existsSync(i.Content))
       .isEqualTo(true)
       .when(
-        (i) =>
+        i =>
           i.ContentType === ContentType.Folder ||
           i.ContentType === ContentType.File
       )
       .withFailureMessage('Invalid Path');
 
-    this.validateIf((i) => i.ContentType)
+    this.validateIf(i => i.ContentType)
       .fulfills(
-        (type) =>
+        type =>
           type === ContentType.Hash ||
           type === ContentType.File ||
           type === ContentType.Folder ||
@@ -48,17 +48,17 @@ export default class IndexRequestValidator extends AbstractValidator<
 
   public ValidateRequest(indexRequest: IndexRequest, callback: any): any {
     if (indexRequest.ContentType === ContentType.Hash) {
-      this._ipfsService.HashExists(indexRequest.Content, (exists) => {
+      this._ipfsService.HashExists(indexRequest.Content, exists => {
         indexRequest.IpfsHashExists = exists;
-        this.validateIf((i) => i.IpfsHashExists)
+        this.validateIf(i => i.IpfsHashExists)
           .isEqualTo(true)
           .withFailureMessage('Invalid Ipfs hash');
         return callback(this.validate(indexRequest));
       });
     } else if (indexRequest.ContentType === ContentType.Zip) {
-      this.ValidateZipFile(indexRequest.Content, (validZip) => {
+      this.ValidateZipFile(indexRequest.Content, validZip => {
         indexRequest.ValidZip = validZip;
-        this.validateIf((i) => i.ValidZip)
+        this.validateIf(i => i.ValidZip)
           .isDefined()
           .withFailureMessage('Invalid Zip file');
         return callback(this.validate(indexRequest));
@@ -71,7 +71,7 @@ export default class IndexRequestValidator extends AbstractValidator<
   public ValidateZipFile(content: string, callback: any) {
     const zip = new JSZip();
     zip.loadAsync(content, { base64: true }).then(
-      (zipFiles) => {
+      zipFiles => {
         callback(zipFiles.folder());
       },
       () => {

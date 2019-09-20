@@ -18,16 +18,20 @@ export default class Web3IndexerValidator extends AbstractValidator<
     indexedFile: IndexedFile,
     ownerAddress: string,
     callback: any
-  ) {
-    this.WebSiteExists(indexedFile.IpfsHash, ownerAddress, (exists) => {
-      this.validateIf((s) => exists)
+  ): void {
+    this.WebSiteExists(indexedFile.IpfsHash, ownerAddress, exists => {
+      this.validateIf(s => exists)
         .isEqualTo(false)
         .withFailureMessage('Ipfs hash already indexed');
       callback(this.validate(this._coreConfigs));
     });
   }
 
-  public WebSiteExists(ipfsHash: string, ownerAddress: string, callback: any) {
+  public WebSiteExists(
+    ipfsHash: string,
+    ownerAddress: string,
+    callback: any
+  ): void {
     const indexerSm = new this._web3.eth.Contract(
       this._coreConfigs.contractAbi,
       this._coreConfigs.contractAddress
@@ -35,7 +39,7 @@ export default class Web3IndexerValidator extends AbstractValidator<
     indexerSm.methods
       .webSiteExists(ipfsHash)
       .call({ from: ownerAddress, gas: 3000000 })
-      .then((exists) => {
+      .then(exists => {
         callback(exists);
       });
   }

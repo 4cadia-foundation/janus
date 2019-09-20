@@ -1,13 +1,14 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "rootDir": ".",
+    "rootDir": "src",
     "outDir": "dist",
     "noImplicitAny": false,
     "resolveJsonModule": true
   },
   "include": [
     "src/**/*.ts",
+    "src/defaultconfig.json",
     "types/**/*.ts"
   ],
   "exclude": [
@@ -21,6 +22,6 @@
   ],
   "typeRoots": [
     "node_modules/@types",
-    "./types"
+    "./src/types"
   ]
 }

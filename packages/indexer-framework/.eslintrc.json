@@ -13,7 +13,7 @@
         "args": "after-used"
       }
     ],
-    "camelcase": "off",
+    "camelcase": "warn",
     "@typescript-eslint/camelcase": [
       "warn",
       {

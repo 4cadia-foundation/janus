@@ -27,7 +27,7 @@ import unfluff = require('unfluff');
 
 const fsAsync = fs.promises;
 
-export function GetMetaTag(ipfsHtml, metaName): string {
+export function GetMetaTag(ipfsHtml, metaName): string | null {
   const metas = ipfsHtml.getElementsByTagName('meta');
   for (const meta of metas) {
     if (meta.getAttribute('name') === metaName) {
@@ -65,49 +65,40 @@ export default class SpiderService implements ISpiderService {
   public async ExtractResumeIndexRequest(
     indexRequest: IndexRequest
   ): Promise<ResumeIndexRequest> {
-    let resume = new ResumeIndexRequest(indexRequest);
+    const resume = new ResumeIndexRequest(indexRequest);
 
     switch (indexRequest.ContentType) {
       case ContentType.File:
         try {
-          resume = await this.FillMetadataFromHtmlFile(
-            indexRequest.Content,
-            resume
-          );
+          return this.FillMetadataFromHtmlFile(indexRequest.Content, resume);
         } catch (error) {
           throw new Error(
             `Error on ExtractResumeIndexRequest - File: ${error}`
           );
         }
-        break;
 
       case ContentType.Folder:
         try {
-          resume = await this.FillMetadataFromFolder(
-            indexRequest.Content,
-            resume
-          );
+          return this.FillMetadataFromFolder(indexRequest.Content, resume);
         } catch (error) {
           throw new Error(
             `Error on ExtractResumeIndexRequest - Folder: ${error}`
           );
         }
-        break;
 
       case ContentType.Hash:
         try {
-          this._ipfsService.GetIpfsFile(
-            indexRequest.Content,
-            async (error, fileResult) => {
-              if (error) {
-                console.log(error);
-              } else {
-                resume = await this.FillMetadataFromHtmlFile(
-                  fileResult,
-                  resume
-                );
+          return new Promise<ResumeIndexRequest>((resolve, reject): void =>
+            this._ipfsService.GetIpfsFile(
+              indexRequest.Content,
+              async (error, fileResult) => {
+                if (error) {
+                  reject(error);
+                } else {
+                  resolve(this.FillMetadataFromHtmlFile(fileResult, resume));
+                }
               }
-            }
+            )
           );
         } catch (error) {
           throw new Error(
@@ -119,7 +110,7 @@ export default class SpiderService implements ISpiderService {
       case ContentType.Zip:
         try {
           const zipFile = await zipFilesAsPromised(indexRequest.Content);
-          resume = await this.FillMetadataFromZipFile(zipFile, resume);
+          return this.FillMetadataFromZipFile(zipFile, resume);
         } catch (error) {
           throw new Error(`Error on ExtractResumeIndexRequest - Zip: ${error}`);
         }
@@ -128,8 +119,6 @@ export default class SpiderService implements ISpiderService {
       default:
         throw new Error('ContentType is required');
     }
-
-    return resume;
   }
 
   public AddContent(indexRequest: IndexRequest, callback: any): void {
@@ -156,7 +145,7 @@ export default class SpiderService implements ISpiderService {
               return callback(err);
             }
 
-            let mainHash: string;
+            let mainHash = '';
 
             filesResult.forEach(f => {
               if (f.path === mainFolder) {
@@ -169,6 +158,7 @@ export default class SpiderService implements ISpiderService {
               file.Content = f.fileText;
               files.push(file);
             });
+
             const result = this.ChangeToMainHash(mainHash, files);
             callback(null, result);
           }
@@ -196,7 +186,7 @@ export default class SpiderService implements ISpiderService {
       case ContentType.Zip:
         const reader = new FileReader();
         reader.onload = (): void => {
-          indexRequest.Content = reader.result.slice(
+          indexRequest.Content = reader.result!.slice(
             (reader.result as string).indexOf('base64') + 7
           );
           const fileArray: IpfsFile[] = [];

@@ -17,7 +17,7 @@ export default class IpfsService implements IIpfsService {
     });
   }
 
-  public AddIpfsFile(filePath: string, callback: any) {
+  public AddIpfsFile(filePath: string, callback: any): void {
     const fileText = fs.readFileSync(filePath, 'utf8');
     const file = [
       {
@@ -30,7 +30,7 @@ export default class IpfsService implements IIpfsService {
     });
   }
 
-  public AddIpfsFileList(fileArray: IpfsFile[], callback: any) {
+  public AddIpfsFileList(fileArray: IpfsFile[], callback: any): void {
     return this._ipfsClient.add(
       fileArray,
       { recursive: true },
@@ -40,7 +40,7 @@ export default class IpfsService implements IIpfsService {
     );
   }
 
-  public AddIpfsFolder(folderPath: string, callback: any) {
+  public AddIpfsFolder(folderPath: string, callback: any): void {
     this._ipfsClient.addFromFs(
       folderPath,
       { recursive: true },
@@ -61,13 +61,13 @@ export default class IpfsService implements IIpfsService {
     );
   }
 
-  public GetIpfsFile(ipfsHash: string, callback: any) {
+  public GetIpfsFile(ipfsHash: string, callback: any): void {
     return this._ipfsClient.get(ipfsHash, (error, files) => {
       callback(error, files[0]);
     });
   }
 
-  public HashExists(ipfsHash: string, callback: any) {
+  public HashExists(ipfsHash: string, callback: any): void {
     return this._ipfsClient.get(ipfsHash, (error, files) => {
       if (error) {
         console.log(error);

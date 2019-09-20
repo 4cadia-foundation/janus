@@ -2,6 +2,7 @@
 **/node_modules/
 **/*.log
 **/coverage
+**/*.tsbuildinfo
 
 # Editor directories and files
 .vs/
