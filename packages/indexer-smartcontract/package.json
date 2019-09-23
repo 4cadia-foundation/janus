@@ -1,6 +1,6 @@
 {
   "name": "@4cadia/janus-indexer-smartcontract",
-  "version": "1.1.1",
+  "version": "0.2.0",
   "description": "",
   "main": "contracts.json",
   "files": ["contracts.json"],

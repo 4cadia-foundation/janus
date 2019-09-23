@@ -1,6 +1,6 @@
 {
-  "name": "@4cadia/janus-indexer-framework",
-  "version": "0.1.1",
+  "name": "@4cadia/janus-indexer-core",
+  "version": "0.2.0",
   "description": "Janus Indexer Proxy Package",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@4cadia/janus-indexer-smartcontract": "^1.1.1",
+    "@4cadia/janus-indexer-smartcontract": "~0.2.0",
     "@types/web3": "^1.0.18",
     "chalk": "^2.4.2",
     "clear": "^0.1.0",
