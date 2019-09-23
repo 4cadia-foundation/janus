@@ -1,7 +1,6 @@
 import Multiaddr = require('./index');
 
 const multiaddr = new Multiaddr('/ip4/127.0.0.1/tcp/80');
-multiaddr.buffer;
 
 const str = multiaddr.toString();
 

@@ -29,7 +29,11 @@
         "plugin:import/typescript"
       ],
       "parser": "@typescript-eslint/parser",
-      "plugins": ["@typescript-eslint"]
+      "plugins": ["@typescript-eslint"],
+      "rules": {
+        "no-useless-constructor": "off",
+        "@typescript-eslint/no-useless-constructor": "error"
+      }
     },
     {
       "files": ["*.vue"],

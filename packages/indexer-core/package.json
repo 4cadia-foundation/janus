@@ -5,12 +5,13 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc -p . && npm run assets",
+    "clean": "shx rm -rf dist/ *.tsbuildinfo",
+    "build": "tsc -p .",
+    "build-watch": "tsc -p . --watch",
     "test": "jest",
     "coverage": "jest --coverage",
-    "assets": "copyfiles test/templates/*.* dist/",
-    "lint": "eslint src --ext ts,js",
-    "lint:fix": "eslint --fix src --ext ts,js"
+    "lint": "eslint src/ test/ --ext ts,js",
+    "lint-fix": "eslint --fix src/ test/ --ext ts,js"
   },
   "author": "",
   "license": "ISC",
@@ -38,8 +39,8 @@
     "web3": "^1.0.0-beta.54"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.6.0",
     "@types/jest": "^24.0.18",
-    "@types/mocha": "^5.2.6",
     "@types/node": "^11.13.20",
     "@typescript-eslint/eslint-plugin": "^2.3.0",
     "@typescript-eslint/parser": "^2.3.0",
@@ -60,7 +61,7 @@
     "nodemon": "^1.19.0",
     "prettier": "^1.18.2",
     "prettier-config-standard": "^1.0.1",
-    "ts-jest": "^24.0.2",
+    "ts-jest": "^24.1.0",
     "ts-node": "^8.1.0",
     "tsutils": "^3.10.0",
     "typescript": "^3.5.3"

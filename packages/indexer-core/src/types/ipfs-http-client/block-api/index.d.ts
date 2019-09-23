@@ -30,7 +30,7 @@ export interface Block {
   put(
     block: PutContent,
     options: Partial<PutOptions>,
-    callback: NodeCallback<BlockData>,
+    callback: NodeCallback<BlockData>
   ): void;
 
   stat(cid: IpfsPath): Promise<StatResult>;

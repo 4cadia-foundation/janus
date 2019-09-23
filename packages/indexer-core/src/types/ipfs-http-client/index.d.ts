@@ -13,19 +13,23 @@ import * as _object from './object-api';
 import * as pin from './pin-api';
 
 export interface MinimalOptions {
-    protocol: string;
-    'api-path': string;
-    headers: {
-        [key: string]: string;
-    };
+  protocol: string;
+  'api-path': string;
+  headers: {
+    [key: string]: string;
+  };
 }
 
 export interface Options extends MinimalOptions {
-    host: string;
-    port: string;
+  host: string;
+  port: string;
 }
 
-declare function ipfs(hostOrMultiaddr: string, port: string, opts?: Partial<MinimalOptions>): IpfsClient;
+declare function ipfs(
+  hostOrMultiaddr: string,
+  port: string,
+  opts?: Partial<MinimalOptions>
+): IpfsClient;
 declare function ipfs(opts?: Partial<Options>): IpfsClient;
 
 export default ipfs;
@@ -33,24 +37,36 @@ export default ipfs;
 export { _ipfs as ipfs, refs, files, block, dag, _object as object, pin };
 
 export interface IpfsClient extends _ipfs.RegularFiles {
-    refsReadableStream(ipfsPath: IpfsPath, options?: Partial<refs.RefOptions>): ReadableStream;
+  refsReadableStream(
+    ipfsPath: IpfsPath,
+    options?: Partial<refs.RefOptions>
+  ): ReadableStream;
 
-    localReadableStream(ipfsPath: IpfsPath, options?: Partial<refs.RefOptions>): ReadableStream;
+  localReadableStream(
+    ipfsPath: IpfsPath,
+    options?: Partial<refs.RefOptions>
+  ): ReadableStream;
 
-    files: files.Mfs;
-    block: block.Block;
-    refs: refs.Refs;
-    dag: dag.Dag;
-    object: _object._Object;
-    pin: pin.Pin;
+  files: files.Mfs;
+  block: block.Block;
+  refs: refs.Refs;
+  dag: dag.Dag;
+  object: _object._Object;
+  pin: pin.Pin;
 
-    /**
-     * TODO: find/create proper typings for pull-stream package
-     */
-    addPullStream(options?: Partial<_ipfs.AddStreamOptions>): unknown;
-    catPullStream(ipfsPath: IpfsPath, options?: Partial<_ipfs.CatOptions>): unknown;
-    getPullStream(ipfsPath: IpfsPath): unknown;
-    lsPullStream(ipfsPath: IpfsPath): unknown;
-    refsPullStream(ipfsPath: IpfsPath, options?: Partial<refs.RefOptions>): unknown;
-    localPullStream(): unknown;
+  /**
+   * TODO: find/create proper typings for pull-stream package
+   */
+  addPullStream(options?: Partial<_ipfs.AddStreamOptions>): unknown;
+  catPullStream(
+    ipfsPath: IpfsPath,
+    options?: Partial<_ipfs.CatOptions>
+  ): unknown;
+  getPullStream(ipfsPath: IpfsPath): unknown;
+  lsPullStream(ipfsPath: IpfsPath): unknown;
+  refsPullStream(
+    ipfsPath: IpfsPath,
+    options?: Partial<refs.RefOptions>
+  ): unknown;
+  localPullStream(): unknown;
 }

@@ -2,7 +2,7 @@ import multibase = require('./index');
 
 const m = multibase('foo', Buffer.from('foo'));
 
-const code: multibase.Base | undefined = multibase.codes['foo'];
+const code: multibase.Base | undefined = multibase.codes.foo;
 
 const encoded: Buffer = multibase.encode('foo', Buffer.from('foo'));
 

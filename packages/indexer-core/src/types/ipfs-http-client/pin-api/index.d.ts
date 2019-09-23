@@ -22,7 +22,7 @@ export interface Pin {
   add(
     hash: MultiHash,
     options: Partial<PinAddOptions>,
-    callback: NodeCallback<void>,
+    callback: NodeCallback<void>
   ): void;
   add(hash: MultiHash, callback: NodeCallback<void>): void;
 
@@ -31,12 +31,12 @@ export interface Pin {
   ls(callback: NodeCallback<PinLsResult[]>): void;
   ls(
     hashOrOptions: MultiHash | Partial<PinLsOptions>,
-    callback: NodeCallback<PinLsResult[]>,
+    callback: NodeCallback<PinLsResult[]>
   ): void;
   ls(
     hash: MultiHash,
     options: Partial<PinLsOptions>,
-    callback: NodeCallback<PinLsResult[]>,
+    callback: NodeCallback<PinLsResult[]>
   ): void;
 
   rm(hash: MultiHash, options?: Partial<PinRmOptions>): Promise<void>;
@@ -44,6 +44,6 @@ export interface Pin {
   rm(
     hash: MultiHash,
     options: PinRmOptions,
-    callback: NodeCallback<void>,
+    callback: NodeCallback<void>
   ): void;
 }

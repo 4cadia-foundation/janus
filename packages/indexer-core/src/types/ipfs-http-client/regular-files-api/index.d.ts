@@ -69,20 +69,20 @@ export interface RegularFiles {
   add(
     data: AddContent,
     options: Partial<AddOptions>,
-    callback: NodeCallback<AddResult[]>,
+    callback: NodeCallback<AddResult[]>
   ): void;
 
   addReadableStream(options?: Partial<AddStreamOptions>): ReadableStream;
 
-  addFromFs(path: string, options?: Partial<AddFromFsOptions>): Promise<AddResult[]>;
   addFromFs(
     path: string,
-    callback: NodeCallback<AddResult[]>,
-  ): void;
+    options?: Partial<AddFromFsOptions>
+  ): Promise<AddResult[]>;
+  addFromFs(path: string, callback: NodeCallback<AddResult[]>): void;
   addFromFs(
     path: string,
     options: Partial<AddFromFsOptions>,
-    callback: NodeCallback<AddResult[]>,
+    callback: NodeCallback<AddResult[]>
   ): void;
 
   addFromURL(url: string): Promise<AddResult>;
@@ -91,7 +91,7 @@ export interface RegularFiles {
   addFromStream(stream: ReadableStream): Promise<AddResult>;
   addFromStream(
     stream: ReadableStream,
-    callback: NodeCallback<AddResult>,
+    callback: NodeCallback<AddResult>
   ): void;
 
   cat(ipfsPath: IpfsPath, options?: Partial<CatOptions>): Promise<Buffer>;
@@ -99,12 +99,12 @@ export interface RegularFiles {
   cat(
     ipfsPath: IpfsPath,
     options: Partial<CatOptions>,
-    callback: NodeCallback<Buffer>,
+    callback: NodeCallback<Buffer>
   ): void;
 
   catReadableStream(
     ipfsPath: IpfsPath,
-    options?: Partial<CatOptions>,
+    options?: Partial<CatOptions>
   ): ReadableStream;
 
   get(ipfsPath: IpfsPath): Promise<FileDescriptor>;
@@ -115,7 +115,7 @@ export interface RegularFiles {
   ls(ipfsPath: IpfsPath): Promise<DirectoryItemDescriptor[]>;
   ls(
     ipfsPath: IpfsPath,
-    callback: NodeCallback<DirectoryItemDescriptor[]>,
+    callback: NodeCallback<DirectoryItemDescriptor[]>
   ): void;
 
   lsReadableStream(ipfsPath: IpfsPath): ReadableStream;

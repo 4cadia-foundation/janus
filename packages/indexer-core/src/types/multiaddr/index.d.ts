@@ -3,8 +3,6 @@
 // Definitions by: Henrique Barcelos <https://github.com/hbarcelos> and Victor Santana <https://github.com/victorSantana09>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-export = Multiaddr;
-
 declare class Multiaddr {
   constructor(addr: string | Buffer | Multiaddr);
 
@@ -59,34 +57,34 @@ declare namespace Multiaddr {
 
     const V: number;
     const codes: {
-      "132": ProtocolInfo;
-      "273": ProtocolInfo;
-      "275": ProtocolInfo;
-      "276": ProtocolInfo;
-      "277": ProtocolInfo;
-      "290": ProtocolInfo;
-      "301": ProtocolInfo;
-      "302": ProtocolInfo;
-      "33": ProtocolInfo;
-      "4": ProtocolInfo;
-      "400": ProtocolInfo;
-      "41": ProtocolInfo;
-      "42": ProtocolInfo;
-      "421": ProtocolInfo;
-      "443": ProtocolInfo;
-      "444": ProtocolInfo;
-      "445": ProtocolInfo;
-      "446": ProtocolInfo;
-      "460": ProtocolInfo;
-      "477": ProtocolInfo;
-      "478": ProtocolInfo;
-      "479": ProtocolInfo;
-      "480": ProtocolInfo;
-      "53": ProtocolInfo;
-      "54": ProtocolInfo;
-      "55": ProtocolInfo;
-      "56": ProtocolInfo;
-      "6": ProtocolInfo;
+      '132': ProtocolInfo;
+      '273': ProtocolInfo;
+      '275': ProtocolInfo;
+      '276': ProtocolInfo;
+      '277': ProtocolInfo;
+      '290': ProtocolInfo;
+      '301': ProtocolInfo;
+      '302': ProtocolInfo;
+      '33': ProtocolInfo;
+      '4': ProtocolInfo;
+      '400': ProtocolInfo;
+      '41': ProtocolInfo;
+      '42': ProtocolInfo;
+      '421': ProtocolInfo;
+      '443': ProtocolInfo;
+      '444': ProtocolInfo;
+      '445': ProtocolInfo;
+      '446': ProtocolInfo;
+      '460': ProtocolInfo;
+      '477': ProtocolInfo;
+      '478': ProtocolInfo;
+      '479': ProtocolInfo;
+      '480': ProtocolInfo;
+      '53': ProtocolInfo;
+      '54': ProtocolInfo;
+      '55': ProtocolInfo;
+      '56': ProtocolInfo;
+      '6': ProtocolInfo;
     };
 
     const names: {
@@ -105,11 +103,11 @@ declare namespace Multiaddr {
       onion: ProtocolInfo;
       onion3: ProtocolInfo;
       p2p: ProtocolInfo;
-      "p2p-circuit": ProtocolInfo;
-      "p2p-stardust": ProtocolInfo;
-      "p2p-webrtc-direct": ProtocolInfo;
-      "p2p-webrtc-star": ProtocolInfo;
-      "p2p-websocket-star": ProtocolInfo;
+      'p2p-circuit': ProtocolInfo;
+      'p2p-stardust': ProtocolInfo;
+      'p2p-webrtc-direct': ProtocolInfo;
+      'p2p-webrtc-star': ProtocolInfo;
+      'p2p-websocket-star': ProtocolInfo;
       quic: ProtocolInfo;
       sctp: ProtocolInfo;
       tcp: ProtocolInfo;
@@ -124,3 +122,5 @@ declare namespace Multiaddr {
     const table: ProtocolInfo[];
   }
 }
+
+export = Multiaddr;

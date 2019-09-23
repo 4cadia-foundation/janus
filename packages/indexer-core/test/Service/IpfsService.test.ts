@@ -1,6 +1,6 @@
-import Bootstrapper from "../../src/Infra/IoC/Bootstrapper";
+import Bootstrapper from '../../src/Infra/IoC/Bootstrapper';
 import CoreConfigs from '../../src/Domain/Entity/CoreConfigs';
-import IpfsService from "../../src/Application/Service/IpfsService";
+import IpfsService from '../../src/Application/Service/IpfsService';
 
 // test.skip('skip', () => { })
 // jest.mock('../src/Application/Service/IpfsService');

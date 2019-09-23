@@ -72,28 +72,28 @@ export interface Mfs {
     from1: string,
     from2: string,
     to: string,
-    options?: Partial<CpOptions>,
+    options?: Partial<CpOptions>
   ): Promise<void>;
   cp(
     from1: string,
     from2: string,
     from3: string,
     to: string,
-    options?: Partial<CpOptions>,
+    options?: Partial<CpOptions>
   ): Promise<void>;
   cp(from1: string, to: string, callback: NodeCallback<void>): void;
   cp(
     from1: string,
     from2OrTo: string,
     toOrOptions: string | Partial<CpOptions>,
-    callback: NodeCallback<void>,
+    callback: NodeCallback<void>
   ): void;
   cp(
     from1: string,
     from2: string,
     from3OrTo: string,
     toOrOptions: string | Partial<CpOptions>,
-    callback: NodeCallback<void>,
+    callback: NodeCallback<void>
   ): void;
   cp(
     from1: string,
@@ -101,7 +101,7 @@ export interface Mfs {
     from3: string,
     to: string,
     options: Partial<CpOptions>,
-    callback: NodeCallback<void>,
+    callback: NodeCallback<void>
   ): void;
   cp(...args: any[]): Promise<void>;
   cp(...args: any[]): void;
@@ -111,7 +111,7 @@ export interface Mfs {
   mkdir(
     path: string,
     options: Partial<MkdirOptions>,
-    callback: NodeCallback<void>,
+    callback: NodeCallback<void>
   ): void;
 
   stat(path: string, options?: Partial<StatOptions>): Promise<StatResult>;
@@ -119,7 +119,7 @@ export interface Mfs {
   stat(
     path: string,
     options: Partial<StatOptions>,
-    callback: NodeCallback<StatResult>,
+    callback: NodeCallback<StatResult>
   ): void;
 
   rm(path1: string, options?: Partial<RmOptions>): Promise<void>;
@@ -128,26 +128,26 @@ export interface Mfs {
     path1: string,
     path2: string,
     path3: string,
-    options?: Partial<RmOptions>,
+    options?: Partial<RmOptions>
   ): Promise<void>;
   rm(path1: string, callback: NodeCallback<void>): void;
   rm(
     path1: string,
     path2OrOptions: string | Partial<RmOptions>,
-    callback: NodeCallback<void>,
+    callback: NodeCallback<void>
   ): void;
   rm(
     path1: string,
     path2: string,
     path3OrOptions: string | Partial<RmOptions>,
-    callback: NodeCallback<void>,
+    callback: NodeCallback<void>
   ): void;
   rm(
     path1: string,
     path2: string,
     path3: string,
     options: Partial<RmOptions>,
-    callback: NodeCallback<void>,
+    callback: NodeCallback<void>
   ): void;
   rm(...args: any[]): Promise<void>;
   rm(...args: any[]): void;
@@ -157,29 +157,29 @@ export interface Mfs {
   read(
     path: string,
     options: Partial<ReadOptions>,
-    callback: NodeCallback<Buffer>,
+    callback: NodeCallback<Buffer>
   ): void;
 
   readReadableStream(
     path: string,
-    options?: Partial<ReadOptions>,
+    options?: Partial<ReadOptions>
   ): ReadableStream;
 
   write(
     path: string,
     content: WriteContent,
-    options?: Partial<WriteOptions>,
+    options?: Partial<WriteOptions>
   ): Promise<void>;
   write(
     path: string,
     content: WriteContent,
-    callback: NodeCallback<void>,
+    callback: NodeCallback<void>
   ): void;
   write(
     path: string,
     content: WriteContent,
     options: Partial<WriteOptions>,
-    callback: NodeCallback<void>,
+    callback: NodeCallback<void>
   ): void;
 
   mv(from1: string, to: string, options?: Partial<MvOptions>): Promise<void>;
@@ -187,28 +187,28 @@ export interface Mfs {
     from1: string,
     from2: string,
     to: string,
-    options?: Partial<MvOptions>,
+    options?: Partial<MvOptions>
   ): Promise<void>;
   mv(
     from1: string,
     from2: string,
     from3: string,
     to: string,
-    options?: Partial<MvOptions>,
+    options?: Partial<MvOptions>
   ): Promise<void>;
   mv(from1: string, to: string, callback: NodeCallback<void>): void;
   mv(
     from1: string,
     from2OrTo: string,
     toOrOptions: string | Partial<MvOptions>,
-    callback: NodeCallback<void>,
+    callback: NodeCallback<void>
   ): void;
   mv(
     from1: string,
     from2: string,
     from3OrTo: string,
     toOrOptions: string | Partial<MvOptions>,
-    callback: NodeCallback<void>,
+    callback: NodeCallback<void>
   ): void;
   mv(
     from1: string,
@@ -216,7 +216,7 @@ export interface Mfs {
     from3: string,
     to: string,
     options: Partial<MvOptions>,
-    callback: NodeCallback<void>,
+    callback: NodeCallback<void>
   ): void;
   mv(...args: any[]): Promise<void>;
   mv(...args: any[]): void;
@@ -229,7 +229,7 @@ export interface Mfs {
     paths1: string,
     paths2: string,
     paths3: string,
-    callback: NodeCallback<void>,
+    callback: NodeCallback<void>
   ): void;
   flush(...args: any[]): void;
 
@@ -238,12 +238,12 @@ export interface Mfs {
   ls(callback: NodeCallback<LsResult>): void;
   ls(
     pathOrOptions: string | Partial<SortableLsOptions>,
-    callback: NodeCallback<LsResult>,
+    callback: NodeCallback<LsResult>
   ): void;
   ls(
     path: string,
     options: Partial<SortableLsOptions>,
-    callback: NodeCallback<LsResult>,
+    callback: NodeCallback<LsResult>
   ): void;
 
   lsReadableStream(options?: Partial<LsOptions>): ReadableStream;

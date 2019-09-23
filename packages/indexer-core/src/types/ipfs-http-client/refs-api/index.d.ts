@@ -25,7 +25,7 @@ export interface Refs {
   (
     path: IpfsPath,
     options: Partial<RefOptions>,
-    callback: NodeCallback<RefResult>,
+    callback: NodeCallback<RefResult>
   ): void;
 
   local(): Promise<RefResult>;

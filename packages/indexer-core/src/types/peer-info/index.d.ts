@@ -3,8 +3,8 @@
 // Definitions by: Henrique Barcelos <https://github.com/me>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
-import PeerId = require("peer-id");
-import Multiaddr = require("multiaddr");
+import PeerId = require('peer-id');
+import Multiaddr = require('multiaddr');
 
 export = PeerInfo;
 
