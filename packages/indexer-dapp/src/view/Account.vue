@@ -36,7 +36,7 @@
 import Hero from '@/components/Hero'
 import IndexerCard from '@/components/IndexerCard'
 import IndexerModal from '@/components/IndexerModal'
-import { Indexer } from '@4cadia/janus-core-indexer'
+import { Indexer } from '@4cadia/janus-indexer-core'
 import { mapState } from 'vuex'
 import LocalStorage from '../utils/localStorage'
 

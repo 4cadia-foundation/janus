@@ -44,7 +44,7 @@
 
 <script>
 import Input from '@/components/Input'
-import { Indexer } from '@4cadia/janus-core-indexer/dist/src/index'
+import { Indexer } from '@4cadia/janus-indexer-core'
 import LocalStorage from '../utils/localStorage'
 
 export default {

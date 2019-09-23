@@ -11,7 +11,7 @@
 <script>
 import Header from '@/components/Header'
 import LoginModal from '@/components/LoginModal'
-import { Indexer } from '@4cadia/janus-core-indexer'
+import { Indexer } from '@4cadia/janus-indexer-core'
 import LocalStorage from './utils/localStorage'
 
 export default {

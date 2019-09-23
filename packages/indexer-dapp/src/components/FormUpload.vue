@@ -52,10 +52,10 @@
 import Input from '@/components/Input'
 import FileInput from '@/components/FileInput'
 import IndexerCard from '@/components/IndexerCard'
-import { Indexer, Spider } from '@4cadia/janus-core-indexer'
+import { Indexer, Spider } from '@4cadia/janus-indexer-core'
 import { mapState, mapGetters } from 'vuex'
-import IndexRequest from '@4cadia/janus-core-indexer/dist/src/Domain/Entity/IndexRequest'
-import ResumeIndexRequest from '@4cadia/janus-core-indexer/dist/src/Domain/Entity/ResumeIndexRequest'
+import IndexRequest from '@4cadia/janus-indexer-core/dist/Domain/Entity/IndexRequest'
+import ResumeIndexRequest from '@4cadia/janus-indexer-core/dist/Domain/Entity/ResumeIndexRequest'
 
 const STATUS_INITIAL = 0
 const STATUS_SAVING = 1

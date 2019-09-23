@@ -1,6 +1,6 @@
 {
-  "name": "janus-dapp-indexer",
-  "version": "0.1.1",
+  "name": "@4cadia/janus-indexer-dapp",
+  "version": "0.2.0",
   "description": "A Web3 index engine",
   "private": true,
   "scripts": {
@@ -15,7 +15,7 @@
     "deploy": "push-dir --dir=dist --branch=dist --cleanup"
   },
   "dependencies": {
-    "@4cadia/janus-core-indexer": "^0.1.1",
+    "@4cadia/janus-indexer-core": "~0.2.0",
     "@kugatsu/vuenotification": "^1.1.2",
     "apexcharts": "^3.7.1",
     "axios": "^0.18.0",
