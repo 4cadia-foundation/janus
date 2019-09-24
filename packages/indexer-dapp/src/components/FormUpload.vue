@@ -75,7 +75,7 @@ export default {
       resume: {
         type: ResumeIndexRequest
       },
-      files: FileList,
+      files: [],
       fileName: '',
       ipfsLinkHash: [],
       loader: {},

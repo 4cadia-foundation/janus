@@ -2,6 +2,9 @@
   "extends": [
     "../../.eslintrc.json"
   ],
+  "env": {
+    "jest": true
+  },
   "rules": {
     "no-case-declarations": "warn",
     "@typescript-eslint/interface-name-prefix": "warn",

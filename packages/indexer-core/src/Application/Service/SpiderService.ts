@@ -13,7 +13,7 @@ import { HtmlLanguage } from '../../Domain/Entity/HtmlLanguage';
 import ArrayHelper from '../../Infra/Helper/ArrayHelper';
 import ResumeIndexRequest from '../../Domain/Entity/ResumeIndexRequest';
 import IIndexerService from '../Interface/IIndexerService';
-import MetadataFile from '../../Domain/Entity/MetadataFile';
+import ContentMetadata from '../../Domain/Entity/ContentMetadata';
 import {
   zipFilesAsPromised,
   loadFileFromZipFile,
@@ -21,6 +21,9 @@ import {
 import { resolve } from 'multiaddr';
 import { rejects } from 'assert';
 import ipfs from 'ipfs-http-client';
+import fromHtmlMetaTags from '../../Domain/Services/ExtractMetadata/fromHtmlMetaTags';
+import fromFileSystemDirectory from '../../Domain/Services/ExtractMetadata/fromFileSystemDirectory';
+import { path } from '../../types/is-ipfs';
 import isHtml = require('is-html');
 import keywordExtractor = require('keyword-extractor');
 import unfluff = require('unfluff');
@@ -70,7 +73,10 @@ export default class SpiderService implements ISpiderService {
     switch (indexRequest.ContentType) {
       case ContentType.File:
         try {
-          return this.FillMetadataFromHtmlFile(indexRequest.Content, resume);
+          resume.metadata = await this.extractMetadataFromHtmlFile(
+            indexRequest.Content
+          );
+          return resume;
         } catch (error) {
           throw new Error(
             `Error on ExtractResumeIndexRequest - File: ${error}`
@@ -79,7 +85,10 @@ export default class SpiderService implements ISpiderService {
 
       case ContentType.Folder:
         try {
-          return this.FillMetadataFromFolder(indexRequest.Content, resume);
+          resume.metadata = await this.extractMetadataFromFolder(
+            indexRequest.Content
+          );
+          return resume;
         } catch (error) {
           throw new Error(
             `Error on ExtractResumeIndexRequest - Folder: ${error}`
@@ -95,7 +104,10 @@ export default class SpiderService implements ISpiderService {
                 if (error) {
                   reject(error);
                 } else {
-                  resolve(this.FillMetadataFromHtmlFile(fileResult, resume));
+                  resume.metadata = await this.extractMetadataFromHtmlFile(
+                    fileResult
+                  );
+                  resolve(resume);
                 }
               }
             )
@@ -184,133 +196,95 @@ export default class SpiderService implements ISpiderService {
         );
         break;
       case ContentType.Zip:
-        const reader = new FileReader();
-        reader.onload = (): void => {
-          indexRequest.Content = reader.result!.slice(
-            (reader.result as string).indexOf('base64') + 7
-          );
-          const fileArray: IpfsFile[] = [];
-          const zip = new JSZip();
-          zip
-            .loadAsync(indexRequest.Content, { base64: true })
-            .then(zipFiles => {
-              let fileCount = 0;
-              fileCount = zipFiles.folder().filter((fn, f) => !f.dir).length;
-              zipFiles.forEach((fileName, file) => {
-                if (!file.dir) {
-                  file.async('base64').then(fileContent => {
-                    const ipfsFile = new IpfsFile();
-                    ipfsFile.path = fileName;
-                    ipfsFile.content = Buffer.from(fileContent, 'base64');
-                    fileArray.push(ipfsFile);
-                    if (fileArray.length === fileCount) {
-                      this._ipfsService.AddIpfsFileList(
-                        fileArray,
-                        (err, fileResponse) => {
-                          if (err) {
-                            return callback(err);
-                          }
-
-                          const ipfsFiles = Array.from(fileResponse);
-                          ipfsFiles.forEach(_ipfsFile => {
-                            const fileArrayItem = fileArray.find(f => {
-                              return f.path === (_ipfsFile as any).path;
-                            });
-                            if (fileArrayItem) {
-                              const _file = new IndexedFile();
-                              _file.IpfsHash = (_ipfsFile as any).hash;
-                              _file.Content = fileArrayItem.content.toString();
-                              _file.FileName = fileArrayItem.path;
-                              files.push(_file);
-                            }
-                          });
-
-                          const rootFile =
-                            files.find(
-                              _file => _file.FileName === 'index.html'
-                            ) || files[0];
-
-                          callback(
-                            null,
-                            this.ChangeToMainHash(rootFile.IpfsHash, files)
-                          );
-                        }
-                      );
-                    }
-                  });
-                }
-              });
-            });
-        };
-        reader.readAsDataURL(indexRequest.Content);
+        this.AddContentFromZip(indexRequest, callback);
         break;
     }
   }
 
+  public AddContentFromZip(indexRequest: IndexRequest, callback): void {
+    const files: IndexedFile[] = [];
+    const reader = new FileReader();
+    reader.readAsDataURL(indexRequest.Content);
+
+    reader.onload = (): void => {
+      indexRequest.Content = reader.result!.slice(
+        (reader.result as string).indexOf('base64') + 7
+      );
+      const fileArray: IpfsFile[] = [];
+      const zip = new JSZip();
+      zip.loadAsync(indexRequest.Content, { base64: true }).then(zipFiles => {
+        let fileCount = 0;
+        fileCount = zipFiles.folder().filter((fn, f) => !f.dir).length;
+        zipFiles.forEach((fileName, file) => {
+          if (!file.dir) {
+            file.async('base64').then(fileContent => {
+              const ipfsFile = new IpfsFile();
+              ipfsFile.path = fileName;
+              ipfsFile.content = Buffer.from(fileContent, 'base64');
+              fileArray.push(ipfsFile);
+              if (fileArray.length === fileCount) {
+                this._ipfsService.AddIpfsFileList(
+                  fileArray,
+                  (err, fileResponse) => {
+                    if (err) {
+                      return callback(err);
+                    }
+
+                    const ipfsFiles = Array.from(fileResponse);
+                    ipfsFiles.forEach(_ipfsFile => {
+                      const fileArrayItem = fileArray.find(f => {
+                        return f.path === (_ipfsFile as any).path;
+                      });
+                      if (fileArrayItem) {
+                        const _file = new IndexedFile();
+                        _file.IpfsHash = (_ipfsFile as any).hash;
+                        _file.Content = fileArrayItem.content.toString();
+                        _file.FileName = fileArrayItem.path;
+                        files.push(_file);
+                      }
+                    });
+
+                    const rootFile =
+                      files.find(_file => _file.FileName === 'index.html') ||
+                      files[0];
+
+                    callback(
+                      null,
+                      this.ChangeToMainHash(rootFile.IpfsHash, files)
+                    );
+                  }
+                );
+              }
+            });
+          }
+        });
+      });
+    };
+  }
+
   // TODO: Implementar Validator
-  private async FillMetadataFromHtmlFile(
-    pathContent: string,
-    resumeIndexRequest: ResumeIndexRequest
-  ): Promise<ResumeIndexRequest> {
+  private async extractMetadataFromHtmlFile(
+    pathContent: string
+  ): Promise<ContentMetadata> {
     try {
-      const file = await fsAsync.readFile(pathContent, 'utf8');
-      const metadata = new MetadataFile();
+      const htmlContent = await fsAsync.readFile(pathContent, 'utf8');
 
-      if (isHtml(file)) {
-        const htmlDoc = unfluff(file);
-        metadata.title = htmlDoc.title;
-        metadata.description = htmlDoc.description;
-        metadata.tags = [];
-
-        if (htmlDoc.keywords) {
-          const tags = GetNormalizedText(htmlDoc.keywords);
-          const tagsArray = tags.split(',');
-          tagsArray.forEach(t => metadata.tags.push(t.trim()));
-        }
-
-        resumeIndexRequest.suggestions = this.GetTagSuggestion(htmlDoc);
-      }
-
-      resumeIndexRequest.metadata = metadata;
-
-      return resumeIndexRequest;
+      return fromHtmlMetaTags(htmlContent);
     } catch (error) {
-      throw new Error(`Error on FillMetadataFromHtmlFile - : ${error}`);
+      throw new Error(`Error on extractMetadataFromHtmlFile - : ${error}`);
     }
   }
 
   // TODO: Implementar Validator
-  private async FillMetadataFromFolder(
-    pathFolder: string,
-    resumeIndexRequest: ResumeIndexRequest
-  ): Promise<ResumeIndexRequest> {
-    try {
-      const mainFolder = this.GetMainFolder(pathFolder);
-
-      if (fs.existsSync(`${mainFolder}/janus.json`)) {
-        const janusJSON = JSON.parse(
-          await fsAsync.readFile(`${mainFolder}/janus.json`, 'utf8')
-        );
-
-        resumeIndexRequest.metadata.title = janusJSON.title;
-        resumeIndexRequest.metadata.description = janusJSON.description;
-        resumeIndexRequest.metadata.tags = janusJSON.tags;
-      } else {
-        resumeIndexRequest = await this.FillMetadataFromHtmlFile(
-          `${mainFolder}/index.html`,
-          resumeIndexRequest
-        );
-      }
-    } catch (error) {
-      throw new Error(`Error on FillMetadataFromFolder -: ${error}`);
-    }
-
-    return resumeIndexRequest;
+  private async extractMetadataFromFolder(
+    pathFolder: string
+  ): Promise<ContentMetadata> {
+    return fromFileSystemDirectory(pathFolder);
   }
 
   // TODO: Implementar Validator
   private async FillMetadataFromZipFile(
-    zipFile: JSZip,
+    zipFile: any,
     resumeIndexRequest: ResumeIndexRequest
   ): Promise<ResumeIndexRequest> {
     try {
