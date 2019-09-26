@@ -10,13 +10,13 @@
         @input="$emit('input', $event.target.files)"
         v-on:change="handleUpload($event.target.files)"
         :accept="this.accept"
-      >
+      />
       <p class="separator">or click to choose a file</p>
       <button type="button" class="btn">Browse File</button>
     </div>
     <div class="errors">
       <li v-for="(exception, index) in this.exceptions" :key="index">
-        <p v-if="exception.show"> {{ exception.message }} </p>
+        <p v-if="exception.show">{{ exception.message }}</p>
       </li>
     </div>
   </div>
@@ -32,8 +32,7 @@ const STATUS_FAILED = 'failed'
 
 export default {
   name: 'FileInput',
-  components: {
-  },
+  components: {},
   data () {
     return {
       exceptions: [],
@@ -45,11 +44,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('validation', [
-      'getExceptionByType'
-    ]),
+    ...mapGetters('validation', ['getExceptionByType']),
     hasExceptions: function () {
-      return this.exceptions.filter(exception => exception.show === true).length > 0
+      return (
+        this.exceptions.filter(exception => exception.show === true).length > 0
+      )
     },
     isInitial () {
       return this.currentStatus === STATUS_INITIAL
@@ -81,6 +80,10 @@ export default {
       this.filename = files[0].name
       this.currentStatus = STATUS_SAVING
       this.fieldIsValid(this.isEmpty(this.filename), 'EmptyField')
+
+      if (typeof this.handleChange === 'function') {
+        this.handleChange(files)
+      }
     },
     fieldIsValid: function (exception, type) {
       let exceptionType = this.filterExceptionByType(type)
@@ -91,7 +94,9 @@ export default {
       }
     },
     filterExceptionByType: function (exceptionType) {
-      return this.exceptions.filter(exception => exception.type === exceptionType)
+      return this.exceptions.filter(
+        exception => exception.type === exceptionType
+      )
     },
     isEmpty: function (value) {
       return value === '' || value == null
@@ -105,13 +110,25 @@ export default {
     accept: {
       type: String,
       required: false
+    },
+    handleChange: {
+      type: Function,
+      required: false
     }
   },
   mounted () {
     this.reset()
     this.exceptions.push(
-      {type: 'EmptyField', message: this.getExceptionByType('EmptyField'), show: false},
-      {type: 'InvalidField', message: this.getExceptionByType('InvalidField'), show: false}
+      {
+        type: 'EmptyField',
+        message: this.getExceptionByType('EmptyField'),
+        show: false
+      },
+      {
+        type: 'InvalidField',
+        message: this.getExceptionByType('InvalidField'),
+        show: false
+      }
     )
   }
 }
