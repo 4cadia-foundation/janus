@@ -1,4 +1,4 @@
-import fromHtmlMetaTags from './fromHtmlMetaTags';
+import { fromHtmlMetaTags } from './fromHtmlMetaTags';
 import ContentMetadata from '../../Entity/ContentMetadata';
 
 describe('Extracts metadata from HTML Meta Tags', () => {
@@ -133,20 +133,16 @@ describe('Extracts metadata from HTML Meta Tags', () => {
   });
 
   describe('When input is not a valid HTML', () => {
-    it('Should return a ContentMetadata object with all properties being empty', () => {
+    it('Should throw an error describing the problem', () => {
       // Arrange
       const input = 'This is not and HTML!';
-      const expected = {
-        title: '',
-        description: '',
-        tags: [],
-      };
 
       // Act
-      const actual = fromHtmlMetaTags(input);
 
       // Assert
-      expect(actual).toEqual(expected);
+      expect(() => fromHtmlMetaTags(input)).toThrowError(
+        /invalid html document/i
+      );
     });
   });
 });
