@@ -103,7 +103,7 @@ export default class SpiderService implements ISpiderService {
         );
         break;
       case ContentType.Folder:
-        const mainFolder = this.GetMainFolder(indexRequest.Content);
+        const mainFolder = this.GetMainFolder(indexRequest.Content as string);
         this._ipfsService.AddIpfsFolder(
           indexRequest.Content as string,
           (err, filesResult) => {

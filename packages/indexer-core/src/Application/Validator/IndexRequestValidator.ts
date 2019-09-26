@@ -22,7 +22,7 @@ export default class IndexRequestValidator extends AbstractValidator<
       .isNotNull()
       .withFailureMessage("Content can't be empty");
 
-    this.validateIf(i => fs.existsSync(i.Content))
+    this.validateIf(i => fs.existsSync(i.Content as string))
       .isEqualTo(true)
       .when(
         i =>
@@ -48,7 +48,7 @@ export default class IndexRequestValidator extends AbstractValidator<
 
   public ValidateRequest(indexRequest: IndexRequest, callback: any): any {
     if (indexRequest.ContentType === ContentType.Hash) {
-      this._ipfsService.HashExists(indexRequest.Content, exists => {
+      this._ipfsService.HashExists(indexRequest.Content as string, exists => {
         indexRequest.IpfsHashExists = exists;
         this.validateIf(i => i.IpfsHashExists)
           .isEqualTo(true)
@@ -56,7 +56,7 @@ export default class IndexRequestValidator extends AbstractValidator<
         return callback(this.validate(indexRequest));
       });
     } else if (indexRequest.ContentType === ContentType.Zip) {
-      this.ValidateZipFile(indexRequest.Content, validZip => {
+      this.ValidateZipFile(indexRequest.Content as string, validZip => {
         indexRequest.ValidZip = validZip;
         this.validateIf(i => i.ValidZip)
           .isDefined()
@@ -71,9 +71,7 @@ export default class IndexRequestValidator extends AbstractValidator<
   public ValidateZipFile(content: string, callback: any) {
     const zip = new JSZip();
     zip.loadAsync(content, { base64: true }).then(
-      zipFiles => {
-        callback(zipFiles.folder());
-      },
+      zipFiles => callback(zipFiles),
       () => {
         callback();
       }

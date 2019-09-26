@@ -1,10 +1,13 @@
+import { promisify } from 'util';
 import { resolve } from 'path';
-import { readFile } from 'fs-extra';
+import { readFile } from 'fs';
 import { fromZipString } from './fromZipString';
+
+const readFileAsync = promisify(readFile);
 
 const getFixture = (fileName: string): Promise<string> => {
   const filePath = resolve(__dirname, '__fixtures__', 'fromZip', fileName);
-  return readFile(filePath, { encoding: 'base64' });
+  return readFileAsync(filePath, { encoding: 'base64' });
 };
 
 describe('Read File from Zip', () => {
