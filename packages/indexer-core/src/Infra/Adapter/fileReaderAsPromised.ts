@@ -1,16 +1,22 @@
 export async function fileReaderAsPromised(file: File): Promise<string> {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-
   const content = await new Promise<string>((resolve, reject): void => {
+    const reader = new FileReader();
+
     reader.onload = (): void => {
       resolve(reader.result as string);
+      reader.onload = null;
     };
 
-    reader.onerror = (error): void => {
-      reject(error);
+    reader.onerror = (): void => {
+      reader.abort();
+      reject(new Error('Failed to load file'));
+      reader.onerror = null;
     };
+
+    reader.readAsDataURL(file);
   });
 
-  return content.replace(/^data:.*\/.*;base64,/i, '');
+  const delimiter = 'base64,';
+  const start = content.indexOf(delimiter);
+  return content.slice(start + delimiter.length);
 }
