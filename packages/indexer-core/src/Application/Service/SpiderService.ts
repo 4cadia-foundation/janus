@@ -36,7 +36,7 @@ export default class SpiderService implements ISpiderService {
     this._ipfsService = _ipfsService;
   }
 
-  public async ExtractResumeIndexRequest(
+  public async extractResumeIndexRequest(
     indexRequest: IndexRequest
   ): Promise<ResumeIndexRequest> {
     const resume = new ResumeIndexRequest(indexRequest);
@@ -57,7 +57,7 @@ export default class SpiderService implements ISpiderService {
       case ContentType.Hash:
         try {
           return new Promise<ResumeIndexRequest>((resolve, reject): void =>
-            this._ipfsService.GetIpfsFile(
+            this._ipfsService.getIpfsFile(
               indexRequest.Content as string,
               async (error, fileResult) => {
                 if (error) {
@@ -87,11 +87,11 @@ export default class SpiderService implements ISpiderService {
     }
   }
 
-  public AddContent(indexRequest: IndexRequest, callback: any): void {
+  public addContent(indexRequest: IndexRequest, callback: any): void {
     const files: IndexedFile[] = [];
     switch (indexRequest.ContentType) {
       case ContentType.File:
-        this._ipfsService.AddIpfsFile(
+        this._ipfsService.addIpfsFile(
           indexRequest.Content as string,
           (ipfsHash, fileText) => {
             const file = new IndexedFile();
@@ -104,7 +104,7 @@ export default class SpiderService implements ISpiderService {
         break;
       case ContentType.Folder:
         const mainFolder = this.GetMainFolder(indexRequest.Content as string);
-        this._ipfsService.AddIpfsFolder(
+        this._ipfsService.addIpfsFolder(
           indexRequest.Content as string,
           (err, filesResult) => {
             if (err) {
@@ -131,7 +131,7 @@ export default class SpiderService implements ISpiderService {
         );
         break;
       case ContentType.Hash:
-        this._ipfsService.GetIpfsFile(
+        this._ipfsService.getIpfsFile(
           indexRequest.Content as string,
           (error, fileResult) => {
             if (error) {
@@ -177,7 +177,7 @@ export default class SpiderService implements ISpiderService {
               ipfsFile.content = Buffer.from(fileContent, 'base64');
               fileArray.push(ipfsFile);
               if (fileArray.length === fileCount) {
-                this._ipfsService.AddIpfsFileList(
+                this._ipfsService.addIpfsFileList(
                   fileArray,
                   (err, fileResponse) => {
                     if (err) {

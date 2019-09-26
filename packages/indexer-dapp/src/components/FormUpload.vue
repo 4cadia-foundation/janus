@@ -189,7 +189,7 @@ export default {
 
       let options = this.getOptions()
       let spider = new Spider(null, options)
-      const resumeIndexRequest = await spider.ExtractMetadataContent(
+      const resumeIndexRequest = await spider.extractMetadataContent(
         indexRequest
       )
 
@@ -212,7 +212,7 @@ export default {
       }
 
       const indexResult = await new Promise(resolve => {
-        spider.AddContent(indexRequest, indexResult => resolve(indexResult))
+        spider.addContent(indexRequest, indexResult => resolve(indexResult))
       })
 
       if (indexResult.Success) {
@@ -230,7 +230,7 @@ export default {
         }
 
         let indexer = new Indexer(this.instance.currentProvider, options)
-        let indexedFileResult = await indexer.AddNewWebsite(indexedFile)
+        let indexedFileResult = await indexer.addWebsite(indexedFile)
         if (indexedFileResult.Success) {
           this.$notification.success(
             'Success! Thank you for contributing with your content!'

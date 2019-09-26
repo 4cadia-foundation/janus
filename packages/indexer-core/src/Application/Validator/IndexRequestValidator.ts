@@ -48,7 +48,7 @@ export default class IndexRequestValidator extends AbstractValidator<
 
   public ValidateRequest(indexRequest: IndexRequest, callback: any): any {
     if (indexRequest.ContentType === ContentType.Hash) {
-      this._ipfsService.HashExists(indexRequest.Content as string, exists => {
+      this._ipfsService.hashExists(indexRequest.Content as string, exists => {
         indexRequest.IpfsHashExists = exists;
         this.validateIf(i => i.IpfsHashExists)
           .isEqualTo(true)

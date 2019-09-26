@@ -95,7 +95,7 @@ export default {
 
       this.indexer = new Indexer(this.instance.currentProvider, options)
 
-      this.indexer.ListWebsitesByOwner().then(listResult => {
+      this.indexer.listWebsitesByOwner().then(listResult => {
         this.sites = listResult.Result
       })
     },
@@ -111,7 +111,7 @@ export default {
 
       if (this.indexer) {
         site.tags = normalizeTags(site.tags)
-        this.indexer.UpdateWebsite(site).then(updateResponse => {
+        this.indexer.updateWebsite(site).then(updateResponse => {
           this.loader.hide()
           this.$notification.success(`Success! Your website has update!`)
         })
@@ -126,7 +126,7 @@ export default {
       })
 
       if (this.indexer) {
-        this.indexer.DeleteWebSite(site).then(deleteRsponse => {
+        this.indexer.deleteWebsite(site).then(deleteRsponse => {
           this.sites = this.sites.filter(website => {
             if (JSON.stringify(site) !== JSON.stringify(website)) {
               return website

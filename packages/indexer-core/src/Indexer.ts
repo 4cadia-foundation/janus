@@ -11,7 +11,7 @@ import IndexRequest from './Domain/Entity/IndexRequest';
 import IndexedFile from './Domain/Entity/IndexedFile';
 
 export class Indexer {
-  public static GetDefaultConfigs(): CoreConfigs {
+  public static getDefaultConfigs(): CoreConfigs {
     return CoreConfigs.getDefaultConfigs();
   }
 
@@ -26,11 +26,11 @@ export class Indexer {
     );
   }
 
-  public async AddNewWebsite(indexedFile: IndexedFile): Promise<RequestResult> {
+  public async addWebsite(indexedFile: IndexedFile): Promise<RequestResult> {
     const result = new RequestResult();
 
     try {
-      result.Result = await this._indexerService.IndexFile(indexedFile);
+      result.Result = await this._indexerService.indexFile(indexedFile);
       result.Success = true;
     } catch (error) {
       result.Errors.push(error);
@@ -39,11 +39,11 @@ export class Indexer {
     return result;
   }
 
-  public async ListWebsitesByOwner(): Promise<RequestResult> {
+  public async listWebsitesByOwner(): Promise<RequestResult> {
     const result = new RequestResult();
 
     try {
-      result.Result = await this._indexerService.ListWebsitesByOwner();
+      result.Result = await this._indexerService.listWebsitesByOwner();
       result.Success = true;
     } catch (error) {
       result.Errors.push(error);
@@ -52,11 +52,11 @@ export class Indexer {
     return result;
   }
 
-  public async UpdateWebsite(target: Website): Promise<RequestResult> {
+  public async updateWebsite(target: Website): Promise<RequestResult> {
     const result = new RequestResult();
 
     try {
-      const events = await this._indexerService.UpdateWebsite(target);
+      const events = await this._indexerService.updateWebsite(target);
       if (events) {
         result.Success = true;
         result.Result.push(...events);
@@ -68,11 +68,11 @@ export class Indexer {
     return result;
   }
 
-  public async DeleteWebSite(site: Website): Promise<RequestResult> {
+  public async deleteWebsite(site: Website): Promise<RequestResult> {
     const result = new RequestResult();
 
     try {
-      const events = await this._indexerService.BurnWebsite(site.storageHash);
+      const events = await this._indexerService.burnWebsite(site.storageHash);
       if (events) {
         result.Success = true;
         result.Result.push(...events);
