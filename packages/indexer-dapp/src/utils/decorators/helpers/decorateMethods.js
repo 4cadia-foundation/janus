@@ -4,6 +4,15 @@ const getOwnMethodNames = obj =>
     []
   )
 
+/**
+ * Creates an object "enhancer" function.
+ *
+ * @param {Function} decorator a method decorator
+ * @param {string[]} methods a list of methods to decorate
+ *
+ * @returns {Function} function that when called will decorate `methods`
+ * from the object passed  as parameter with the given `decorator` function
+ */
 export default function decorateMethods (decorator, methods) {
   return obj => {
     if (!Array.isArray(methods)) {
