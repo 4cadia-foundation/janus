@@ -10,15 +10,12 @@ export default function decorateMethods (decorator, methods) {
       methods = getOwnMethodNames(obj)
     }
 
-    const result = methods.reduce(
+    return methods.reduce(
       (acc, methodName) =>
         typeof obj[methodName] === 'function'
           ? Object.assign(acc, { [methodName]: decorator(obj[methodName]) })
           : acc,
       { ...obj }
     )
-
-    console.log(result)
-    return result
   }
 }
