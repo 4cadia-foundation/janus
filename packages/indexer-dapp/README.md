@@ -4,41 +4,104 @@ Indexer front-end is an interface that allows the user to access needed services
 The indexer front end helps to publish and index the websites. Publish in the IPFS and return the valid hash or validate the ipfs hash entered and index the informations on the Janus platform.
 
 
-![](header.png)
+<br>
+
+![Indexer](indexer.png)
+
+
+## Featured Technologies
+
+Vue: Is a progressive framework for building user interfaces.
+
+Web3: Web3 is a collection of libraries which allow you to interact with a local or remote ethereum node, using a HTTP or IPC connection.
+
+<br>
+
+## Prerequites
+
+For those who use Windows is necessary to configure web3
+
+Use the link to install *[WEB3](https://medium.com/@jcbombardelli/configurando-web3-em-um-projeto-node-js-com-windows-984ca1224fa)*
+
+
+<br>
 
 ## Installation
 
+
 ``` bash
+
 # install dependencies
-npm install
+yarn install
+
+# if you are in develop mode enter folder:
+
+janus/packages/indexer-core
+
+# Is run command:
+yarn build
 
 # serve with hot reload at localhost:8080
-npm run dev
+yarn dev
 
-# build for production with minification
-npm run build
+```
+
+<br>
+
+
+## Run Tests
+
+
+```bash
 
 # build for production and view the bundle analyzer report
-npm run build --report
+yarn build --report
+
+```
+
+```bash
 
 # run unit tests
-npm run unit
+yarn unit
 
-# run e2e tests
-npm run e2e
+```
+
+```bash
 
 # run all tests
-npm test
+yarn test
+
+
+```
+<br>
+
+
+## Other Commands
+
+
+
+``` bash
 
 # run lint code highlight
-npm run lint
+yarn lint
+
+```
+
+``` bash
 
 # run lint fix code
-npm run fix
+yarn fix
+
+```
+
+``` bash
 
 # run build production and send the dist folder to another branch
-npm run deploy
+yarn deploy
+
 ```
+
+<br>
 
 ## Contributing
 
