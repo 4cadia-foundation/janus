@@ -15,13 +15,17 @@ Vue: Is a progressive framework for building user interfaces.
 
 Web3: Web3 is a collection of libraries which allow you to interact with a local or remote ethereum node, using a HTTP or IPC connection.
 
+Yarn: Is a package manager for javascript
+
 <br>
 
 ## Prerequites
 
-For those who use Windows is necessary to configure web3
+- For those who use Windows is necessary to configure web3.
 
 Use the link to install *[WEB3](https://medium.com/@jcbombardelli/configurando-web3-em-um-projeto-node-js-com-windows-984ca1224fa)*
+
+- Yarn
 
 
 <br>
@@ -34,11 +38,11 @@ Use the link to install *[WEB3](https://medium.com/@jcbombardelli/configurando-w
 # install dependencies
 yarn install
 
-# if you are in develop mode enter folder:
+# if you are in develop mode enter folder
 
 janus/packages/indexer-core
 
-# Is run command:
+# Is run command
 yarn build
 
 # serve with hot reload at localhost:8080
