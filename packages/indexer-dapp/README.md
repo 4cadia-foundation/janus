@@ -19,7 +19,7 @@ Yarn: Is a package manager for javascript
 
 <br>
 
-## Prerequites
+## Prerequisites
 
 - For those who use Windows is necessary to configure web3.
 
