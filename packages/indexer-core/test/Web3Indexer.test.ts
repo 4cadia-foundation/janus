@@ -7,7 +7,7 @@ import HtmlData from '../src/Domain/Entity/HtmlData';
 import Bootstrapper from '../src/Infra/IoC/Bootstrapper';
 
 test.skip('skip', () => {});
-jest.mock('../src/Application/Validator/Web3IndexerValidator');
+jest.mock('../src/Application/Validator/IndexerValidator');
 test('Web3Validator - Invalid address validation', () => {
   // Bootstrapper.RegisterServices();
   // let isAddressMock = jest.fn(() => {
