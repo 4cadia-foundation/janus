@@ -17,7 +17,7 @@ Web3: Web3 is a collection of libraries which allow you to interact with a local
 
 <br>
 
-## Prerequites
+## Prerequisites
 
 For those who use Windows is necessary to configure web3
 
