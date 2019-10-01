@@ -10,7 +10,7 @@ const getFixture = (fileName: string): Promise<string> => {
   return readFileAsync(filePath, { encoding: 'base64' });
 };
 
-describe('Read File from Zip', () => {
+describe('Read File from Zip #unit', () => {
   describe('When file is in the top-level of the zip', () => {
     it('Should load the required file contents', async () => {
       const fileName = 'janus.json';

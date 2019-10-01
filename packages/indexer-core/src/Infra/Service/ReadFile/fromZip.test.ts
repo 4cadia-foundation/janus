@@ -5,7 +5,7 @@ const getFixture = (fileName: string): string => {
   return resolve(__dirname, '__fixtures__', 'fromZip', fileName);
 };
 
-describe('Read File from Zip', () => {
+describe('Read File from Zip #integration', () => {
   describe('When file is in the top-level of the zip', () => {
     it('Should load the required file contents', async () => {
       const zipFileName = getFixture('top-level.zip');

@@ -54,6 +54,12 @@ export default class SpiderService implements ISpiderService {
         );
         return resume;
 
+      case ContentType.Zip:
+        resume.metadata = await this.extractMetadataFromZip(
+          indexRequest.Content as File
+        );
+        return resume;
+
       case ContentType.Hash:
         try {
           return new Promise<ResumeIndexRequest>((resolve, reject): void =>
@@ -75,12 +81,6 @@ export default class SpiderService implements ISpiderService {
           );
         }
         break;
-
-      case ContentType.Zip:
-        resume.metadata = await this.extractMetadataFromZip(
-          indexRequest.Content as File
-        );
-        return resume;
 
       default:
         throw new Error('ContentType is required');
