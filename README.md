@@ -27,16 +27,16 @@ Search front-end is an interface that allows the user to search for websites and
 
 **Vue:** Is a progressive framework for building user interfaces.
 
-
 ## Prerequites
 
-- For those who use Windows is necessary to configure web3.
+- [Node.js](https://nodejs.org/en/): `>=8.0.0 <12.0.0`
+- [Yarn](https://yarnpkg.com/lang/en/): `>=1.0.0`
 
-Use the link to install *[WEB3](https://medium.com/@jcbombardelli/configurando-web3-em-um-projeto-node-js-com-windows-984ca1224fa)*
+### Windows users only
 
+For those who use Windows is necessary to [install and configure web3](https://medium.com/@jcbombardelli/configurando-web3-em-um-projeto-node-js-com-windows-984ca1224fa).
 
 ## Installation
-
 
 ``` bash
 # install dependencies
