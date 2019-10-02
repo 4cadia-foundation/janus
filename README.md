@@ -40,39 +40,41 @@ For those who use Windows is necessary to [install and configure web3](https://m
 
 ``` bash
 # install dependencies
-lerna bootstrap
+yarn install
+```
 
-# **Only** if you are in develop mode, run :
-lerna run build --scope=@4cadia/janus-indexer-core
+### Run the Indexer dapp
+
+```
+# build the core package:
+yarn lerna run build --scope=@4cadia/janus-indexer-core
 
 # serve with hot reload at localhost:8080
-lerna run build --scope=@4cadia/janus-indexer-dapp
+yarn lerna run dev --scope=@4cadia/janus-indexer-dapp
 ```
 
 ## Run Tests
 
 ```bash
 # run unit tests
-lerna run test:unit [--scope=<package>]
+yarn test:unit [--scope=<package>]
 ```
 
 ```bash
 # run all tests
-lerna run test [--scope=<package>]
+yarn test [--scope=<package>]
 ```
 
 ## Other Commands
 
-
-
 ``` bash
 # run linters
-lerna run lint [--scope=<package>]
+yarn lint [--scope=<package>]
 ```
 
 ``` bash
 # run linter to automatically fix code
-lerna lint-fix [--scope=<package>]
+yarn lint-fix [--scope=<package>]
 ```
 
 ## Contributing
