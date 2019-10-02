@@ -1,5 +1,5 @@
-/build/
-/config/
-/dist/
-/test/unit/coverage/
-!.*.js
+build/
+config/
+dist/
+test/unit/coverage/
+node_modules/

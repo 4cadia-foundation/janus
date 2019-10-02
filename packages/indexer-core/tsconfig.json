@@ -8,8 +8,7 @@
   },
   "include": [
     "src/**/*.ts",
-    "src/defaultconfig.json",
-    "types/**/*.ts"
+    "src/defaultconfig.json"
   ],
   "exclude": [
     "node_modules",

@@ -1,9 +1,9 @@
 import IpfsFile from '../../Domain/Entity/IpfsFile';
 
 export default interface IIpfsService {
-  AddIpfsFile(filePath: string, callback: any): void;
-  AddIpfsFileList(fileArray: IpfsFile[], callback: any): void;
-  AddIpfsFolder(folderPath: string, callback: any): void;
-  GetIpfsFile(ipfsHash: string, callback: any): void;
-  HashExists(ipfsHash: string, callback: any): void;
+  addIpfsFile(filePath: string, callback: any): void;
+  addIpfsFileList(fileArray: IpfsFile[], callback: any): void;
+  addIpfsFolder(folderPath: string, callback: any): void;
+  getIpfsFile(ipfsHash: string, callback: any): void;
+  hashExists(ipfsHash: string, callback: any): void;
 }

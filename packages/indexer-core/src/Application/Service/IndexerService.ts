@@ -26,7 +26,7 @@ export default class IndexerService implements IIndexerService {
     );
   }
 
-  public async IndexFile(indexedFile: IndexedFile): Promise<ethers.Event[]> {
+  public async indexFile(indexedFile: IndexedFile): Promise<ethers.Event[]> {
     // TODO: Refactor Validators
     // let validator = new IndexerValidator(this._coreConfigs);
     // validator.ValidateIndexRequestAsync(indexedFile, ownerAddress, async validation => {
@@ -58,7 +58,7 @@ export default class IndexerService implements IIndexerService {
     // });
   }
 
-  public async ListWebsitesByOwner(): Promise<Website[]> {
+  public async listWebsitesByOwner(): Promise<Website[]> {
     const listAllWebsitesByOwner = await this._smartContract.getAllWebsitesByOwner();
     const listWebSites = listAllWebsitesByOwner
       .filter(website => website.visible)
@@ -73,7 +73,7 @@ export default class IndexerService implements IIndexerService {
     return listWebSites;
   }
 
-  public async UpdateWebsite(target: Website): Promise<ethers.Event[]> {
+  public async updateWebsite(target: Website): Promise<ethers.Event[]> {
     if (target) {
       const tx = await this._smartContract.appendWebsite(
         target.storageHash,
@@ -88,7 +88,7 @@ export default class IndexerService implements IIndexerService {
     throw new Error('Target can`t be nullable');
   }
 
-  public async BurnWebsite(hash: string): Promise<ethers.Event[]> {
+  public async burnWebsite(hash: string): Promise<ethers.Event[]> {
     const tx = await this._smartContract.burnWebsite(hash);
     const receipt = await tx.wait();
 

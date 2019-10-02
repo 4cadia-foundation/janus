@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     reset () {
-      let configs = Indexer.GetDefaultConfigs()
+      let configs = Indexer.getDefaultConfigs()
 
       this.ipfsHost = configs.ipfsHost
       this.contractAddress = configs.contractAddress

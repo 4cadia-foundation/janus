@@ -23,7 +23,7 @@ export default {
   },
   created () {
     // this.$store.dispatch('web3/registerWeb3')
-    let configs = Indexer.GetDefaultConfigs()
+    let configs = Indexer.getDefaultConfigs()
 
     if (!LocalStorage.existsItem('contractAddress')) { LocalStorage.setItem('contractAddress', configs.contractAddress) }
 

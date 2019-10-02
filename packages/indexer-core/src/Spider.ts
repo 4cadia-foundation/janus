@@ -27,7 +27,7 @@ export class Spider {
     this._ipfsService = Bootstrapper.Resolve<IIpfsService>('IIpfsService');
   }
 
-  public AddContent(indexRequest: IndexRequest, callback: any) {
+  public addContent(indexRequest: IndexRequest, callback: any): void {
     const validator = new IndexRequestValidator(
       this._spiderConfigs,
       this._ipfsService
@@ -40,7 +40,7 @@ export class Spider {
         return callback(result);
       }
 
-      this._spiderService.AddContent(indexRequest, (err, indexResult) => {
+      this._spiderService.addContent(indexRequest, (err, indexResult) => {
         if (err) {
           result.Errors = [err.message];
           result.Success = false;
@@ -52,7 +52,7 @@ export class Spider {
     });
   }
 
-  public async ExtractMetadataContent(
+  public async extractMetadataContent(
     indexRequest: IndexRequest
   ): Promise<ResumeIndexRequest> {
     const validator = new IndexRequestValidator(
@@ -65,7 +65,7 @@ export class Spider {
     result.Success = validation.isValid();
     result.Errors = validation.getFailureMessages();
 
-    const resume = await this._spiderService.ExtractResumeIndexRequest(
+    const resume = await this._spiderService.extractResumeIndexRequest(
       indexRequest
     );
 
