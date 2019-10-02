@@ -5,11 +5,11 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "unit": "jest --config test/unit/jest.conf.js --coverage",
-    "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
-    "fix": "npm run lint -- --fix",
+    "test:unit": "jest --config test/unit/jest.conf.js --coverage",
+    "test:e2e": "node test/e2e/runner.js",
+    "test": "concurrently \"yarn:test:unit\" \"yarn:test:e2e\"",
+    "lint": "eslint --ext js,vue \"*.js\" src test",
+    "lint-fix": "yarn run lint --fix",
     "build": "node build/build.js",
     "deploy": "push-dir --dir=dist --branch=dist --cleanup"
   },
