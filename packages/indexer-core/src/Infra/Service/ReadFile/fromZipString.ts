@@ -28,21 +28,17 @@ function findFile(
   return pathList.find(findMatchingFile);
 }
 
-function findRootDirectory(zipFiles: JSZip): JSZip.JSZipObject | undefined {
+function findRootDirectory(zipFiles: JSZip): JSZip.JSZipObject {
   const onlyTopLevelDirectoreis: JSZipFilterPredicate = (relativePath, file) =>
     isDir(file) && isTopLevelPath(file.name);
 
   const topLevelDirectories = zipFiles.filter(onlyTopLevelDirectoreis);
 
-  if (topLevelDirectories.length === 0) {
-    return undefined;
-  }
-
   if (topLevelDirectories.length === 1) {
     return topLevelDirectories[0];
   }
 
-  throw new Error('Zip file contains more than one top-level directory');
+  throw new Error('Zip file should contain a single top-level directory');
 }
 
 interface Options {
@@ -63,18 +59,13 @@ export async function fromZipString(
     throw attachCause(new Error('Corrupted zip file'), err);
   }
 
-  let file = findFile(fileName, zipFiles);
+  const rootDirectory = findRootDirectory(zipFiles);
+  const file = findFile(join(rootDirectory.name, fileName), zipFiles);
 
   if (!file) {
-    const rootDirectory = findRootDirectory(zipFiles);
-
-    if (rootDirectory) {
-      file = findFile(join(rootDirectory.name, fileName), zipFiles);
-    }
-  }
-
-  if (!file) {
-    throw new Error(`File "${fileName}" not found inside the zip file`);
+    throw new Error(
+      `File "${rootDirectory}/${fileName}" not found inside the zip file`
+    );
   }
 
   return file.async('text');

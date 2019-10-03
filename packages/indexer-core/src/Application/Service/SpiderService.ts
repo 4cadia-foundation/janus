@@ -1,4 +1,4 @@
-import { join } from 'path';
+import { join, basename, dirname } from 'path';
 import { injectable, inject } from 'tsyringe';
 import JSZip from 'jszip';
 import keywordExtractor from 'keyword-extractor';
@@ -169,7 +169,7 @@ export default class SpiderService implements ISpiderService {
       zip.loadAsync(indexRequest.Content, { base64: true }).then(zipFiles => {
         let fileCount = 0;
         fileCount = zipFiles.filter((fn, f) => !f.dir).length;
-        zipFiles.forEach((fileName, file) => {
+        zipFiles.folder('').forEach((fileName, file) => {
           if (!file.dir) {
             file.async('base64').then(fileContent => {
               const ipfsFile = new IpfsFile();
@@ -199,12 +199,30 @@ export default class SpiderService implements ISpiderService {
                     });
 
                     const rootFile =
-                      files.find(_file => _file.FileName === 'index.html') ||
-                      files[0];
+                      files.find(_file => {
+                        const isIndexHtml =
+                          basename(_file.FileName) === 'index.html';
+                        const isInRootDirectory =
+                          dirname(dirname(_file.FileName)) === '.';
 
-                    callback(
+                        return isIndexHtml && isInRootDirectory;
+                      }) || files[0];
+
+                    const rootDirectory = fileResponse.find(
+                      _file => dirname(rootFile.FileName) === _file.path
+                    );
+
+                    if (!rootDirectory) {
+                      return callback(
+                        new Error(
+                          'Zip file should contain a single top-level directory'
+                        )
+                      );
+                    }
+
+                    return callback(
                       null,
-                      this.ChangeToMainHash(rootFile.IpfsHash, files)
+                      this.ChangeToMainHash(rootDirectory.hash, files)
                     );
                   }
                 );
@@ -271,10 +289,7 @@ export default class SpiderService implements ISpiderService {
 
         return fromHtmlMetaTags(htmlContent);
       } catch (innerErr) {
-        throw attachCause(
-          new Error(`Error on ExtractResumeIndexRequest - Zip`),
-          attachCause(innerErr, err)
-        );
+        throw attachCause(innerErr, err);
       }
     }
   }

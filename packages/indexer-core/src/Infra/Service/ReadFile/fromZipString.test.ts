@@ -10,26 +10,8 @@ const getFixture = (fileName: string): Promise<string> => {
   return readFileAsync(filePath, { encoding: 'base64' });
 };
 
-describe('Read File from Zip #unit', () => {
-  describe('When file is in the top-level of the zip', () => {
-    it('Should load the required file contents', async () => {
-      const fileName = 'janus.json';
-      const zipContent = await getFixture('top-level.zip');
-
-      const expected = {
-        version: 'a2',
-        tags: ['azul', 'sofa', 'loja'],
-        title: 'Minha Loja',
-        description: 'Loja de sofás azuis',
-      };
-
-      const actual = JSON.parse(await fromZipString(fileName, zipContent));
-
-      expect(actual).toEqual(expected);
-    });
-  });
-
-  describe('When file is nested in a single top-level folder in the zip', () => {
+describe('Read from Zip content #unit', () => {
+  describe('When file is nested in a single top-level directory in the zip', () => {
     it('Should load the required file contents', async () => {
       const fileName = 'janus.json';
       const zipContent = await getFixture('root-folder.zip');
@@ -47,24 +29,35 @@ describe('Read File from Zip #unit', () => {
     });
   });
 
-  describe('When file does not exist in the zip', () => {
-    it('Should throw an error informing the client', async () => {
-      const fileName = '__unexistent-file.json';
+  describe('When there is no top-level directory', () => {
+    it('Should throw an error', async () => {
+      const fileName = 'janus.json';
       const zipContent = await getFixture('top-level.zip');
 
       expect(fromZipString(fileName, zipContent)).rejects.toThrowError(
-        /File ".*" not found/i
+        /zip file should contain a single top-level directory/i
       );
     });
   });
 
-  describe('When there are more than one top-level folder', () => {
-    it('Should throw an error regarding the unexpected condition', async () => {
+  describe('When there are more than one top-level directory', () => {
+    it('Should throw an error', async () => {
       const fileName = 'janus.json';
       const zipContent = await getFixture('two-top-level-folders.zip');
 
       expect(fromZipString(fileName, zipContent)).rejects.toThrowError(
-        /zip file contains more than one top-level directory/i
+        /zip file should contain a single top-level directory/i
+      );
+    });
+  });
+
+  describe('When file does not exist in the zip', () => {
+    it('Should throw an error informing the client', async () => {
+      const fileName = '__unexistent-file.json';
+      const zipContent = await getFixture('root-folder.zip');
+
+      expect(fromZipString(fileName, zipContent)).rejects.toThrowError(
+        /File ".*" not found/i
       );
     });
   });
