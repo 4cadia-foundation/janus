@@ -1,7 +1,19 @@
+dist/
 **/dist/
+
+node_modules/
 **/node_modules/
-**/*.log
-**/coverage
+
+coverage/
+**/coverage/
+
+.coverage/
+**/.coverage/
+
+*.log
+./**/*.log
+
+*.tsbuildinfo
 **/*.tsbuildinfo
 
 # Editor directories and files

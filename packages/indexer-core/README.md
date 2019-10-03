@@ -1,9 +1,9 @@
 # Janus Indexer Core
 
 Indexer Core is the bridge between Dapp and SmartContract.
-He is responsible for extracting the tags and documentation that will be indexed and also for communicating with IPFS.
+It is responsible for extracting metadata that will be indexed, interacting with the `Indexer` smart contract and also for communicating with the storage layer. 
 
-<br>
+For smart contracts we currently support only **Ethereum** and for storage currently only **IPFS**, but we plan to include other smart contract engines and decentralized storage solutions in the future.
 
 ## Featured Technologies
 
@@ -14,37 +14,25 @@ He is responsible for extracting the tags and documentation that will be indexed
 **TypeScript:** Is an open-source programming language developed and maintained by Microsoft. It is a strict syntactical superset of JavaScript, and adds optional static typing to the language.  
 
 
-<br>
+## Build
+```bash
+# Is run command:
+yarn build
+```
 
 ## Run Tests
 
-
 ```bash
-
-# Is run command:
-yarn build
-
-# build for production and view the bundle analyzer report
-yarn build --report
-
-```
-
-```bash
-
 # run unit tests
-yarn unit
-
+yarn test:unit
 ```
 
 ```bash
-
 # run all tests
 yarn test
 
 
 ```
-<br>
-
 
 ## Other Commands
 
@@ -52,30 +40,20 @@ yarn test
 
 ``` bash
 
-# run lint code highlight
+# run code linter
 yarn lint
 
 ```
 
 ``` bash
-
-# run lint fix code
-yarn fix
-
-```
-
-``` bash
-
-# run build production and send the dist folder to another branch
-yarn deploy
+# automatically fix issues detected by the linter
+yarn lint-fix
 
 ```
-
-<br>
 
 ## Contributing
 
-1. Fork it (<https://github.com/4cadia/janus.webapp.indexer/fork>)
+1. Fork it (<https://github.com/4cadia-foundation/janus/fork>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)

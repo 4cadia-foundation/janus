@@ -1,11 +1,18 @@
 {
-  "extends": [
-    "../../.eslintrc.json"
-  ],
+  "extends": ["../../.eslintrc.json"],
+  "env": {
+    "jest": true
+  },
   "rules": {
     "no-case-declarations": "warn",
     "@typescript-eslint/interface-name-prefix": "warn",
-    "no-unused-vars": "warn",
+    "no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "args": "after-used"
+      }
+    ],
     "@typescript-eslint/no-unused-vars": [
       "warn",
       {
@@ -13,7 +20,12 @@
         "args": "after-used"
       }
     ],
-    "camelcase": "warn",
+    "camelcase": [
+      "warn",
+      {
+        "properties": "never"
+      }
+    ],
     "@typescript-eslint/camelcase": [
       "warn",
       {

@@ -42,8 +42,7 @@ Vue.use(Loading, {
   backgroundColor: 'var(--color-black)'
 })
 
-/* eslint-disable no-new */
-new Vue({
+export default new Vue({
   el: '#app',
   store,
   router,

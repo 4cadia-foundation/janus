@@ -1,10 +1,8 @@
-# Janus Dapp Indexer
-Indexer front-end is an interface that allows the user to access needed services to push a content in the blockchain and attach it in the Janus system. It also charges gas and tributes for this services, working as a facilitator.
+# Janus Indexer Dapp
 
-The indexer front end helps to publish and index the websites. Publish in the IPFS and return the valid hash or validate the ipfs hash entered and index the informations on the Janus platform.
+Indexer front-end is an interface that allows the user content in the blockchain and attach it in the Janus system.
 
-
-<br>
+The indexer front end helps to publish and index the websites. Publish in the IPFS and return the valid hash or validate the IPFS hash entered and index the informations on the Janus platform.
 
 ![Indexer](indexer.png)
 
@@ -17,99 +15,75 @@ Web3: Web3 is a collection of libraries which allow you to interact with a local
 
 Yarn: Is a package manager for javascript
 
-<br>
-
 ## Prerequisites
 
-- For those who use Windows is necessary to configure web3.
 
-Use the link to install *[WEB3](https://medium.com/@jcbombardelli/configurando-web3-em-um-projeto-node-js-com-windows-984ca1224fa)*
-
-- Yarn
-
-
-<br>
+### Windows users only
+Configure web3 following the instructions in this [page](https://medium.com/@jcbombardelli/configurando-web3-em-um-projeto-node-js-com-windows-984ca1224fa) (in Portuguese).
 
 ## Installation
 
 
 ``` bash
-
 # install dependencies
 yarn install
+```
 
-# if you are in develop mode enter folder
+## Usage
 
-janus/packages/indexer-core
+This package requires `@4cadia/janus-indexer-core`, which is located in the `./packages/indexer-core` directory of this repository.
 
-# Is run command
+```
+# Go to the indexer-core folder
+cd ../indexer-core
+
+# Run
 yarn build
+
+# Come back to this package directory
+cd ../indexer-dapp
 
 # serve with hot reload at localhost:8080
 yarn dev
-
 ```
 
-<br>
-
+### Build for production
+```
+# Run
+yarn build
+```
 
 ## Run Tests
-
-
-```bash
-
-# build for production and view the bundle analyzer report
-yarn build --report
-
-```
 
 ```bash
 
 # run unit tests
-yarn unit
+yarn test:unit
 
 ```
 
 ```bash
-
 # run all tests
 yarn test
-
-
 ```
-<br>
-
 
 ## Other Commands
 
-
-
 ``` bash
-
-# run lint code highlight
+# run code linter
 yarn lint
 
 ```
 
 ``` bash
-
-# run lint fix code
-yarn fix
-
-```
-
-``` bash
-
-# run build production and send the dist folder to another branch
-yarn deploy
+# automatically fixes issues found by linter
+yarn lint-fix
 
 ```
-
-<br>
 
 ## Contributing
 
-1. Fork it (<https://github.com/4cadia/janus.webapp.indexer/fork>)
+1. Fork it (<https://github.com/4cadia-foundation/janus/fork>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
