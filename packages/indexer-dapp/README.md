@@ -15,7 +15,8 @@ Web3: Web3 is a collection of libraries which allow you to interact with a local
 
 Yarn: Is a package manager for javascript
 
-## Prerequites
+## Prerequisites
+
 
 ### Windows users only
 Configure web3 following the instructions in this [page](https://medium.com/@jcbombardelli/configurando-web3-em-um-projeto-node-js-com-windows-984ca1224fa) (in Portuguese).
