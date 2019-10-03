@@ -14,7 +14,7 @@
         <div class="form_card">
           <v-indexer-card
             :data="cardData"
-            v-if="files.length > 0"
+            v-if="isReadyToSubmit"
             :title="fileName"
             @handleActionRemove="reset"
           />
@@ -36,13 +36,12 @@
           </p>
           <button
             type="submit"
-            :class="{
-              btn: true,
-              'btn--success': account,
-              'btn--disabled': !account,
-            }"
-            :disabled="!account"
-            v-if="files.length > 0"
+            :class="[
+              'btn',
+              isReadyToSubmit ? 'btn--success' : 'btn--disabled',
+            ]"
+            :disabled="!isReadyToSubmit"
+            v-if="isReadyToSubmit"
             @click="save()"
             title="Index Content"
           >
@@ -91,6 +90,7 @@ export default {
       },
       files: [],
       fileName: '',
+      isValidFile: false,
       ipfsLinkHash: [],
       loader: {},
       isUploading: false,
@@ -113,6 +113,9 @@ export default {
     },
     isFailed () {
       return this.currentStatus === STATUS_FAILED
+    },
+    isReadyToSubmit () {
+      return this.account && this.isValidFile
     },
     ...mapState({
       account: state => state.web3.address,
@@ -189,12 +192,19 @@ export default {
 
       let options = this.getOptions()
       let spider = new Spider(null, options)
-      const resumeIndexRequest = await spider.extractMetadataContent(
-        indexRequest
-      )
 
-      this.cardData = resumeIndexRequest.metadata
-      this.resume = resumeIndexRequest
+      try {
+        const resumeIndexRequest = await spider.extractMetadataContent(
+          indexRequest
+        )
+
+        this.cardData = resumeIndexRequest.metadata
+        this.resume = resumeIndexRequest
+        this.isValidFile = true
+      } catch (err) {
+        this.$notification.error(err.message)
+        this.isValidFile = false
+      }
     },
     async upload () {
       let options = this.getOptions()
@@ -217,9 +227,9 @@ export default {
 
       if (indexResult.Success) {
         let indexedFile =
-          indexResult.IndexedFiles.find(
-            file => file.FileName === 'index.html'
-          ) || indexResult.IndexedFile[0]
+          indexResult.IndexedFiles.find(file =>
+            file.FileName.endsWith('index.html')
+          ) || indexResult.IndexedFiles[0]
 
         this.ipfsLinkHash = [indexedFile.IpfsHash]
 
