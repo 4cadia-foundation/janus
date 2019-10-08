@@ -17,6 +17,10 @@
   },
   "author": "",
   "license": "ISC",
+  "files": [
+    "dist",
+    "src"
+  ],
   "dependencies": {
     "@4cadia/janus-indexer-smartcontract": "~0.2.0",
     "@types/web3": "^1.0.18",
@@ -41,12 +45,18 @@
     "web3": "^1.0.0-beta.54"
   },
   "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/node": "^7.6.1",
+    "@babel/preset-env": "^7.6.0",
     "@babel/preset-typescript": "^7.6.0",
     "@types/jest": "^24.0.18",
     "@types/jszip": "^3.1.6",
     "@types/node": "^11.13.20",
     "@typescript-eslint/eslint-plugin": "^2.3.0",
     "@typescript-eslint/parser": "^2.3.0",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.0.6",
     "copyfiles": "^2.1.0",
     "dtslint": "^0.9.6",
     "eslint": "^6.4.0",
@@ -58,8 +68,9 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "husky": "^3.0.8",
     "jest": "^24.8.0",
-    "mocha": "^6.1.4",
+    "lint-staged": "^9.4.2",
     "node-metamask": "^1.1.2",
     "nodemon": "^1.19.0",
     "prettier": "^1.18.2",
@@ -69,22 +80,5 @@
     "ts-node": "^8.1.0",
     "tsutils": "^3.10.0",
     "typescript": "^3.5.3"
-  },
-  "files": [
-    "dist"
-  ],
-  "jest": {
-    "transform": {
-      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
   }
 }

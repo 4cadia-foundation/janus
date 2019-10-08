@@ -4,7 +4,7 @@
 
 ### Indexer
 
-Indexer front-end is an interface that allows the user to access needed services to push a content in the blockchain and attach it in the Janus system. It also charges gas and tributes for this services, working as a facilitator.  
+Indexer front-end is an interface that allows the user to access needed services to push a content in the blockchain and attach it in the Janus system. It also charges gas and tributes for this services, working as a facilitator.
 The indexer front end helps to publish and index the websites. Publish in the IPFS and return the valid hash or validate the ipfs hash entered and index the informations on the Janus platform.
 
 ### Search
@@ -17,9 +17,9 @@ Search front-end is an interface that allows the user to search for websites and
 
 **Solidity:** Solidity is an object-oriented programming language for writing smart contracts. It is used for implementing smart contracts on various blockchain platforms, most notably, Ethereum.
 
-**IPFS:** The InterPlanetary File System is a protocol and peer-to-peer network for storing and sharing data in a distributed file system. 
+**IPFS:** The InterPlanetary File System is a protocol and peer-to-peer network for storing and sharing data in a distributed file system.
 
-**Ethereum:** Is an open source, public, blockchain-based distributed computing platform and operating system featuring smart contract functionality. 
+**Ethereum:** Is an open source, public, blockchain-based distributed computing platform and operating system featuring smart contract functionality.
 
 **TypeScript:** Is an open-source programming language developed and maintained by Microsoft. It is a strict syntactical superset of JavaScript, and adds optional static typing to the language.
 
