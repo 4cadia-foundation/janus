@@ -1,5 +1,3 @@
-build/
-config/
 dist/
 test/unit/coverage/
 node_modules/

@@ -8,11 +8,12 @@
     "test:unit": "jest --config test/unit/jest.conf.js --coverage",
     "test:e2e": "node test/e2e/runner.js",
     "test": "concurrently \"yarn:test:unit\" \"yarn:test:e2e\"",
-    "lint": "eslint --ext js,vue \"*.js\" src test",
+    "lint": "eslint --ext js,vue \"*.js\" src test build config",
     "lint-fix": "yarn run lint --fix",
     "build": "node build/build.js",
     "deploy": "push-dir --dir=dist --branch=dist --cleanup"
   },
+  "browserslist": ["> 1%", "last 2 versions", "not ie <= 8"],
   "dependencies": {
     "@4cadia/janus-indexer-core": "~0.2.0",
     "@kugatsu/vuenotification": "^1.1.2",
@@ -34,17 +35,12 @@
     "web3": "^1.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.0",
-    "@babel/core": "^7.6.0",
-    "@babel/node": "^7.6.1",
-    "@babel/preset-env": "^7.6.0",
-    "@babel/preset-typescript": "^7.6.0",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^10.0.3",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-jest": "^21.0.2",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^7.1.0",
     "babel-plugin-dynamic-import-node": "^1.2.0",
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
@@ -99,14 +95,5 @@
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"
-  },
-  "engines": {
-    "node": ">= 6.0.0",
-    "npm": ">= 3.0.0"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+  }
 }
