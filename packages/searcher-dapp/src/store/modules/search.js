@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Web3IndexerService from 'janus-searchengine'
+import Web3IndexerService from '@4cadia/janus-searcher-core'
 import web3ConfigStatic from '../../../static/configs/web3Config.json'
 
 // initial state
