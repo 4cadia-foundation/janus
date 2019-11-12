@@ -1,0 +1,92 @@
+.main {
+  margin-top: 0;
+  overflow: hidden;
+}
+
+.col {
+  position: relative;
+}
+
+.col:first-child {
+  width: 100vw;
+  margin-left: -5vw;
+}
+
+.col:not(:first-child) {
+  padding: 3vw 0;
+}
+
+.logo {
+  width: 150px;
+}
+
+/* Media Mobile */
+@media (max-width: 768px) {
+  .logo {
+    width: 100px;
+  }
+}
+
+.btn {
+  background-color: transparent;
+  border-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn--alert {
+  background: var(--color-red);
+}
+
+.btn--success {
+  background: var(--color-green);
+}
+
+.btn--outline {
+  background: none;
+  border: 1px solid;
+}
+
+.btn--icon {
+  box-shadow: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-weight: 800;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  display: block;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+
+.btn--close {
+  background-image: url('../images/close.png');
+}
+
+.wrapper {
+  max-width: 50%;
+  position: relative;
+  margin: auto;
+}
+
+.errors {
+  text-align: left;
+  padding: 0 0 0 5px;
+  margin-top: 10px;
+  font-size: .875rem;
+  color: var(--color-red);
+  list-style: none;
+}
+
+.invalid {
+  color: var(--color-red);
+  border-color: var(--color-red);
+}
+
+.router-link-exact-active {
+  color: var(--color-primary) !important;
+  font-weight: bold;
+}

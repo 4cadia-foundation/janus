@@ -1,0 +1,31 @@
+{
+  "success": "Your search returned about { results_count } results.",
+  "errors": [
+    {
+      "type": "Forbidden",
+      "text": "An error happened during your search. Try again later." 
+    },
+    {
+      "type": "BadRequest",
+      "text": "Search failed due to technical problems. Try again later." 
+    },
+    {
+      "type": "NotFound",
+      "text": "Janus couldn't find this page. Return to our homepage to start searching."
+    }
+  ],
+  "exceptions": [
+    {
+      "type": "EmptyReturn",
+      "text": "<p class='subtitle'>Sorry! Janus couldn't find any result for { keyword }. </p><p>Try to search for differents or more general keywords.</p>" 
+    },
+    {
+      "type": "EmptyField",
+      "text": "This field cannot be empty." 
+    },
+    {
+      "type": "InvalidField",
+      "text": "This field only accepts numbers and letters. Please enter another value" 
+    }
+  ]
+}
