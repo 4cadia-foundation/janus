@@ -1,0 +1,26 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "noImplicitAny": false,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/web3config.json"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts"
+  ],
+  "lib": [
+    "es6",
+    "es2015",
+    "dom"
+  ],
+  "typeRoots": [
+    "node_modules/@types",
+    "./src/types"
+  ]
+}
