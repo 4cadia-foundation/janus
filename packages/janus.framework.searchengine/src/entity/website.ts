@@ -5,7 +5,7 @@ export default class Website {
     public tld: string;
     public domain: string;
 
-    constructor(storageHash: string, title: string, description: string,tld: string, domain: string) {
+    constructor(storageHash: string, title: string, description: string, tld: string, domain: string) {
         this.storageHash = storageHash;
         this.title = title;
         this.description = description;

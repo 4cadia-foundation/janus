@@ -16,32 +16,32 @@ export default class Web3IndexerService {
     }
 
     public async ListByTags(tags: string[],
-        pageNumber: number,
-        pageSize: number)
+                            pageNumber: number,
+                            pageSize: number)
         : Promise<IndexerResult> {
 
-        let indexerResult = new IndexerResult();
+        const indexerResult = new IndexerResult();
 
         for (let i = 0; i < tags.length; i++) {
 
-            tags[i] = tags[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLowerCase();
+            tags[i] = tags[i].normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
         }
 
-        let result = await this._indexerSmartContract.methods.getWebSite(tags, pageNumber, pageSize)
+        const result = await this._indexerSmartContract.methods.getWebSite(tags, pageNumber, pageSize)
             .call()
-            .then(a => { return a; });
+            .then((a) => a);
 
         for (let i = 0; i < result[0].length; i++) {
-            let element = result[0][i];
+            const element = result[0][i];
 
             if (element && element.length > 0) {
-                let storageHash = element.split(';')[0];
-                let title = element.split(';')[1];
-                let description = element.split(';')[2];
+                const storageHash = element.split(';')[0];
+                const title = element.split(';')[1];
+                const description = element.split(';')[2];
 
-                let jns = await this._jnsSmartContract.methods.getDomainByStorageHash(storageHash)
+                const jns = await this._jnsSmartContract.methods.getDomainByStorageHash(storageHash)
                     .call()
-                    .then(a => { return a; });
+                    .then((a) => a);
 
                 indexerResult.websites[i] = new Website(
                     storageHash,

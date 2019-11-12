@@ -1,4 +1,4 @@
-import Website from "./website";
+import Website from './website';
 
 export default class IndexerResult {
     public websites: Website[];
