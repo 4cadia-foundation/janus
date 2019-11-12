@@ -1,0 +1,39 @@
+[
+  {
+    "type": "list_hero",
+    "content": {
+      "title": "Janus Indexer",
+      "text": "<p>We present Janus Indexer, a Ethereum Blockchain tool that will upload your content on the decentralized Web 3.0</p><p><em>The future is here</em></p>",
+      "image": ""
+    }
+  },
+  {
+    "type": "list_card",
+    "content": {
+      "title": "Our Services",
+      "data": [
+        {
+          "icon": "./static/images/tld.png",
+          "title": "Top Level Domain",
+          "text": "<p>Our business deep-dives game changers to conservatively and dynamically leverage our proactive core competency.</p>"
+        },
+        {
+          "icon": "./static/images/domain-name.png",
+          "title": "Domain Name",
+          "text": "<p>Efficiencies will come from effectively calibrating our market foci. Our standard setter development lifecycle enables holistic, seamless standpoints.</p>"
+        },
+        {
+          "icon": "./static/images/domain-protocol.png",
+          "title": "Domain Protocol",
+          "text": "<p>Going forward, our mobile capability will deliver value to innovations. Our business monetizes deliverables to iteratively and effectively grow our unparalleled user experience.</p>"
+        }
+      ]
+    }
+  },
+  {
+    "type": "list_paragraph",
+    "content": {
+      "title": "How to use the Indexer?"
+    }
+  }
+]

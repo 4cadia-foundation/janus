@@ -1,0 +1,45 @@
+{
+  "name": "@4cadia/janus-indexer-smartcontract",
+  "version": "0.2.0",
+  "description": "",
+  "main": "contracts.json",
+  "files": ["contracts.json"],
+  "scripts": {
+    "build": "truffle build",
+    "postbuild": "node scripts/extract-contract-info.js",
+    "deploy": "truffle migrate",
+    "postdeploy": "node scripts/extract-contract-info.js",
+    "ganache-dev": "ganache-cli -dq -p 9545 -i 5577",
+    "lint:js": "eslint --ext js .",
+    "lint:sol": "solium --dir contracts",
+    "lint": "concurrently \"yarn:lint:js\" \"yarn:lint:sol\"",
+    "lint-fix:js": "yarn run lint:js --fix",
+    "lint-fix:sol": "solium --dir --fix contracts",
+    "lint-fix": "concurrently \"yarn:lint-fix:js\" \"yarn:lint-fix:sol\"",
+    "precommit": "lint-staged",
+    "_test": "truffle test",
+    "pretest": "yarn run ganache-dev 1>&2 &",
+    "test": "yarn run _test",
+    "posttest": "kill `lsof -ti :9545` 1>&2"
+  },
+  "author": "4cadia-foundation",
+  "license": "ISC",
+  "lint-staged": {
+    "*.{js,jsx}": ["eslint --fix", "git add"],
+    "*.json": ["prettier --write", "git add"],
+    "*.sol": ["solium --fix --file", "git add"]
+  },
+  "dependencies": {
+    "assertion-error": "^1.1.0"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.2",
+    "cuid": "^2.1.6",
+    "ganache-cli": "^6.7.0",
+    "solc": "^0.5.11",
+    "solium": "^1.2.4",
+    "solium-plugin-security": "^0.1.1",
+    "truffle": "^5.0.34",
+    "truffle-assertions": "^0.9.1"
+  }
+}

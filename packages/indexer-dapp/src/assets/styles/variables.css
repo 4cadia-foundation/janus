@@ -1,0 +1,19 @@
+:root {
+  --color-primary: #7757f9;
+  --color-black: #000e1a;
+  --color-white: #fff;
+  --color-blue: #009CDE;
+  --color-cyan: #6AD1E3;
+  --color-navy: #071D49;
+  --color-lazuli: #0047BB;
+  --color-red: #dc3545;
+  --color-yellow:#ffc44a;
+  --color-pink: #f55a96;
+  --color-green: #28C081;
+  --color-gray-lighter: #e6e6e6;
+  --color-gray: #424242;
+  --color-gray-darker: #1a1a1a;
+  --media-phone: 768px;
+  --media-tablet: 992px;
+  --media-desktop: 1200px;
+}

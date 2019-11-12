@@ -1,0 +1,9 @@
+{
+  "name": "@4cadia/example-typescript",
+  "version": "0.1.0",
+  "description": "Janus Platform CLI client",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {}
+}

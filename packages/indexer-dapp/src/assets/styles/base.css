@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-gray-lighter);
+  position: relative;
+  min-height: 100vh;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+a:hover {
+  color: var(--color-blue);
+}
+

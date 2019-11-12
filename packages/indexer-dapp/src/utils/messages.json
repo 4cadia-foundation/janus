@@ -1,0 +1,47 @@
+{
+  "success": "Your search returned about { number } results.",
+  "errors": [
+    {
+      "type": "Forbidden",
+      "text": "An error happened during your search. Try again later." 
+    },
+    {
+      "type": "BadRequest",
+      "text": "Search failed due to technical problems. Try again later." 
+    },
+    {
+      "type": "NotFound",
+      "text": "Janus haven’t found this page. Return to our homepage to start searching."
+    }
+  ],
+  "exceptions": [
+    {
+      "type": "NoMetamask",
+      "text": "We couldn't find Metamask in your browser. Please install it first." 
+    },
+    {
+      "type": "EmptyReturn",
+      "text": "Janus haven’t found any content about { keyword }. Try search for something different." 
+    },
+    {
+      "type": "EmptyField",
+      "text": "This field is required!" 
+    },
+    {
+      "type": "EmptyFile",
+      "text": "Zip file must be filled. Upload something to start" 
+    },
+    {
+      "type": "InvalidField",
+      "text": "Field is invalid! Type only alphanumeric characters." 
+    },
+    {
+      "type": "MaxLength",
+      "text": "The field must be a maximum of { keyword } characters." 
+    },
+    {
+      "type": "MinLength",
+      "text": "Field must be at least { keyword } characters." 
+    }
+  ]
+}

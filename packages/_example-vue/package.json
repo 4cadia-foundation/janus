@@ -1,0 +1,29 @@
+{
+  "name": "@4cadia/example-vue",
+  "description": "Janus Platform web client",
+  "version": "1.0.0",
+  "author": "Henrique Barcelos <henrique@4cadia.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js --progress --hide-modules",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.js --hot",
+    "format:html": "prettier \"**/*.html\" --write",
+    "format:json": "prettier \"**/*.json\" --write",
+    "format": "concurrently --raw \"yarn:format:html\" \"yarn:format:json\"",
+    "lint": "eslint . --ext js,vue,json",
+    "lint-fix": "eslint . --ext js,vue,json --fix"
+  },
+  "dependencies": {
+    "vue": "^2.5.11"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "devDependencies": {
+    "cross-env": "^6.0.0",
+    "eslint-import-resolver-webpack": "^0.11.1"
+  }
+}
