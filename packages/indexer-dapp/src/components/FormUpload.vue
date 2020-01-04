@@ -24,7 +24,7 @@
             Access your content in:
             <a
               target="_blank"
-              :href="`http://ipfs.caralabs.me/ipfs/${this.ipfsLinkHash[0]}`"
+              :href="`http://ipfs.4cadia.com/ipfs/${this.ipfsLinkHash[0]}`"
             >
               {{ this.ipfsLinkHash[0] }}</a
             >
@@ -36,10 +36,7 @@
           </p>
           <button
             type="submit"
-            :class="[
-              'btn',
-              isReadyToSubmit ? 'btn--success' : 'btn--disabled',
-            ]"
+            :class="['btn', isReadyToSubmit ? 'btn--success' : 'btn--disabled']"
             :disabled="!isReadyToSubmit"
             v-if="isReadyToSubmit"
             @click="save()"

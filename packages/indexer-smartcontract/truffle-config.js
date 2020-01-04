@@ -16,8 +16,8 @@ module.exports = {
       network_id: '5577',
     },
     rinkeby: {
-      host: 'rinkeby.caralabs.me',
-      port: 18575,
+      host: 'rinkeby.4cadia.com',
+      port: 8545,
       network_id: '4',
     },
   },
