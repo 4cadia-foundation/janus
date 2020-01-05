@@ -1,3 +1,7 @@
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+
+const { WALLET_MNEMONIC, INFURA_API_KEY } = process.env;
+
 module.exports = {
   compilers: {
     solc: {
@@ -16,8 +20,11 @@ module.exports = {
       network_id: '5577',
     },
     rinkeby: {
-      host: 'rinkeby.4cadia.com',
-      port: 8545,
+      provider: () =>
+        new HDWalletProvider(
+          WALLET_MNEMONIC,
+          `https://rinkeby.infura.io/v3/${INFURA_API_KEY}`
+        ),
       network_id: '4',
     },
   },
