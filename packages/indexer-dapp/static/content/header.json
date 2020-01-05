@@ -7,20 +7,20 @@
     {
       "title": "About",
       "path": "/about"
-  },
+    },
     {
-        "title": "Indexer",
-        "path": "/indexer"
+      "title": "Indexer",
+      "path": "/indexer"
     },
     {
       "title": "Settings",
-      "path":"/settings"
+      "path": "/settings"
     },
     {
-        "title": "Identity",
-        "href": "https://janusproj.atlassian.net/wiki/spaces/PAP/pages/126320921/What+s+Identity"
+      "title": "Identity",
+      "href": "https://janusproj.atlassian.net/wiki/spaces/PAP/pages/126320921/What+s+Identity"
     }
   ],
-  "logo": "/static/images/logo.png",
+  "logo": "./static/images/logo.png",
   "title": "Janus"
 }
